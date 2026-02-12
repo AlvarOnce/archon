@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{6d0783c7-1d68-4be5-84a0-f4bc64db2b57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{565aaac7-9aef-49fb-a39d-208dfbac6905}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{bd1b816e-a404-4891-927a-5b5bdbc8eac8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{67e6349c-5151-4700-9be3-107e9a11d993}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{a258a7a4-b43b-439a-9ba5-d5c785fff85f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\placeholder.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\READMEassets.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="lib\READMElib.txt">
+      <Filter>lib</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\memoria.md">
+      <Filter>docs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
