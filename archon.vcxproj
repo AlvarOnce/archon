@@ -131,7 +131,7 @@
     <Text Include="lib\READMElib.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\Downloads\archonMainTheme.mpeg" />
+    <None Include="assets\Audio\archonMainTheme.mpeg" />
     <None Include="docs\memoria.md" />
   </ItemGroup>
   <ItemGroup>
