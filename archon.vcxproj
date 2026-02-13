@@ -135,7 +135,7 @@
     <None Include="docs\memoria.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="assets\Sprites\a.txt" />
+    <ClCompile Include="assets\Audio\a.txt" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
