@@ -57,4 +57,9 @@
       <Filter>assets\Sprites</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="assets\Audio\song3.wav">
+      <Filter>assets\Audio</Filter>
+    </Media>
+  </ItemGroup>
 </Project>

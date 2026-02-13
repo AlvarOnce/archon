@@ -142,6 +142,9 @@
     <Image Include="assets\Sprites\foto2.png" />
     <Image Include="assets\Sprites\Image.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="assets\Audio\song3.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
