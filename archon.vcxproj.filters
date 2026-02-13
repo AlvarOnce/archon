@@ -29,9 +29,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="assets\READMEassets.txt">
-      <Filter>assets</Filter>
-    </Text>
     <Text Include="lib\READMElib.txt">
       <Filter>lib</Filter>
     </Text>

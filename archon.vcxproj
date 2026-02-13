@@ -128,7 +128,6 @@
     <ClInclude Include="include\placeholder.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="assets\READMEassets.txt" />
     <Text Include="lib\READMElib.txt" />
   </ItemGroup>
   <ItemGroup>
