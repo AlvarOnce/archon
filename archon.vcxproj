@@ -135,7 +135,11 @@
     <None Include="docs\memoria.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="assets\Sprites\a.txt" />
     <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\Sprites\Image.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

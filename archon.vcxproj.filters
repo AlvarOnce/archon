@@ -16,6 +16,12 @@
     <Filter Include="docs">
       <UniqueIdentifier>{a258a7a4-b43b-439a-9ba5-d5c785fff85f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="assets\Sprites">
+      <UniqueIdentifier>{6089dfd6-f126-450f-814b-9888291820f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets\Audio">
+      <UniqueIdentifier>{b0730d51-1d57-4375-8da5-2487571c30ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\placeholder.h">
@@ -39,5 +45,13 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="assets\Sprites\a.txt">
+      <Filter>assets\Audio</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\Sprites\Image.png">
+      <Filter>assets\Sprites</Filter>
+    </Image>
   </ItemGroup>
 </Project>
