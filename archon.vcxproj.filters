@@ -56,9 +56,6 @@
     <Image Include="assets\Sprites\foto2.png">
       <Filter>assets\Sprites</Filter>
     </Image>
-    <Image Include="assets\Audio\foto4.png">
-      <Filter>assets\Sprites</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\Audio\song3.wav">

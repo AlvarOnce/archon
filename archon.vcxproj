@@ -139,11 +139,7 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <Image Include="assets\Audio\foto4.png" />
-=======
     <Image Include="assets\Sprites\art.gif" />
->>>>>>> bfc7e4fd20c5e250db19bd715bd21c689392b8f3
     <Image Include="assets\Sprites\foto2.png" />
     <Image Include="assets\Sprites\Image.png" />
   </ItemGroup>
