@@ -53,5 +53,8 @@
     <Image Include="assets\Sprites\Image.png">
       <Filter>assets\Sprites</Filter>
     </Image>
+    <Image Include="assets\Sprites\foto2.png">
+      <Filter>assets\Sprites</Filter>
+    </Image>
   </ItemGroup>
 </Project>
