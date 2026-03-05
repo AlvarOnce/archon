@@ -134,7 +134,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\Audio\archonMainTheme.mpeg" />
+    <None Include="bin\ETSIDI.dll" />
+    <None Include="bin\fmodL.dll" />
     <None Include="docs\memoria.md" />
+    <None Include="ETSIDI\ETSIDI.exp" />
+    <None Include="ETSIDI\ETSIDIlib.pdf" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="assets\Audio\a.txt" />
@@ -147,6 +151,9 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\Audio\song3.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\ETSIDI.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
