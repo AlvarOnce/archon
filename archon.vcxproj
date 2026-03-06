@@ -102,12 +102,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)lib</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -125,6 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="lib\ETSIDI.h" />
     <ClInclude Include="include\placeholder.h" />
   </ItemGroup>
   <ItemGroup>
@@ -132,7 +134,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\Audio\archonMainTheme.mpeg" />
+    <None Include="bin\ETSIDI.dll" />
+    <None Include="bin\fmodL.dll" />
     <None Include="docs\memoria.md" />
+    <None Include="ETSIDI\ETSIDI.exp" />
+    <None Include="ETSIDI\ETSIDIlib.pdf" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="assets\Audio\a.txt" />
@@ -145,6 +151,9 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\Audio\song3.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\ETSIDI.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

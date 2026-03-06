@@ -22,10 +22,16 @@
     <Filter Include="assets\Audio">
       <UniqueIdentifier>{b0730d51-1d57-4375-8da5-2487571c30ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ETSIDI">
+      <UniqueIdentifier>{a460dea5-461c-45e7-b2eb-9186eda55fce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\placeholder.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\ETSIDI.h">
+      <Filter>ETSIDI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
