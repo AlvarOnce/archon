@@ -43,16 +43,17 @@
     <None Include="docs\memoria.md">
       <Filter>docs</Filter>
     </None>
-    <None Include="assets\Audio\archonMainTheme.mpeg">
+    <None Include="assets\Audio\ranchoMainTheme.mpeg">
       <Filter>assets\Audio</Filter>
     </None>
+    <None Include="bin\ETSIDI.dll" />
+    <None Include="bin\fmodL.dll" />
+    <None Include="ETSIDI\ETSIDI.exp" />
+    <None Include="ETSIDI\ETSIDIlib.pdf" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="assets\Audio\a.txt">
-      <Filter>assets\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,8 +66,6 @@
     <Image Include="assets\Sprites\art.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="assets\Audio\song3.wav">
-      <Filter>assets\Audio</Filter>
-    </Media>
+    <Library Include="lib\ETSIDI.lib" />
   </ItemGroup>
 </Project>

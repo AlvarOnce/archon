@@ -24,6 +24,7 @@
     <ProjectGuid>{aadc87b6-e587-482d-94ce-9b4f5fdfe621}</ProjectGuid>
     <RootNamespace>archon</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>rancho</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -133,7 +134,7 @@
     <Text Include="lib\READMElib.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\Audio\archonMainTheme.mpeg" />
+    <None Include="assets\Audio\ranchoMainTheme.mpeg" />
     <None Include="bin\ETSIDI.dll" />
     <None Include="bin\fmodL.dll" />
     <None Include="docs\memoria.md" />
@@ -141,16 +142,12 @@
     <None Include="ETSIDI\ETSIDIlib.pdf" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="assets\Audio\a.txt" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\Sprites\art.gif" />
     <Image Include="assets\Sprites\foto2.png" />
     <Image Include="assets\Sprites\Image.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="assets\Audio\song3.wav" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />
