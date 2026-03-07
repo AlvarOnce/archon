@@ -133,10 +133,6 @@
     <ClInclude Include="lib\freeglut.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="lib\READMElib.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\Downloads\tema2inicial_VS22x64\tema2inicial_VS22x64\freeglut.dll" />
     <None Include="assets\Audio\ranchoMainTheme.mpeg" />
     <None Include="bin\ETSIDI.dll" />
     <None Include="bin\fmodL.dll" />
@@ -146,6 +142,7 @@
     <None Include="ETSIDI\ETSIDIlib.pdf" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CODEOWNERS" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
