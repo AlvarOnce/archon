@@ -142,7 +142,6 @@
     <None Include="ETSIDI\ETSIDIlib.pdf" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CODEOWNERS" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
