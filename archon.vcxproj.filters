@@ -25,19 +25,20 @@
     <Filter Include="ETSIDI">
       <UniqueIdentifier>{a460dea5-461c-45e7-b2eb-9186eda55fce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="bin">
+      <UniqueIdentifier>{1cc42ab5-8e73-43e5-a1a3-597c137c9896}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\placeholder.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="lib\ETSIDI.h">
-      <Filter>ETSIDI</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="lib\READMElib.txt">
+    <ClInclude Include="lib\freeglut.h">
       <Filter>lib</Filter>
-    </Text>
+    </ClInclude>
+    <ClInclude Include="lib\ETSIDI.h">
+      <Filter>lib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\memoria.md">
@@ -46,15 +47,27 @@
     <None Include="assets\Audio\ranchoMainTheme.mpeg">
       <Filter>assets\Audio</Filter>
     </None>
-    <None Include="bin\ETSIDI.dll" />
-    <None Include="bin\fmodL.dll" />
-    <None Include="ETSIDI\ETSIDI.exp" />
-    <None Include="ETSIDI\ETSIDIlib.pdf" />
+    <None Include="bin\ETSIDI.dll">
+      <Filter>bin</Filter>
+    </None>
+    <None Include="bin\fmodL.dll">
+      <Filter>bin</Filter>
+    </None>
+    <None Include="bin\freeglut.dll">
+      <Filter>bin</Filter>
+    </None>
+    <None Include="ETSIDI\ETSIDI.exp">
+      <Filter>ETSIDI</Filter>
+    </None>
+    <None Include="ETSIDI\ETSIDIlib.pdf">
+      <Filter>ETSIDI</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="CODEOWNERS" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\Sprites\Image.png">
@@ -63,9 +76,16 @@
     <Image Include="assets\Sprites\foto2.png">
       <Filter>assets\Sprites</Filter>
     </Image>
-    <Image Include="assets\Sprites\art.gif" />
+    <Image Include="assets\Sprites\art.gif">
+      <Filter>assets\Sprites</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="lib\ETSIDI.lib" />
+    <Library Include="lib\ETSIDI.lib">
+      <Filter>lib</Filter>
+    </Library>
+    <Library Include="lib\freeglut.lib">
+      <Filter>lib</Filter>
+    </Library>
   </ItemGroup>
 </Project>
