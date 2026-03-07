@@ -13,6 +13,7 @@ void OnKeyboardDown(unsigned char key, int x, int y); // cuando se pulse una tec
 int main(int argc, char* argv[])
 {
 	std::cout << "Iniciando Rancho";
+	ETSIDI::playMusica("../assets/Audio/ranchoMainTheme.mpeg", true);
 
 	//Inicializar el gestor de ventanas GLUT y crear la ventana
 	glutInit(&argc, argv);
