@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 {
 	std::cout << "Iniciando Rancho";
 	ETSIDI::playMusica("../assets/Audio/ranchoMainTheme.mpeg", true);
-
+	
 	//Inicializar el gestor de ventanas GLUT y crear la ventana
 	glutInit(&argc, argv);
 	glutInitWindowSize(800, 600);
@@ -37,7 +37,6 @@ int main(int argc, char* argv[])
 
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();
-	std::cout << ("primera linea");
 
 }
 
@@ -56,6 +55,25 @@ void OnDraw(void)
 
 	glColor3ub(200, 200, 100);
 	glutSolidCube(5);
+
+
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("../assets/Sprites/tablero y escenario/tablero.png").id); //Ruta foto
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); //Estos dos mejoran calidad imagen
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	glDisable(GL_LIGHTING);
+	glBegin(GL_POLYGON);
+	glColor3f(1, 1, 1);
+	glTexCoord2d(0, 1);    glVertex3f(-8, 0, -0.1);  // coordenada (0,1) textura se asocia con vertice de arriba izquierda
+	glTexCoord2d(1, 1);    glVertex3f(8, 0, -0.1);  // lo mismo pero (1,1) es arriba derecha
+	glTexCoord2d(1, 0);	    glVertex3f(8, 8, -0.1);
+	glTexCoord2d(0, 0);   	glVertex3f(-8, 8, -0.1);
+	glEnd();
+	glEnable(GL_LIGHTING);
+	glDisable(GL_TEXTURE_2D);
 
 	glutSwapBuffers();	// no borrar esta linea ni poner nada despues
 }
