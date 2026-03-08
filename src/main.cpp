@@ -9,6 +9,7 @@ void OnDraw(void);		 // llamada para dibujar
 void OnTimer(int value); // llamada cuando transcurra una temporizacion
 void OnKeyboardDown(unsigned char key, int x, int y); // cuando se pulse una tecla	
 
+float angulo = 0;
 
 int main(int argc, char* argv[])
 {
@@ -56,7 +57,7 @@ void OnDraw(void)
 	glColor3ub(200, 200, 100);
 	glutSolidCube(5);
 
-
+	glRotated(angulo, 1, 0, 0);
 
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("../assets/Sprites/tablero y escenario/tablero.png").id); //Ruta foto
@@ -85,6 +86,7 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 
 void OnTimer(int value)
 {
+	angulo+=2;
 	glutTimerFunc(25, OnTimer, 0);
 	glutPostRedisplay();
 }
