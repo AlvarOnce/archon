@@ -147,11 +147,6 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="assets\Sprites\art.gif" />
-    <Image Include="assets\Sprites\foto2.png" />
-    <Image Include="assets\Sprites\Image.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />
     <Library Include="lib\freeglut.lib" />
   </ItemGroup>

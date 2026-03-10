@@ -8,8 +8,13 @@
 void OnDraw(void);		 // llamada para dibujar
 void OnTimer(int value); // llamada cuando transcurra una temporizacion
 void OnKeyboardDown(unsigned char key, int x, int y); // cuando se pulse una tecla	
+void OnSpecialDown(int key, int x, int y); // cuando se pulse una tecla	
 
-double tam = 5;
+
+double tamano = 40;
+double x = 0, y = 0;
+int ancho = 160, alto = 90;
+
 
 int main(int argc, char* argv[])
 {
@@ -24,19 +29,22 @@ int main(int argc, char* argv[])
 
 	//habilitar luces y definir perspectiva
 	glEnable(GL_LIGHT0);
-	glEnable(GL_LIGHTING);
+	//glEnable(GL_LIGHTING);
+	glDisable(GL_LIGHTING);
+
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_COLOR_MATERIAL);
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(40.0, 1920.0f / 1080.0f, 0.1, 150);
+	glOrtho(0, ancho, 0, alto,50,-50); // en vez de gluPerspective( 40.0, 800/600.0f, 0.1, 150);
 	glutFullScreen();
-
-
-	//Registrar los callbacks
+	
+		//Registrar los callbacks
 	glutDisplayFunc(OnDraw);
 	glutTimerFunc(25, OnTimer, 0);//le decimos que dentro de 25ms llame 1 vez a la funcion OnTimer()
 	glutKeyboardFunc(OnKeyboardDown);
+	glutSpecialFunc(OnSpecialDown);
 
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();
@@ -51,38 +59,52 @@ void OnDraw(void)
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluOrtho2D(0, 16, 0, 9);
 
-	gluLookAt(0,0,-40,  // posición del ojo
-		0.0, 0, 0.0,      // hacia que punto mira  (0,0,0) 
-		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y) 
+	//gluLookAt(0,0,-40,  // posición del ojo
+	//	0.0, 0, 0.0,      // hacia que punto mira  (0,0,0) 
+	//	0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y) 
 
-	glTranslated(-8, 0, 0);
-	glutSolidSphere(3, 20, 20);
-	glTranslated(8, 0, -8);
-	glutSolidSphere(3, 20, 20);
-	glTranslated(8, 0, -8);
-	glutSolidSphere(3, 20, 20);
+	glPushMatrix();
+	glColor3ub(255, 255, 255);
+	glTranslated(40, 45, 0);
+	glutSolidSphere(10, 20, 20);
+	glTranslated(40, 0, -8);
+	glutSolidSphere(10, 20, 20);
+	glTranslated(40, 0, -8);
+	glutSolidSphere(10, 20, 20);
+	glPopMatrix();
 
-
-	//Dibujar("../assets/Sprites/tablero y escenario/tablero.png",5,0,0); //Función propia en otro.cpp para dibujar de forma más fácil
+	Dibujar("../assets/Sprites/tablero y escenario/tablero.png",0,0,0,tamano); //Función propia en otro.cpp para dibujar de forma más fácil
+	Dibujar("../assets/Sprites/Pruebas/borrar20-Sheet.png", x, y, -1, 20);
 
 	glutSwapBuffers();	// no borrar esta linea ni poner nada despues
 }
 
 void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 {
-	if (key == 27) { // Al pulsar "Esc", cierra la ventana gráfica.
+	if (key == 27)  // Al pulsar "Esc", cierra la ventana gráfica.
 		exit(0);
-	}
+	
+	if (key == '+') 
+		tamano++;
 
-	if (key == '+') {
-		tam += 0.2;
-	}
+	if (key == '-') 
+		tamano--;
+}
 
-	if (key == '-') {
-		tam -= 0.2;
-	}
+void OnSpecialDown(int key, int x_t, int y_t)
+{
+	if (key == GLUT_KEY_RIGHT) 
+		x++;
+	
+	if (key == GLUT_KEY_LEFT) 
+		x--;
+
+	if (key == GLUT_KEY_UP)
+		y++;
+
+	if (key == GLUT_KEY_DOWN)
+		y--;
 }
 
 void OnTimer(int value)
