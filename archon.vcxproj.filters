@@ -39,6 +39,9 @@
     <ClInclude Include="lib\ETSIDI.h">
       <Filter>lib</Filter>
     </ClInclude>
+    <ClInclude Include="lib\otro.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\memoria.md">
@@ -67,7 +70,9 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="CODEOWNERS" />
+    <ClCompile Include="src\otro.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\Sprites\Image.png">
