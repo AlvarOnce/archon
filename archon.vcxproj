@@ -131,6 +131,7 @@
     <ClInclude Include="lib\ETSIDI.h" />
     <ClInclude Include="include\placeholder.h" />
     <ClInclude Include="lib\freeglut.h" />
+    <ClInclude Include="lib\otro.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\Audio\ranchoMainTheme.mpeg" />
@@ -142,6 +143,7 @@
     <None Include="ETSIDI\ETSIDIlib.pdf" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\otro.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 #include "iostream"
 #include "ETSIDI.h" // Biblioteca para sprites y sonidos
 #include "freeglut.h" // Biblioteca de ventana, dibujo y manejo teclado
+#include "otro.h"
 
 // los callback, funciones que seran llamadas automaticamente por la glut cuando sucedan eventos (NO HACE FALTA LLAMARLAS EXPLICITAMENTE)
 void OnDraw(void);		 // llamada para dibujar
@@ -17,7 +18,7 @@ int main(int argc, char* argv[])
 	
 	//Inicializar el gestor de ventanas GLUT y crear la ventana
 	glutInit(&argc, argv);
-	glutInitWindowSize(1920, 1080);
+	glutInitWindowSize(1920,1080);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("Rancho");
 
@@ -50,27 +51,21 @@ void OnDraw(void)
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+	gluOrtho2D(0, 16, 0, 9);
 
-	gluLookAt(0,0,-20,  // posición del ojo
+	gluLookAt(0,0,-40,  // posición del ojo
 		0.0, 0, 0.0,      // hacia que punto mira  (0,0,0) 
 		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y) 
 
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("../assets/Sprites/tablero y escenario/tablero.png").id); //Ruta foto
+	glTranslated(-8, 0, 0);
+	glutSolidSphere(3, 20, 20);
+	glTranslated(8, 0, -8);
+	glutSolidSphere(3, 20, 20);
+	glTranslated(8, 0, -8);
+	glutSolidSphere(3, 20, 20);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); //Estos dos mejoran calidad imagen
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	glDisable(GL_LIGHTING);
-	glBegin(GL_POLYGON);
-	glColor3f(1, 1, 1);
-	glTexCoord2d(0, 1);    glVertex3f(-tam, -tam, -0.1);  // abajo izquierda
-	glTexCoord2d(1, 1);    glVertex3f(tam, -tam, -0.1);   // abajo derecha
-	glTexCoord2d(1, 0);    glVertex3f(tam, tam, -0.1);    // arriba derecha
-	glTexCoord2d(0, 0);    glVertex3f(-tam, tam, -0.1);   // arriba izquierda
-	glEnd();
-	glEnable(GL_LIGHTING);
-	glDisable(GL_TEXTURE_2D);
+	//Dibujar("../assets/Sprites/tablero y escenario/tablero.png",5,0,0); //Función propia en otro.cpp para dibujar de forma más fácil
 
 	glutSwapBuffers();	// no borrar esta linea ni poner nada despues
 }
