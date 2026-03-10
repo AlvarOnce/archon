@@ -3,21 +3,21 @@
 #include "ETSIDI.h" // Biblioteca para sprites y sonidos
 #include "freeglut.h" // Biblioteca de ventana, dibujo y manejo teclado
 
-
 // los callback, funciones que seran llamadas automaticamente por la glut cuando sucedan eventos (NO HACE FALTA LLAMARLAS EXPLICITAMENTE)
 void OnDraw(void);		 // llamada para dibujar
 void OnTimer(int value); // llamada cuando transcurra una temporizacion
 void OnKeyboardDown(unsigned char key, int x, int y); // cuando se pulse una tecla	
 
+double tam = 5;
 
 int main(int argc, char* argv[])
 {
-	std::cout << "Iniciando Rancho";
+	std::cout << "Iniciando Rancho...\n";
 	ETSIDI::playMusica("../assets/Audio/ranchoMainTheme.mpeg", true);
 	
 	//Inicializar el gestor de ventanas GLUT y crear la ventana
 	glutInit(&argc, argv);
-	glutInitWindowSize(800, 600);
+	glutInitWindowSize(1920, 1080);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("Rancho");
 
@@ -28,7 +28,9 @@ int main(int argc, char* argv[])
 	glEnable(GL_COLOR_MATERIAL);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
+	gluPerspective(40.0, 1920.0f / 1080.0f, 0.1, 150);
+	glutFullScreen();
+
 
 	//Registrar los callbacks
 	glutDisplayFunc(OnDraw);
@@ -49,14 +51,9 @@ void OnDraw(void)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	gluLookAt(20,10,-10,  // posición del ojo
+	gluLookAt(0,0,-20,  // posición del ojo
 		0.0, 0, 0.0,      // hacia que punto mira  (0,0,0) 
 		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y) 
-
-	glColor3ub(200, 200, 100);
-	glutSolidCube(5);
-
-
 
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("../assets/Sprites/tablero y escenario/tablero.png").id); //Ruta foto
@@ -67,10 +64,10 @@ void OnDraw(void)
 	glDisable(GL_LIGHTING);
 	glBegin(GL_POLYGON);
 	glColor3f(1, 1, 1);
-	glTexCoord2d(0, 1);    glVertex3f(-8, 0, -0.1);  // coordenada (0,1) textura se asocia con vertice de arriba izquierda
-	glTexCoord2d(1, 1);    glVertex3f(8, 0, -0.1);  // lo mismo pero (1,1) es arriba derecha
-	glTexCoord2d(1, 0);	    glVertex3f(8, 8, -0.1);
-	glTexCoord2d(0, 0);   	glVertex3f(-8, 8, -0.1);
+	glTexCoord2d(0, 1);    glVertex3f(-tam, -tam, -0.1);  // abajo izquierda
+	glTexCoord2d(1, 1);    glVertex3f(tam, -tam, -0.1);   // abajo derecha
+	glTexCoord2d(1, 0);    glVertex3f(tam, tam, -0.1);    // arriba derecha
+	glTexCoord2d(0, 0);    glVertex3f(-tam, tam, -0.1);   // arriba izquierda
 	glEnd();
 	glEnable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);
@@ -80,7 +77,17 @@ void OnDraw(void)
 
 void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 {
+	if (key == 27) { // Al pulsar "Esc", cierra la ventana gráfica.
+		exit(0);
+	}
 
+	if (key == '+') {
+		tam += 0.2;
+	}
+
+	if (key == '-') {
+		tam -= 0.2;
+	}
 }
 
 void OnTimer(int value)
