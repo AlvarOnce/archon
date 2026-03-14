@@ -1,6 +1,6 @@
 #pragma once
 
-void Dibujar(const char* rutaImagen, double posx, double posy, double posz, double tam);
+void Dibujar(const char* rutaImagen, float posx, float posy, float posz, float ancho, float alto);
 
 /*
 

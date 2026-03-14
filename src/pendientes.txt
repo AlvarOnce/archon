@@ -1,0 +1,19 @@
+PARA TRANSICION CON PANTALLLA NEGRA QUE SE ABRE O CIERRA:
+
+	if (transicion == true)
+	{
+		Dibujar("../assets/Sprites/menu/transicion.png", 0, 0, -10, tamanoTransicion, tamanoTransicion);
+		tamanoTransicion--;
+		if (tamanoTransicion < 0) transicion = false;
+	}
+
+
+	/*if (key == 13)
+	{
+		printf("pressed");
+		transicion = true;
+		tamanoTransicion = 100;
+	}*/
+
+	int tamanoTransicion;
+bool transicion = false;
