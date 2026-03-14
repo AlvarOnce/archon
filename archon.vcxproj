@@ -152,6 +152,9 @@
     <Library Include="lib\ETSIDI.lib" />
     <Library Include="lib\freeglut.lib" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\pendientes.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

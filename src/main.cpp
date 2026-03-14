@@ -6,7 +6,6 @@
 #include "dibujar.h"
 #include "menu.h"
 
-
 // los callback, funciones que seran llamadas automaticamente por la glut cuando sucedan eventos (NO HACE FALTA LLAMARLAS EXPLICITAMENTE)
 void OnDraw(void);		 // llamada para dibujar
 void OnTimer(int value); // llamada cuando transcurra una temporizacion
@@ -27,7 +26,6 @@ float tamano = 40;
 float x = 0, y = 0;
 double ancho = 160, alto = 90;
 
-
 int main(int argc, char* argv[])
 {
 	std::cout << "Iniciando Rancho...\n";
@@ -35,13 +33,13 @@ int main(int argc, char* argv[])
 	
 	//Inicializar el gestor de ventanas GLUT y crear la ventana
 	glutInit(&argc, argv);
-	glutInitWindowSize(1920,1080);
+	glutInitWindowSize(160,90);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("Rancho");
 
 	//habilitar luces y definir perspectiva
 	glEnable(GL_LIGHT0);
-	//glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHTING);
 	glDisable(GL_LIGHTING);
 
 	glEnable(GL_DEPTH_TEST);
@@ -60,7 +58,6 @@ int main(int argc, char* argv[])
 
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();
-
 }
 
 void OnDraw(void)
@@ -76,33 +73,19 @@ void OnDraw(void)
 	//	0.0, 0, 0.0,      // hacia que punto mira  (0,0,0) 
 	//	0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y) 
 
-	glPushMatrix();
-	glColor3ub(255, 255, 255);
-	glTranslated(40, 45, 0);
-	glutSolidSphere(10, 20, 20);
-	glTranslated(40, 0, -8);
-	glutSolidSphere(10, 20, 20);
-	glTranslated(40, 0, -8);
-	glutSolidSphere(10, 20, 20);
-	glPopMatrix();
-
+	// Estados posibles del juego
 	switch (estado)
 	{
-
 	case MENU:
 		mostrarMenu();
-
 		break;
-
 
 	default:
 		break;
-
 	}
 
-
-	Dibujar("../assets/Sprites/tablero y escenario/tablero.png",0,0,-2,tamano, tamano); //Función propia en otro.cpp para dibujar de forma más fácil
-	Dibujar("../assets/Sprites/Pruebas/borrar20-Sheet.png", x, y, -3, 20.0, 20.0);
+	Dibujar("../assets/Sprites/tablero y escenario/tablero.png",0,0,1,tamano, tamano); //Función propia en otro.cpp para dibujar de forma más fácil
+	Dibujar("../assets/Sprites/Pruebas/borrar20-Sheet.png", x, y, 0, 20, 20);
 
 	glutSwapBuffers();	// no borrar esta linea ni poner nada despues
 }
