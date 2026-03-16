@@ -21,12 +21,13 @@ void Dibujar(const char* rutaImagen, float posx, float posy, float posz, float a
 	glDisable(GL_LIGHTING);
 	glBegin(GL_POLYGON);
 	glColor3f(1, 1, 1);
-	glTexCoord2d(0, 1);    glVertex3f(posx, posy, posz);  // Abajo izquierda
-	glTexCoord2d(1, 1);    glVertex3f(posx + ancho, posy, posz);   // Abajo derecha
-	glTexCoord2d(1, 0);    glVertex3f(posx + ancho, posy + alto, posz);    // Arriba derecha
-	glTexCoord2d(0, 0);    glVertex3f(posx, posy + alto,posz);   // Arriba izquierda
+	glTexCoord2d(0, 1);    glVertex3f(posx-ancho/2, posy-alto/2, posz);  // Abajo izquierda
+	glTexCoord2d(1, 1);    glVertex3f(posx + ancho/2, posy-alto/2, posz);   // Abajo derecha
+	glTexCoord2d(1, 0);    glVertex3f(posx + ancho/2, posy + alto/2, posz);    // Arriba derecha
+	glTexCoord2d(0, 0);    glVertex3f(posx-ancho/2, posy + alto/2,posz);   // Arriba izquierda
 
-	// Estas funciones ponen la posicion x e y de la imagen en su esquina inferior izq. 
+	// Ahora: posicion x e y corresponden a centro de imagen
+	// Obsoleto: Estas funciones ponen la posicion x e y de la imagen en su esquina inferior izq. 
 	// SOLUCIONADO: Además suponen que la imagen es un cuadrado de lado tam, lo que hay que solucionar cambiando los parametros al pedir un dibujo desde main con Dibujar().
 
 	glEnd();
