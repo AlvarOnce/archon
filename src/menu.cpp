@@ -36,5 +36,10 @@ letra titulo[6];
 return;
 }
 
+void transicion(float tamanoTransicion)
+{	
+		Dibujar("../assets/Sprites/menu/transicion.png", 160/2, 90/2, -10, tamanoTransicion, tamanoTransicion);	
+}
+
 
 

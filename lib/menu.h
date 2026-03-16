@@ -1,6 +1,7 @@
 #pragma once
 
 void mostrarMenu();
+void transicion(float tamanoTransicion);
 
 class letra {
 
