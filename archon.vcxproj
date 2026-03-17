@@ -128,20 +128,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="lib\ETSIDI.h" />
+    <ClInclude Include="include\ETSIDI.h" />
     <ClInclude Include="include\placeholder.h" />
-    <ClInclude Include="lib\freeglut.h" />
-    <ClInclude Include="lib\dibujar.h" />
-    <ClInclude Include="lib\menu.h" />
+    <ClInclude Include="include\freeglut.h" />
+    <ClInclude Include="include\dibujar.h" />
+    <ClInclude Include="include\menu.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\Audio\ranchoMainTheme.mpeg" />
     <None Include="bin\ETSIDI.dll" />
     <None Include="bin\fmodL.dll" />
     <None Include="bin\freeglut.dll" />
+    <None Include="docs\GitFlow Workflow.pdf" />
     <None Include="docs\memoria.md" />
-    <None Include="ETSIDI\ETSIDI.exp" />
-    <None Include="ETSIDI\ETSIDIlib.pdf" />
+    <None Include="lib\ETSIDI.exp" />
+    <None Include="docs\ETSIDIlib.pdf" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dibujar.cpp" />
