@@ -25,8 +25,6 @@ estadosPosibles estado = MENU;
 float tamano = 40;
 double ancho = 160, alto = 90;
 float x = ancho/2, y = alto/2;
-bool estadoTransicion = false;
-float tamanoTransicion;
 
 int main(int argc, char* argv[])
 {
@@ -57,8 +55,6 @@ int main(int argc, char* argv[])
 	glutTimerFunc(25, OnTimer, 0);//le decimos que dentro de 25ms llame 1 vez a la funcion OnTimer()
 	glutKeyboardFunc(OnKeyboardDown);
 	glutSpecialFunc(OnSpecialDown);
-
-	transicion(10000);
 
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();
@@ -91,18 +87,6 @@ void OnDraw(void)
 	Dibujar("../assets/Sprites/tablero y escenario/tablero.png",ancho/2,alto/2,1,tamano, tamano); //Función propia en otro.cpp para dibujar de forma más fácil
 	Dibujar("../assets/Sprites/Pruebas/borrar20-Sheet.png", x, y, 0, 20, 20);
 
-	if (estadoTransicion == true)
-	{
-		transicion(tamanoTransicion);
-		tamanoTransicion-=150;
-
-		if (tamanoTransicion < 200)
-		{
-			estadoTransicion = false;
-			estado = CREDITOS;
-		}
-	}
-
 	glutSwapBuffers();	// no borrar esta linea ni poner nada despues
 }
 
@@ -117,13 +101,10 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 	if (key == '-') 
 		tamano--;
 
-	if (key == 13 && estado==MENU)
+	if (key == 13) // enter
 	{
-		estadoTransicion = true;
-		tamanoTransicion = 7000;
+
 	}
-
-
 }
 
 void OnSpecialDown(int key, int x_t, int y_t)

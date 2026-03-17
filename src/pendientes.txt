@@ -17,3 +17,44 @@ PARA TRANSICION CON PANTALLLA NEGRA QUE SE ABRE O CIERRA:
 
 	int tamanoTransicion;
 bool transicion = false;
+
+
+
+
+
+
+
+
+//main.cpp
+bool estadoTransicion = false;
+float tamanoTransicion;
+
+
+	if (estadoTransicion == true)
+	{
+		transicion(tamanoTransicion);
+		tamanoTransicion-=150;
+
+		if (tamanoTransicion < 200)
+		{
+			estadoTransicion = false;
+			estado = CREDITOS;
+		}
+	}
+
+			estadoTransicion = true;
+		tamanoTransicion = 7000;
+
+
+
+
+
+//menu.cpp
+void transicion(float tamanoTransicion)
+{	
+		Dibujar("../assets/Sprites/menu/transicion.png", 160/2, 90/2, -10, tamanoTransicion, tamanoTransicion);	
+
+		return;
+}
+
+
