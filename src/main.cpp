@@ -134,10 +134,26 @@ void OnSpecialUp(int key, int x_t, int y_t)
 
 void OnTimer(int value)
 {
-	if (teclaDerecha)	x++;
-	if (teclaIzquierda) x--;
-	if (teclaArriba)    y++;
-	if (teclaAbajo)     y--;
+	// conversion de flechas a dos direcciones que pueden ser + o -
+	float dirX = 0;
+	float dirY = 0;
+
+	if (teclaDerecha)  dirX += 1;
+	if (teclaIzquierda) dirX -= 1;
+	if (teclaArriba)    dirY += 1;
+	if (teclaAbajo)     dirY -= 1;
+
+	// si nos movemos en diagonal, normalizamos con raiz de 2
+	if (dirX != 0 && dirY != 0) {
+		dirX *= 0.7071f;
+		dirY *= 0.7071f;
+	}
+
+	// aplicamos el movimiento multiplicado por la velocidad que queramos
+	float velocidad = 1.0f; // velocidad modificable
+
+	x += dirX * velocidad;
+	y += dirY * velocidad;
 
 	glutTimerFunc(25, OnTimer, 0);
 	glutPostRedisplay();
