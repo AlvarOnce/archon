@@ -23,8 +23,8 @@ enum estadosPosibles
 estadosPosibles estado = MENU;
 
 float tamano = 40;
-float x = 0, y = 0;
 double ancho = 160, alto = 90;
+float x = ancho/2, y = alto/2;
 
 int main(int argc, char* argv[])
 {
@@ -84,7 +84,7 @@ void OnDraw(void)
 		break;
 	}
 
-	Dibujar("../assets/Sprites/tablero y escenario/tablero.png",0,0,1,tamano, tamano); //Función propia en otro.cpp para dibujar de forma más fácil
+	Dibujar("../assets/Sprites/tablero y escenario/tablero.png",ancho/2,alto/2,1,tamano, tamano); //Función propia en otro.cpp para dibujar de forma más fácil
 	Dibujar("../assets/Sprites/Pruebas/borrar20-Sheet.png", x, y, 0, 20, 20);
 
 	glutSwapBuffers();	// no borrar esta linea ni poner nada despues
@@ -100,6 +100,11 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 
 	if (key == '-') 
 		tamano--;
+
+	if (key == 13) // enter
+	{
+
+	}
 }
 
 void OnSpecialDown(int key, int x_t, int y_t)
