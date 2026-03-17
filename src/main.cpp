@@ -9,8 +9,15 @@
 // los callback, funciones que seran llamadas automaticamente por la glut cuando sucedan eventos (NO HACE FALTA LLAMARLAS EXPLICITAMENTE)
 void OnDraw(void);		 // llamada para dibujar
 void OnTimer(int value); // llamada cuando transcurra una temporizacion
-void OnKeyboardDown(unsigned char key, int x, int y); // cuando se pulse una tecla	
-void OnSpecialDown(int key, int x, int y); // cuando se pulse una tecla	
+void OnKeyboardDown(unsigned char key, int x, int y); // cuando se pulsa una tecla	
+void OnSpecialDown(int key, int x, int y); // cuando se pulsa una tecla	
+void OnSpecialUp(int key, int x, int y); // cuando se suelta la tecla
+
+// interruptores para saber que flechas están pulsadas, IDEA: hacer una clase?
+bool teclaArriba = false;
+bool teclaAbajo = false;
+bool teclaDerecha = false;
+bool teclaIzquierda = false;
 
 enum estadosPosibles
 {
@@ -20,7 +27,7 @@ enum estadosPosibles
 	BATALLA
 };
 
-estadosPosibles estado = MENU;
+estadosPosibles estado = TABLERO;
 
 float tamano = 40;
 double ancho = 160, alto = 90;
@@ -55,6 +62,8 @@ int main(int argc, char* argv[])
 	glutTimerFunc(25, OnTimer, 0);//le decimos que dentro de 25ms llame 1 vez a la funcion OnTimer()
 	glutKeyboardFunc(OnKeyboardDown);
 	glutSpecialFunc(OnSpecialDown);
+	glutSpecialUpFunc(OnSpecialUp);
+
 
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();
@@ -109,21 +118,27 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 
 void OnSpecialDown(int key, int x_t, int y_t)
 {
-	if (key == GLUT_KEY_RIGHT) 
-		x++;
-	
-	if (key == GLUT_KEY_LEFT) 
-		x--;
+	if (key == GLUT_KEY_RIGHT) teclaDerecha = true;
+	if (key == GLUT_KEY_LEFT)  teclaIzquierda = true;
+	if (key == GLUT_KEY_UP)    teclaArriba = true;
+	if (key == GLUT_KEY_DOWN)  teclaAbajo = true;
+}
 
-	if (key == GLUT_KEY_UP)
-		y++;
-
-	if (key == GLUT_KEY_DOWN)
-		y--;
+void OnSpecialUp(int key, int x_t, int y_t)
+{
+	if (key == GLUT_KEY_RIGHT) teclaDerecha = false;
+	if (key == GLUT_KEY_LEFT)  teclaIzquierda = false;
+	if (key == GLUT_KEY_UP)    teclaArriba = false;
+	if (key == GLUT_KEY_DOWN)  teclaAbajo = false;
 }
 
 void OnTimer(int value)
 {
+	if (teclaDerecha)	x++;
+	if (teclaIzquierda) x--;
+	if (teclaArriba)    y++;
+	if (teclaAbajo)     y--;
+
 	glutTimerFunc(25, OnTimer, 0);
 	glutPostRedisplay();
 }
