@@ -1,6 +1,9 @@
-Eventos importantes
+Eventos importantes:
 
-15/02/2026 - Creación del repositorio "archon" en github
+15/02/2026 - Creación del repositorio "archon" en github.
 
-07/03/2026 - Cambio de nombre del repositorio a "rancho"
-07/03/2026 - Primera ventana mostrando imagen y música (freeglut.h)
+07/03/2026 - Cambio de nombre del repositorio a "rancho".
+
+07/03/2026 - Primera ventana mostrando imagen y música (freeglut.h).
+
+17/03/2026 - Establecimiento del GitFlow Workflow para la creación de ramas.
