@@ -27,7 +27,7 @@ enum estadosPosibles
 	BATALLA
 };
 
-estadosPosibles estado = TABLERO;
+estadosPosibles estado = MENU;
 
 float tamano = 40;
 double ancho = 160, alto = 90;
@@ -36,7 +36,7 @@ float x = ancho/2, y = alto/2;
 int main(int argc, char* argv[])
 {
 	std::cout << "Iniciando Rancho...\n";
-	ETSIDI::playMusica("../assets/Audio/ranchoMainTheme.mpeg", true);
+	ETSIDI::playMusica("assets/Audio/ranchoMainTheme.mpeg", true);
 	
 	//Inicializar el gestor de ventanas GLUT y crear la ventana
 	glutInit(&argc, argv);
@@ -93,8 +93,8 @@ void OnDraw(void)
 		break;
 	}
 
-	Dibujar("../assets/Sprites/tablero y escenario/tablero.png",ancho/2,alto/2,1,tamano, tamano); //Función propia en otro.cpp para dibujar de forma más fácil
-	Dibujar("../assets/Sprites/Pruebas/borrar20-Sheet.png", x, y, 0, 20, 20);
+	Dibujar("assets/Sprites/tablero y escenario/tablero.png",ancho/2,alto/2,1,tamano, tamano); //Función propia en otro.cpp para dibujar de forma más fácil
+	Dibujar("assets/Sprites/Pruebas/borrar20-Sheet.png", x, y, 0, 20, 20);
 
 	glutSwapBuffers();	// no borrar esta linea ni poner nada despues
 }
