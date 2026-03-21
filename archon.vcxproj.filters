@@ -57,6 +57,7 @@
     <None Include="docs\GitFlow Workflow.pdf" />
     <None Include="lib\ETSIDI.exp" />
     <None Include="docs\ETSIDIlib.pdf" />
+    <None Include="assets\Audio\ranchoMainTheme.mpeg" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -75,5 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\pendientes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\Sprites\menu\titulo0.png" />
   </ItemGroup>
 </Project>
