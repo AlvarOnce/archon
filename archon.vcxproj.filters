@@ -33,21 +33,16 @@
     <ClInclude Include="include\placeholder.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="lib\freeglut.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\ETSIDI.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\otro.h">
-      <Filter>src</Filter>
-    </ClInclude>
+    <ClInclude Include="include\ETSIDI.h" />
+    <ClInclude Include="include\freeglut.h" />
+    <ClInclude Include="include\dibujar.h" />
+    <ClInclude Include="include\menu.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\memoria.md">
       <Filter>docs</Filter>
     </None>
-    <None Include="assets\Audio\ranchoMainTheme.mpeg">
+    <None Include="bin\assets\Audio\ranchoMainTheme.mpeg">
       <Filter>assets\Audio</Filter>
     </None>
     <None Include="bin\ETSIDI.dll">
@@ -59,31 +54,17 @@
     <None Include="bin\freeglut.dll">
       <Filter>bin</Filter>
     </None>
-    <None Include="ETSIDI\ETSIDI.exp">
-      <Filter>ETSIDI</Filter>
-    </None>
-    <None Include="ETSIDI\ETSIDIlib.pdf">
-      <Filter>ETSIDI</Filter>
-    </None>
+    <None Include="docs\GitFlow Workflow.pdf" />
+    <None Include="lib\ETSIDI.exp" />
+    <None Include="docs\ETSIDIlib.pdf" />
+    <None Include="assets\Audio\ranchoMainTheme.mpeg" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\otro.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="assets\Sprites\Image.png">
-      <Filter>assets\Sprites</Filter>
-    </Image>
-    <Image Include="assets\Sprites\foto2.png">
-      <Filter>assets\Sprites</Filter>
-    </Image>
-    <Image Include="assets\Sprites\art.gif">
-      <Filter>assets\Sprites</Filter>
-    </Image>
+    <ClCompile Include="src\dibujar.cpp" />
+    <ClCompile Include="src\menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib">
@@ -92,5 +73,11 @@
     <Library Include="lib\freeglut.lib">
       <Filter>lib</Filter>
     </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\pendientes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\Sprites\menu\titulo0.png" />
   </ItemGroup>
 </Project>

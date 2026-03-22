@@ -15,11 +15,11 @@ letra titulo[6];
 //Dibujar("../assets/Sprites/Pruebas/Sprite-0004.png", 0, 0, -21, 50, 50);
 //Dibujar("../assets/Sprites/Pruebas/Sprite-0005.png", 30, 30, -22, 50, 50);
 
-	Dibujar("../assets/Sprites/Pruebas/aaa1.png", 160/2, 90/2, 0, 160, 90); // fondo
+	Dibujar("../assets/Sprites/menu/fondo.png", 160/2, 90/2, 0, 160, 90); // fondo
 
 	for (int i = 0; i < 6; i++)
 	{
-		titulo[i].altura = 55 + 10 + 5 * sin(angulo + i/2.0); // +10 porque ahora dibuja posiciones en el centro de imagen
+		titulo[i].altura = 56 + 10 + 5 * sin(angulo + i/2.0); // +10 porque ahora dibuja posiciones en el centro de imagen
 		titulo[i].horiz = 18 * i + 9; // +9 porque ahora dibuja posiciones en el centro de imagen
 
 		if (i == 0)   titulo[i].horiz--;
