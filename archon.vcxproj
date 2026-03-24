@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ejemplogg.h" />
     <ClInclude Include="include\ETSIDI.h" />
     <ClInclude Include="include\placeholder.h" />
     <ClInclude Include="include\freeglut.h" />
@@ -146,6 +147,7 @@
     <None Include="docs\ETSIDIlib.pdf" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ejemplogg.cpp" />
     <ClCompile Include="src\dibujar.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\menu.cpp" />
