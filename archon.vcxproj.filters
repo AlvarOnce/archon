@@ -37,9 +37,7 @@
     <ClInclude Include="include\freeglut.h" />
     <ClInclude Include="include\dibujar.h" />
     <ClInclude Include="include\menu.h" />
-    <ClInclude Include="ejemplogg.h">
-      <Filter>include</Filter>
-    </ClInclude>
+    <ClInclude Include="include\ejemploggg.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\memoria.md">
@@ -68,9 +66,7 @@
     </ClCompile>
     <ClCompile Include="src\dibujar.cpp" />
     <ClCompile Include="src\menu.cpp" />
-    <ClCompile Include="ejemplogg.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
+    <ClCompile Include="src\ejemploggg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib">
