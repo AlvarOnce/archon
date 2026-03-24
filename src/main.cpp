@@ -19,6 +19,8 @@ bool teclaAbajo = false;
 bool teclaDerecha = false;
 bool teclaIzquierda = false;
 
+//comentario de prueba en la reunion
+
 enum estadosPosibles
 {
 	MENU,
