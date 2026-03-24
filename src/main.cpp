@@ -6,6 +6,8 @@
 #include "dibujar.h"
 #include "menu.h"
 
+//cambio para segio
+
 // los callback, funciones que seran llamadas automaticamente por la glut cuando sucedan eventos (NO HACE FALTA LLAMARLAS EXPLICITAMENTE)
 void OnDraw(void);		 // llamada para dibujar
 void OnTimer(int value); // llamada cuando transcurra una temporizacion
