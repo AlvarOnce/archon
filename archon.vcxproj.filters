@@ -37,7 +37,6 @@
     <ClInclude Include="include\freeglut.h" />
     <ClInclude Include="include\dibujar.h" />
     <ClInclude Include="include\menu.h" />
-    <ClInclude Include="src\lobo.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\memoria.md">
@@ -66,7 +65,6 @@
     </ClCompile>
     <ClCompile Include="src\dibujar.cpp" />
     <ClCompile Include="src\menu.cpp" />
-    <ClCompile Include="src\lobo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib">
