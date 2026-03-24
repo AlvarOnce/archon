@@ -133,6 +133,7 @@
     <ClInclude Include="include\freeglut.h" />
     <ClInclude Include="include\dibujar.h" />
     <ClInclude Include="include\menu.h" />
+    <ClInclude Include="src\lobo.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\Audio\ranchoMainTheme.mpeg" />
@@ -147,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dibujar.cpp" />
+    <ClCompile Include="src\lobo.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\menu.cpp" />
   </ItemGroup>
