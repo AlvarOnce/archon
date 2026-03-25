@@ -27,7 +27,7 @@ enum estadosPosibles
 	BATALLA
 };
 
-estadosPosibles estado = MENU;
+estadosPosibles estado = TABLERO;
 
 float tamano = 40;
 double ancho = 160, alto = 90;
@@ -95,6 +95,7 @@ void OnDraw(void)
 
 	Dibujar("../assets/Sprites/tablero y escenario/tablero.png",ancho/2,alto/2,1,tamano, tamano); //Función propia en otro.cpp para dibujar de forma más fácil
 	Dibujar("../assets/Sprites/Pruebas/borrar20-Sheet.png", x, y, 0, 20, 20);
+	Dibujar("../assets/Sprites/Pruebas/pruebares.png", ancho / 2, alto / 2, 5, 160, 90);
 
 	glutSwapBuffers();	// no borrar esta linea ni poner nada despues
 }
