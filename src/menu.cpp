@@ -1,3 +1,5 @@
+// Hay que sustituir Dibujar por el método de la clase Renderizador
+
 #include "dibujar.h"
 #include "menu.h"
 #include <string>
