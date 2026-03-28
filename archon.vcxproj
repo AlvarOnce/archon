@@ -129,7 +129,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\ETSIDI.h" />
-    <ClInclude Include="include\placeholder.h" />
     <ClInclude Include="include\freeglut.h" />
     <ClInclude Include="include\dibujar.h" />
     <ClInclude Include="include\menu.h" />

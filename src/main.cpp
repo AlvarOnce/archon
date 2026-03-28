@@ -1,12 +1,9 @@
-#include "placeholder.h" // Biblioteca vacía
 #include "iostream"
 #include "ETSIDI.h" // Biblioteca para sprites y sonidos
 #include "freeglut.h" // Biblioteca de ventana, dibujo y manejo teclado
 
 #include "dibujar.h"
 #include "menu.h"
-
-//cambio para segio
 
 // los callback, funciones que seran llamadas automaticamente por la glut cuando sucedan eventos (NO HACE FALTA LLAMARLAS EXPLICITAMENTE)
 void OnDraw(void);		 // llamada para dibujar
@@ -20,8 +17,6 @@ bool teclaArriba = false;
 bool teclaAbajo = false;
 bool teclaDerecha = false;
 bool teclaIzquierda = false;
-
-//comentario de prueba en la reunion
 
 enum estadosPosibles
 {
