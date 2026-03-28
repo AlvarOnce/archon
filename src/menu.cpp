@@ -11,9 +11,9 @@ void  mostrarMenu()
 
 letra titulo[6];
 
-//Dibujar("../assets/Sprites/Pruebas/Sprite-0003.png", 100, 60, -20,50,50);
-//Dibujar("../assets/Sprites/Pruebas/Sprite-0004.png", 30, 70, -21, 50, 50);
-//Dibujar("../assets/Sprites/Pruebas/Sprite-0005.png", 65, 30, -22, 50, 50);
+//Dibujar("../assets/Sprites/Pruebas/Sprite-0003.png", 0, 0, -20,50,50);
+//Dibujar("../assets/Sprites/Pruebas/Sprite-0004.png", 0, 0, -21, 50, 50);
+//Dibujar("../assets/Sprites/Pruebas/Sprite-0005.png", 30, 30, -22, 50, 50);
 
 	Dibujar("../assets/Sprites/Pruebas/aaa1.png", 160/2, 90/2, 0, 160, 90); // fondo
 
