@@ -29,7 +29,7 @@ enum estadosPosibles
 	BATALLA
 };
 
-estadosPosibles estado = TABLERO;
+estadosPosibles estado = MENU;
 
 float tamano = 40;
 double ancho = 160, alto = 90;
