@@ -138,7 +138,6 @@
     <ClInclude Include="include\tablero.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\Audio\ranchoMainTheme.mpeg" />
     <None Include="bin\assets\Audio\ranchoMainTheme.mpeg" />
     <None Include="bin\ETSIDI.dll" />
     <None Include="bin\fmodL.dll" />
