@@ -1,4 +1,5 @@
 #pragma once
+#include "renderizador.h"
 
 struct Letra {
     float altura;
@@ -9,8 +10,11 @@ class Menu {
 private:
     float angulo{};
     Letra titulo[6];
+    double ancho = 480;
+    double alto = 270;
 
 public:
-    void actualiza();
-    void dibuja(Renderizador* motor, double ancho, double alto);
+
+    void actualizar();
+    void dibujar(Renderizador* motor);
 };

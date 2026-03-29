@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0, rancho.getAnchoVentana(), 0, rancho.getAltoVentana(), 50, -50); // alto y ancho podrian hacerse static para acceder desde otras clases como menú.
+	glOrtho(0, rancho.getAnchoVentana(), 0, rancho.getAltoVentana(), 50, -50); // alto y ancho podrian hacerse static para acceder desde otras clases como menú (
 	glutFullScreen();
 	
 	//Registrar los callbacks

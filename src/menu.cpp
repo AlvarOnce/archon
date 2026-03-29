@@ -3,15 +3,14 @@
 #include <string>
 #include <iostream>
 #include "math.h"
-#include "renderizador.h"
 
-void Menu::actualiza() 
+void Menu::actualizar() 
 {
 	angulo += 0.05;
 	if (angulo > 360) angulo = 0;
 }
 
-void Menu::dibuja(Renderizador* motor, double ancho, double alto)
+void Menu::dibujar(Renderizador* motor)
 {
 	motor->dibujarSprite("../assets/Sprites/menu/fondo.png", ancho/2, alto/2, 0, ancho, alto); // fondo en posición centro (ancho/2,alto/2,0) de tamaño (ancho,alto)
 

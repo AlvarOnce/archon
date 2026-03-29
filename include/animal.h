@@ -1,6 +1,13 @@
 #pragma once
 #include "ETSIDI.h"
 #include <iostream>
+#include "renderizador.h"
+
+enum modoJuego
+{
+	TABLERO,
+	BATALLA
+};
 
 class Animal {
 
@@ -14,6 +21,12 @@ class Animal {
 	float vely_;
 
 	int equipo;
+
+	void mover(modoJuego m);
+	virtual void atacar()
+	{
+		std::cout << "Soy un animal genérico, mi ataque no está definido.";
+	}
 
 	// Dibujo 
 
@@ -38,9 +51,7 @@ protected: // Solo los hijos animales pueden modificar sus posiciones
 	void setVelX(float velx) { velx_ = velx; } // Es probable que las velocidades sean fijas, en cuyo caso, se eliminarían los setvel();
 	void setVelY(float vely) { vely_ = vely; }
 
-	virtual void atacar()
-	{
-		std::cout << "Soy un animal genérico, mi ataque no está definido.";
-	}
+	void dibujar(Renderizador* motor);
+
 
 };
