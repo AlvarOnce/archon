@@ -13,7 +13,14 @@ class Juego
     //Arena* miArena;
     Renderizador* motorGrafico;
 
+    double anchoVentana = 480;
+    double altoVentana = 270;
+
 public:
+
+    double getAnchoVentana() {return anchoVentana;} // Para decirle al main cuánto mide la ventana que debe crear
+    double getAltoVentana() {return altoVentana;}
+
     enum Estado { MENU, TABLERO, BATALLA };
     Estado estadoActual;
 
