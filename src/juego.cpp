@@ -2,11 +2,28 @@
 #include <iostream>
 #include <stdlib.h>
 
+Juego::Juego() {
+    estadoActual = MENU;
+
+    miMenu = new Menu();
+    //miTablero = new Tablero();
+    //miArena = new Arena();
+    motorGrafico = new Renderizador();
+}
+
+Juego::~Juego() {
+    delete miMenu;
+    //delete miTablero;
+    //delete miArena;
+    delete motorGrafico;
+}
+
 void Juego::actualizarLogica() {
-    // FASE 1: Matemáticas, colisiones y reglas del juego
+    // FASE 1: matemáticas, colisiones y reglas del juego
+
     switch (estadoActual) {
     case MENU:
-        
+        miMenu->actualiza();
         break;
     case TABLERO:
         
@@ -18,78 +35,89 @@ void Juego::actualizarLogica() {
 }
 
 void Juego::renderizarGraficos() {
-    // FASE 2: Pintar en pantalla.
+    // FASE 2: pintar en pantalla.
 
     motorGrafico->limpiarPantalla();
 
     switch (estadoActual) {
     case MENU:
-        motorGrafico->dibujarMenu();
+        miMenu->dibuja(motorGrafico);
         break;
 
     case TABLERO:
-        motorGrafico->dibujarFondoTablero();
+        
         break;
 
     case BATALLA:
-        motorGrafico->dibujarFondoArena();
+        
         break;
     }
 }
 
-void Juego::procesarTeclaPresionada(unsigned char key) 
+void Juego::procesarTeclaPresionada(unsigned char key) // JUGADOR 1 (WASD)
 {
-    if (key == 27) exit(0); // Esc
+    // Esc siempre cierra el juego, aunque en un futuro molaría poner un menú de pausa
+    if (key == 27) exit(0); 
 
     switch (estadoActual) {
-    case TABLERO:
+    case TABLERO: // movimiento discreto en el tablero
         //if (key == 'w' || key == 'W') miTablero->moverCursor(0, 1);
         //if (key == 's' || key == 'S') miTablero->moverCursor(0, -1);
-        //if (key == 13) miTablero->seleccionarCasilla(); // Enter
-        //break;
+        //if (key == 'a' || key == 'A') miTablero->moverCursor(-1, 0);
+        //if (key == 'd' || key == 'D') miTablero->moverCursor(1, 0);
+        
+        //if (key == '.') miTablero->seleccionarCasilla(); // Botón del J2
+        break;
 
-    case BATALLA:
-        // Pasamos las teclas WASD a la lógica de la arena
-        // miArena->recibirInputJugador1(key);
+    case BATALLA: 
+        // movimiento continuo, se activa el bool "interruptor"
+        // miArena->recibirInputJugador1(key, true); 
         break;
     }
 }
 
-void Juego::procesarTeclaLevantada(unsigned char key) {
-    switch (estadoActual) {
-    case BATALLA:
-        // si suelta la W, A, S o D, le decimos a la arena que apague el motor de ese lado
-        // miArena->recibirInputLevantadoJugador1(key);
-        break;
-    default:
-        break;
-    }
-}
-
-void Juego::procesarTeclaEspecialPresionada(int key) {
+void Juego::procesarTeclaLevantada(unsigned char key)
+{
     switch (estadoActual) {
     case TABLERO:
-        // En el tablero, el Jugador 2 (Flechas) también mueve el cursor general
-        // miTablero->moverCursorEspecial(key); 
+        // como en el tablero el movimiento es discreto, no hay que hacer nada
+        // cuando se levanta la tecla, ya se ha hecho todo al pulsarla.
         break;
 
     case BATALLA:
-        // Pasamos las flechas a la lógica de la arena
-        // miArena->recibirInputJugador2(key);
+        // se apaga el bool al levantar la tecla
+        // miArena->recibirInputJugador1(key, false);
         break;
     }
 }
 
-void Juego::procesarTeclaEspecialLevantada(int key) {
+void Juego::procesarTeclaEspecialPresionada(int key) // JUGADOR 2 (FLECHAS)
+{
     switch (estadoActual) {
     case TABLERO:
-        // En el tablero, el Jugador 2 (Flechas) también mueve el cursor general
-        // miTablero->moverCursorEspecial(key); 
+        //if (key == GLUT_KEY_UP)    miTablero->moverCursor(0, 1);
+        //if (key == GLUT_KEY_DOWN)  miTablero->moverCursor(0, -1);
+        //if (key == GLUT_KEY_LEFT)  miTablero->moverCursor(-1, 0);
+        //if (key == GLUT_KEY_RIGHT) miTablero->moverCursor(1, 0);
+
+        //if (key == GLUT_KEY_SHIFT_L) miTablero->seleccionarCasilla(); // Botón del J1
         break;
 
     case BATALLA:
-        // Pasamos las flechas a la lógica de la arena
-        // miArena->recibirInputJugador2(key);
+        // miArena->recibirInputJugador2(key, true);
+        break;
+    }
+}
+
+void Juego::procesarTeclaEspecialLevantada(int key)
+{
+    switch (estadoActual) {
+    case TABLERO:
+        // igual que antes, aquí no hay que poner nada
+        break;
+
+    case BATALLA:
+        // miArena->recibirInputJugador2(key, false);
         break;
     }
 }
