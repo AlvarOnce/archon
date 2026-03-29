@@ -1,6 +1,8 @@
 #pragma once
 
-// este es el ÚNICO archivo .h de todo el proyecto que debe incluir librerías gráficas.
+// este es el ÚNICO archivo .h de todo el proyecto que debe incluir librerías gráficas. (leer a continuación)
+// animal.h necesita ETSIDI.h para crear un puntero a SpriteSequence, pero se mantiene cierto para freeglut.h
+
 #include "freeglut.h"
 #include "ETSIDI.h"
 
@@ -9,6 +11,6 @@ public:
 
     void limpiarPantalla();
 
-    void dibujarSprite(const char* rutaImagen, float posx, float posy, float posz, float ancho, float alto);
+    void dibujarSprite(const char* rutaImagen, float ancho, float alto, float posx, float posy, float capa);
 
 };

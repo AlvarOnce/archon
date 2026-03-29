@@ -2,6 +2,7 @@
 
 void Animal::mover(modoJuego m)  // Para que el animal sepa que tipo de movimiento debe realizar, se le debe indicar en que modo estamos
 {
+    // Agregar dt en los cambios de posición
 
     switch (m) {
 
@@ -15,7 +16,6 @@ void Animal::mover(modoJuego m)  // Para que el animal sepa que tipo de movimien
 
         break;
     }
-
 
 }
 

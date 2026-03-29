@@ -12,7 +12,9 @@ void Menu::actualizar()
 
 void Menu::dibujar(Renderizador* motor)
 {
-	motor->dibujarSprite("../assets/Sprites/menu/fondo.png", ancho/2, alto/2, 0, ancho, alto); // fondo en posición centro (ancho/2,alto/2,0) de tamaño (ancho,alto)
+
+	motor->dibujarSprite("../assets/Sprites/menu/fondo.png", ancho, alto, ancho/2, alto/2, 0); // fondo de tamaño (ancho,alto) en posicion (0,0) capa (0)
+	glPopMatrix();
 
 	for (int i = 0; i < 6; i++)
 	{
@@ -23,10 +25,11 @@ void Menu::dibujar(Renderizador* motor)
 
 		const std::string ruta = std::string("../assets/Sprites/menu/titulo") + std::to_string(i) + ".png";
 
-		motor->dibujarSprite(ruta.c_str(), 0.1625*ancho + titulo[i].horiz, titulo[i].altura, -1, 54, 60);  // letras
+		motor->dibujarSprite(ruta.c_str(), 54, 60, 0.1625*ancho + titulo[i].horiz, titulo[i].altura, -1);  // letras
+
 	}
 
-	motor->dibujarSprite("../assets/Sprites/menu/paloma.png", 0.15*ancho + titulo[0].horiz, 0.14444*alto + titulo[0].altura, -2, 24, 24); // paloma
+	motor->dibujarSprite("../assets/Sprites/menu/paloma.png", 24, 24, 0.15*ancho + titulo[0].horiz, 0.14444*alto + titulo[0].altura, -2); // paloma
 
 	return;
 }
