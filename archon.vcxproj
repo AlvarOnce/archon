@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\animal.h" />
     <ClInclude Include="include\arena.h" />
     <ClInclude Include="include\ETSIDI.h" />
     <ClInclude Include="include\freeglut.h" />
@@ -148,6 +149,7 @@
     <None Include="docs\ETSIDIlib.pdf" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\animal.cpp" />
     <ClCompile Include="src\arena.cpp" />
     <ClCompile Include="src\juego.cpp" />
     <ClCompile Include="src\main.cpp" />

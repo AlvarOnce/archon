@@ -1,5 +1,4 @@
 #pragma once
-#include "Renderizador.h"
 
 struct Letra {
     float altura;

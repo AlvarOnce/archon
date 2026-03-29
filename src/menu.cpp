@@ -1,7 +1,9 @@
 #include "menu.h"
+
 #include <string>
 #include <iostream>
 #include "math.h"
+#include "renderizador.h"
 
 void Menu::actualiza() 
 {
