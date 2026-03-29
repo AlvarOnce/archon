@@ -1,12 +1,17 @@
 #pragma once
+#include "Renderizador.h"
 
-void mostrarMenu();
+struct Letra {
+    float altura;
+    float horiz;
+};
 
-class letra {
+class Menu {
+private:
+    float angulo{};
+    Letra titulo[6];
 
 public:
-
-	float altura;
-	float horiz;
-
+    void actualiza();
+    void dibuja(Renderizador* motor);
 };
