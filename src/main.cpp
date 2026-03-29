@@ -13,17 +13,13 @@ void OnKeyboardUp(unsigned char key, int x, int y); // cuando se suelta la tecla
 void OnSpecialDown(int key, int x, int y); // cuando se pulsa una tecla	especial
 void OnSpecialUp(int key, int x, int y); // cuando se suelta la tecla especial
 
-float tamano = 40;
-double ancho = 160, alto = 90;
-float x = ancho/2, y = alto/2;
-
 int main(int argc, char* argv[]) 
 {
 	std::cout << "Iniciando Rancho...\n";
 		
 	//Inicializar el gestor de ventanas GLUT y crear la ventana
 	glutInit(&argc, argv);
-	glutInitWindowSize(160,90);
+	glutInitWindowSize(rancho.getAnchoVentana(), rancho.getAltoVentana());
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("Rancho");
 
@@ -37,7 +33,7 @@ int main(int argc, char* argv[])
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0, ancho, 0, alto,50,-50); // en vez de gluPerspective( 40.0, 800/600.0f, 0.1, 150);
+	glOrtho(0, rancho.getAnchoVentana(), 0, rancho.getAltoVentana(), 50, -50); // alto y ancho podrian hacerse static para acceder desde otras clases como menú (
 	glutFullScreen();
 	
 	//Registrar los callbacks

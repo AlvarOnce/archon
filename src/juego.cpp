@@ -22,14 +22,20 @@ void Juego::actualizarLogica() {
     // FASE 1: matemáticas, colisiones y reglas del juego
 
     switch (estadoActual) {
+
     case MENU:
-        miMenu->actualiza();
+       
+        miMenu->actualizar();
         break;
+
     case TABLERO:
-        
+
+        // Aqui por ejemplo irira tablero->actualiza() y DENTRO DE TABLERO: for(todoslosanimales) Animal[i].mover o Animal[i].actualizar
         break;
+
     case BATALLA:
-        
+
+        // Aqui por ejemplo irira batalla->actualiza()
         break;
     }
 }
@@ -41,7 +47,7 @@ void Juego::renderizarGraficos() {
 
     switch (estadoActual) {
     case MENU:
-        miMenu->dibuja(motorGrafico);
+        miMenu->dibujar(motorGrafico);
         break;
 
     case TABLERO:

@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\animal.h" />
     <ClInclude Include="include\arena.h" />
     <ClInclude Include="include\ETSIDI.h" />
     <ClInclude Include="include\freeglut.h" />
@@ -137,7 +138,6 @@
     <ClInclude Include="include\tablero.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\Audio\ranchoMainTheme.mpeg" />
     <None Include="bin\assets\Audio\ranchoMainTheme.mpeg" />
     <None Include="bin\ETSIDI.dll" />
     <None Include="bin\fmodL.dll" />
@@ -148,6 +148,7 @@
     <None Include="docs\ETSIDIlib.pdf" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\animal.cpp" />
     <ClCompile Include="src\arena.cpp" />
     <ClCompile Include="src\juego.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -160,6 +161,7 @@
     <Library Include="lib\freeglut.lib" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="src\CopiaDibujoAnterior" />
     <Text Include="src\zzz.txt" />
   </ItemGroup>
   <ItemGroup>
