@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
 		
 	//Inicializar el gestor de ventanas GLUT y crear la ventana
 	glutInit(&argc, argv);
-	glutInitWindowSize(160,90);
+	glutInitWindowSize(rancho.getAnchoVentana(), rancho.getAltoVentana());
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("Rancho");
 
@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0, rancho.getAnchoVentana(), 0, rancho.getAltoVentana(), 50, -50); // en vez de gluPerspective( 40.0, 800/600.0f, 0.1, 150);
+	glOrtho(0, rancho.getAnchoVentana(), 0, rancho.getAltoVentana(), 50, -50); // alto y ancho podrian hacerse static para acceder desde otras clases como menú.
 	glutFullScreen();
 	
 	//Registrar los callbacks

@@ -41,7 +41,7 @@ void Juego::renderizarGraficos() {
 
     switch (estadoActual) {
     case MENU:
-        miMenu->dibuja(motorGrafico);
+        miMenu->dibuja(motorGrafico, getAnchoVentana(),getAltoVentana());
         break;
 
     case TABLERO:

@@ -13,5 +13,5 @@ private:
 
 public:
     void actualiza();
-    void dibuja(Renderizador* motor);
+    void dibuja(Renderizador* motor, double ancho, double alto);
 };
