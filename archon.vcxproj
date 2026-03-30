@@ -133,6 +133,7 @@
     <ClInclude Include="include\freeglut.h" />
     <ClInclude Include="include\dibujar.h" />
     <ClInclude Include="include\menu.h" />
+    <ClInclude Include="src\Tablero.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\Audio\ranchoMainTheme.mpeg" />
@@ -149,6 +150,7 @@
     <ClCompile Include="src\dibujar.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\menu.cpp" />
+    <ClCompile Include="src\Tablero.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />
