@@ -6,7 +6,13 @@ void Renderizador::limpiarPantalla() {
     glLoadIdentity();
 }
 
-void Renderizador::dibujarSprite(const char* rutaImagen, float ancho, float alto, float posx, float posy, float capa) {
+void Renderizador::dibujarSprite(const char* rutaImagen, float ancho, float alto, float posx, float posy, float capa, int cols, int rows, int stateX, int stateY) {
+
+    float anchoFrame = ancho / cols; // si es solo un frame anchoFrame = ancho pasado en parametro
+    float altoFrame = alto / rows;
+    float inicioFrameX = stateX * anchoFrame;
+    float inicioFrameY = stateY * altoFrame;
+
     glEnable(GL_TEXTURE_2D);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
@@ -26,10 +32,10 @@ void Renderizador::dibujarSprite(const char* rutaImagen, float ancho, float alto
     glPushMatrix();  // El renderizador se encarga de mover el origen antes de dibujar en el (0,0)
     glTranslatef(posx, posy, capa); // ahora posicion (x,y) en su capa (capa) corresponden a centro de imagen
     glBegin(GL_POLYGON);
-    glTexCoord2d(0, 1);    glVertex3f( - ancho / 2,  - alto / 2, 0); // abajo izquierda
-    glTexCoord2d(1, 1);    glVertex3f(  ancho / 2,  - alto / 2, 0); // abajo derecha
-    glTexCoord2d(1, 0);    glVertex3f(  ancho / 2,   alto / 2, 0); // arriba derecha
-    glTexCoord2d(0, 0);    glVertex3f( - ancho / 2,   alto / 2, 0); // ariiba izquierda
+    glTexCoord2d(inicioFrameX/ancho               , (inicioFrameY + altoFrame)/alto);    glVertex3f( -anchoFrame/2, -altoFrame/2, 0); // abajo izquierda (0,1)
+    glTexCoord2d((inicioFrameX + anchoFrame)/ancho, (inicioFrameY + altoFrame)/alto);    glVertex3f(  anchoFrame/2, -altoFrame/2, 0); // abajo derecha (1,1)
+    glTexCoord2d((inicioFrameX + anchoFrame)/ancho, inicioFrameY/alto);                  glVertex3f(  anchoFrame/2,  altoFrame/2, 0); // arriba derecha (1,0)
+    glTexCoord2d(inicioFrameX/ancho               , inicioFrameY/alto);                  glVertex3f( -anchoFrame/2,  altoFrame/2, 0); // arriba izquierda (0,0)
     glEnd();
     glPopMatrix();
 
