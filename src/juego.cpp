@@ -1,6 +1,9 @@
 #include "juego.h"
+#include "tablero.h"
 #include <iostream>
 #include <stdlib.h>
+
+Tablero miTablero;
 
 Juego::Juego() {
     estadoActual = MENU;
@@ -67,12 +70,12 @@ void Juego::procesarTeclaPresionada(unsigned char key) // JUGADOR 1 (WASD)
 
     switch (estadoActual) {
     case TABLERO: // movimiento discreto en el tablero
-        //if (key == 'w' || key == 'W') miTablero->moverCursor(0, 1);
-        //if (key == 's' || key == 'S') miTablero->moverCursor(0, -1);
-        //if (key == 'a' || key == 'A') miTablero->moverCursor(-1, 0);
-        //if (key == 'd' || key == 'D') miTablero->moverCursor(1, 0);
+        if (key == 'w' || key == 'W') miTablero->MoverCursorJ1(0, 1);
+        if (key == 's' || key == 'S') miTablero->MoverCursorJ1(0, -1);
+        if (key == 'a' || key == 'A') miTablero->MoverCursorJ1(-1, 0);
+        if (key == 'd' || key == 'D') miTablero->MoverCursorJ1(1, 0);
         
-        //if (key == '.') miTablero->seleccionarCasilla(); // Botón del J2
+        if (key == '.') miTablero->SeleccionarCasillaJ1(); // Botón del J1
         break;
 
     case BATALLA: 
@@ -101,12 +104,13 @@ void Juego::procesarTeclaEspecialPresionada(int key) // JUGADOR 2 (FLECHAS)
 {
     switch (estadoActual) {
     case TABLERO:
-        //if (key == GLUT_KEY_UP)    miTablero->moverCursor(0, 1);
-        //if (key == GLUT_KEY_DOWN)  miTablero->moverCursor(0, -1);
-        //if (key == GLUT_KEY_LEFT)  miTablero->moverCursor(-1, 0);
-        //if (key == GLUT_KEY_RIGHT) miTablero->moverCursor(1, 0);
+        if (key == GLUT_KEY_UP)    miTablero->MoverCursorJ2(0, 1);
+        if (key == GLUT_KEY_DOWN)  miTablero->MoverCursorJ2(0, -1);
+        if (key == GLUT_KEY_LEFT)  miTablero->MoverCursorJ2(-1, 0);
+        if (key == GLUT_KEY_RIGHT) miTablero->MoverCursorJ2(1, 0);
 
-        //if (key == GLUT_KEY_SHIFT_L) miTablero->seleccionarCasilla(); // Botón del J1
+        if (key == 13) miTablero->SeleccionarCasillaJ2(); // Botón del J2
+        //cambie la tecla de seleccionar casilla J2 a Enter, porque GLUT_KEY_SHIFT_L no la reconoce FREEGLUT.
         break;
 
     case BATALLA:
