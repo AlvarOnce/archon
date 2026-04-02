@@ -6,7 +6,7 @@ void Renderizador::limpiarPantalla() {
     glLoadIdentity();
 }
 
-void Renderizador::dibujarSprite(const char* rutaImagen, float ancho, float alto, float posx, float posy, float capa, int cols, int rows, int stateX, int stateY) {
+void Renderizador::dibujarSprite(const char* rutaImagen, float ancho, float alto, float posx, float posy, float capa, int rows, int cols, int stateX, int stateY) {
 
     float anchoFrame = ancho / cols; // si es solo un frame anchoFrame = ancho pasado en parametro
     float altoFrame = alto / rows;

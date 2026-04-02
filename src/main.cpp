@@ -60,7 +60,7 @@ void OnDraw(void)
 
 void OnTimer(int value)
 {
-	rancho.actualizarLogica();
+	rancho.actualizarLogica(25);
 
 	glutTimerFunc(25, OnTimer, 0);
 	glutPostRedisplay();
