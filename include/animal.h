@@ -9,33 +9,48 @@ enum modoJuego
 	BATALLA
 };
 
+enum animacionTipo
+{
+	QUIETO,
+	CAMINAR,
+	ATACAR,
+};
+
+enum direccion
+{
+	R,
+	L,
+	U,
+	D,
+	UR,
+	UL,
+	DR,
+	DL
+};
+
 class Animal {
+
+public:
 
 	// Lógica
 
-	float posx_;
-	float posy_;
+	float posx_{ 100 };
+	float posy_{ 100 };
 	float capaz_;
 	
-	float velx_;
-	float vely_;
+	float velx_{0};
+	float vely_{0};
 
 	int equipo;
 
-	void mover(modoJuego m);
+	void mover(modoJuego modo, direccion dir);
 	virtual void atacar()
 	{
 		std::cout << "Soy un animal genérico, mi ataque no está definido.";
 	}
 
-	// Dibujo 
-
-	int ancho;
-	int alto;
-	ETSIDI::SpriteSequence* visual; // Esta línea le permite a la clase Animal acceder a métodos de la clase SpriteSequence (Composición)
-
-
-public:
+	//ETSIDI::SpriteSequence* visual; // Esta línea le permite a la clase Animal acceder a métodos de la clase SpriteSequence (Composición)
+	void actualizar(float dt);
 
 	float getPosX() const { return posx_; }
 	float getPosY() const { return posy_; }
@@ -43,7 +58,7 @@ public:
 	float getVelX() const { return velx_; }
 	float getVelY() const { return vely_; }
 
-protected: // Solo los hijos animales pueden modificar sus posiciones
+//protected: // Solo los hijos animales pueden modificar sus posiciones
 
 	void setPosX(float posx) { posx_ = posx;}
 	void setPosy(float posy) { posy_ = posy; }
@@ -51,7 +66,17 @@ protected: // Solo los hijos animales pueden modificar sus posiciones
 	void setVelX(float velx) { velx_ = velx; } // Es probable que las velocidades sean fijas, en cuyo caso, se eliminarían los setvel();
 	void setVelY(float vely) { vely_ = vely; }
 
-	void dibujar(Renderizador* motor);
 
+	// Dibujo y animación
+
+	int frameActualX = 0;
+	int frameActualY = 1;
+	float timer = 0;
+	float msStep = 100;
+
+	int ancho;
+	int alto;
+
+	virtual void dibujar(Renderizador* motor);
 
 };
