@@ -33,15 +33,15 @@ void Juego::actualizarLogica(float dt) {
 
     case MENU:
        
-        miMenu->actualizar();
+        miMenu->actualizar(25);
 
-        for (int i = 0; i < 10; i++)
-        misAnimales[i]->actualizar(25);
         break;
 
     case TABLERO:
 
         // Aqui por ejemplo irira tablero->actualiza() y DENTRO DE TABLERO: for(todoslosanimales) Animal[i].mover o Animal[i].actualizar
+        for (int i = 0; i < 10; i++) // ESTO DENTRO DE ACTUALIZAR TABLERO
+        misAnimales[i]->actualizar(25);
         break;
 
     case BATALLA:
@@ -60,12 +60,13 @@ void Juego::renderizarGraficos() {
     case MENU:
         miMenu->dibujar(motorGrafico);
 
-        for (int i = 0; i < 10; i++)
-            misAnimales[i]->dibujar(motorGrafico);
         break;
 
     case TABLERO:
         
+
+        for (int i = 0; i < 10; i++) // LO MISMO QUE ARRIBA DENTRO DE DIBUJAR TABLERO
+        misAnimales[i]->dibujar(motorGrafico);
         break;
 
     case BATALLA:
