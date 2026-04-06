@@ -62,8 +62,7 @@ void Juego::renderizarGraficos() {
 
         break;
 
-    case TABLERO:
-        
+    case TABLERO:  
 
         for (int i = 0; i < 10; i++) // LO MISMO QUE ARRIBA DENTRO DE DIBUJAR TABLERO
         misAnimales[i]->dibujar(motorGrafico);
