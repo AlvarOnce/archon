@@ -3,12 +3,20 @@
 #include <stdlib.h>
 
 Juego::Juego() {
+
     estadoActual = MENU;
 
     miMenu = new Menu();
     //miTablero = new Tablero();
     //miArena = new Arena();
     motorGrafico = new Renderizador();
+
+    for (int i = 0; i < 10; i++) // ejemplo de creacion de 32 animales (cabras, dibujadas como palomas)
+    {
+        misAnimales[i] = new Cabra();
+        misAnimales[i]->posx_ = 50 + 30 * i;
+        misAnimales[i]->posy_ = 100 + 5*i;
+    }
 }
 
 Juego::~Juego() {
@@ -18,19 +26,22 @@ Juego::~Juego() {
     delete motorGrafico;
 }
 
-void Juego::actualizarLogica() {
+void Juego::actualizarLogica(float dt) {
     // FASE 1: matemáticas, colisiones y reglas del juego
 
     switch (estadoActual) {
 
     case MENU:
        
-        miMenu->actualizar();
+        miMenu->actualizar(25);
+
         break;
 
     case TABLERO:
 
         // Aqui por ejemplo irira tablero->actualiza() y DENTRO DE TABLERO: for(todoslosanimales) Animal[i].mover o Animal[i].actualizar
+        for (int i = 0; i < 10; i++) // ESTO DENTRO DE ACTUALIZAR TABLERO
+        misAnimales[i]->actualizar(25);
         break;
 
     case BATALLA:
@@ -48,10 +59,13 @@ void Juego::renderizarGraficos() {
     switch (estadoActual) {
     case MENU:
         miMenu->dibujar(motorGrafico);
+
         break;
 
-    case TABLERO:
-        
+    case TABLERO:  
+
+        for (int i = 0; i < 10; i++) // LO MISMO QUE ARRIBA DENTRO DE DIBUJAR TABLERO
+        misAnimales[i]->dibujar(motorGrafico);
         break;
 
     case BATALLA:

@@ -11,6 +11,7 @@ public:
 
     void limpiarPantalla();
 
-    void dibujarSprite(const char* rutaImagen, float ancho, float alto, float posx, float posy, float capa);
+    void dibujarSprite(const char* rutaImagen, float ancho, float alto, float posx, float posy, float capa, 
+                       int rows = 1, int cols = 1, int stateX = 0, int stateY = 0);
 
 };
