@@ -30,13 +30,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\placeholder.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\ETSIDI.h" />
     <ClInclude Include="include\freeglut.h" />
-    <ClInclude Include="include\dibujar.h" />
     <ClInclude Include="include\menu.h" />
+    <ClInclude Include="include\animal.h" />
+    <ClInclude Include="include\arena.h" />
+    <ClInclude Include="include\juego.h" />
+    <ClInclude Include="include\renderizador.h" />
+    <ClInclude Include="include\tablero.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\memoria.md">
@@ -57,14 +58,17 @@
     <None Include="docs\GitFlow Workflow.pdf" />
     <None Include="lib\ETSIDI.exp" />
     <None Include="docs\ETSIDIlib.pdf" />
-    <None Include="assets\Audio\ranchoMainTheme.mpeg" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\dibujar.cpp" />
     <ClCompile Include="src\menu.cpp" />
+    <ClCompile Include="src\animal.cpp" />
+    <ClCompile Include="src\arena.cpp" />
+    <ClCompile Include="src\juego.cpp" />
+    <ClCompile Include="src\renderizador.cpp" />
+    <ClCompile Include="src\tablero.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib">
@@ -75,7 +79,8 @@
     </Library>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="src\pendientes.txt" />
+    <Text Include="src\CopiaDibujoAnterior" />
+    <Text Include="src\zzz.txt" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\Sprites\menu\titulo0.png" />

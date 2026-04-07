@@ -2,7 +2,7 @@
 
 #include "tablero.h"
 #include "menu.h"
-//#include "tablero.h"
+#include "tablero.h"
 //#include "arena.h"
 #include "renderizador.h" 
 #include "animal.h"
@@ -11,7 +11,7 @@
 class Juego 
 {
     Menu* miMenu;
-    //Tablero* miTablero;
+    Tablero* miTablero;
     //Arena* miArena;
     Renderizador* motorGrafico;
     Animal* misAnimales[32];
