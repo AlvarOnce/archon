@@ -6,12 +6,20 @@
 Tablero miTablero;
 
 Juego::Juego() {
+
     estadoActual = MENU;
 
     miMenu = new Menu();
     miTablero = new Tablero();
     //miArena = new Arena();
     motorGrafico = new Renderizador();
+
+    for (int i = 0; i < 10; i++) // ejemplo de creacion de 32 animales (cabras, dibujadas como palomas)
+    {
+        misAnimales[i] = new Cabra();
+        misAnimales[i]->posx_ = 50 + 30 * i;
+        misAnimales[i]->posy_ = 100 + 5*i;
+    }
 }
 
 Juego::~Juego() {
@@ -21,19 +29,22 @@ Juego::~Juego() {
     delete motorGrafico;
 }
 
-void Juego::actualizarLogica() {
-    // FASE 1: matem·ticas, colisiones y reglas del juego
+void Juego::actualizarLogica(float dt) {
+    // FASE 1: matem√°ticas, colisiones y reglas del juego
 
     switch (estadoActual) {
 
     case MENU:
        
-        miMenu->actualizar();
+        miMenu->actualizar(25);
+
         break;
 
     case TABLERO:
 
         // Aqui por ejemplo irira tablero->actualiza() y DENTRO DE TABLERO: for(todoslosanimales) Animal[i].mover o Animal[i].actualizar
+        for (int i = 0; i < 10; i++) // ESTO DENTRO DE ACTUALIZAR TABLERO
+        misAnimales[i]->actualizar(25);
         break;
 
     case BATALLA:
@@ -51,10 +62,13 @@ void Juego::renderizarGraficos() {
     switch (estadoActual) {
     case MENU:
         miMenu->dibujar(motorGrafico);
+
         break;
 
-    case TABLERO:
-        miTablero->dibujarTablero();
+    case TABLERO:  
+
+        for (int i = 0; i < 10; i++) // LO MISMO QUE ARRIBA DENTRO DE DIBUJAR TABLERO
+        misAnimales[i]->dibujar(motorGrafico);
         break;
 
     case BATALLA:
@@ -65,7 +79,7 @@ void Juego::renderizarGraficos() {
 
 void Juego::procesarTeclaPresionada(unsigned char key) // JUGADOR 1 (WASD)
 {
-    // Esc siempre cierra el juego, aunque en un futuro molarÌa poner un men˙ de pausa
+    // Esc siempre cierra el juego, aunque en un futuro molar√≠a poner un men√∫ de pausa
     if (key == 27) exit(0); 
 
     switch (estadoActual) {
@@ -75,7 +89,7 @@ void Juego::procesarTeclaPresionada(unsigned char key) // JUGADOR 1 (WASD)
         if (key == 'a' || key == 'A') miTablero->moverCursorJ1(-1, 0);
         if (key == 'd' || key == 'D') miTablero->moverCursorJ1(1, 0);
         
-        if (key == '.') miTablero->seleccionarCasillaJ1(); // BotÛn del J1
+        if (key == '.') miTablero->seleccionarCasillaJ1(); // Bot√≥n del J1
         break;
 
     case BATALLA: 
@@ -109,7 +123,7 @@ void Juego::procesarTeclaEspecialPresionada(int key) // JUGADOR 2 (FLECHAS)
         if (key == GLUT_KEY_LEFT)  miTablero->moverCursorJ2(-1, 0);
         if (key == GLUT_KEY_RIGHT) miTablero->moverCursorJ2(1, 0);
 
-        if (key == '.') miTablero->seleccionarCasillaJ2(); // BotÛn del J2
+        if (key == '.') miTablero->seleccionarCasillaJ2(); // Bot√≥n del J2
         break;
 
     case BATALLA:
@@ -122,7 +136,7 @@ void Juego::procesarTeclaEspecialLevantada(int key)
 {
     switch (estadoActual) {
     case TABLERO:
-        // igual que antes, aquÌ no hay que poner nada
+        // igual que antes, aqu√≠ no hay que poner nada
         break;
 
     case BATALLA:

@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClInclude Include="include\animal.h" />
     <ClInclude Include="include\arena.h" />
+    <ClInclude Include="include\cabra.h" />
     <ClInclude Include="include\ETSIDI.h" />
     <ClInclude Include="include\freeglut.h" />
     <ClInclude Include="include\juego.h" />
@@ -150,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="src\animal.cpp" />
     <ClCompile Include="src\arena.cpp" />
+    <ClCompile Include="src\cabra.cpp" />
     <ClCompile Include="src\juego.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\menu.cpp" />

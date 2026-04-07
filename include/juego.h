@@ -5,6 +5,8 @@
 #include "tablero.h"
 //#include "arena.h"
 #include "renderizador.h" 
+#include "animal.h"
+#include "cabra.h"
 
 class Juego 
 {
@@ -12,6 +14,7 @@ class Juego
     Tablero* miTablero;
     //Arena* miArena;
     Renderizador* motorGrafico;
+    Animal* misAnimales[32];
 
     double anchoVentana = 480;
     double altoVentana = 270;
@@ -28,7 +31,7 @@ public:
     ~Juego();
 
     // game loop dividido en dos fases desacopladas
-    void actualizarLogica(); // se llama desde OnTimer
+    void actualizarLogica(float dt); // se llama desde OnTimer
     void renderizarGraficos(); // se llama desde OnDraw
 
     // coordinador de inputs de teclado
