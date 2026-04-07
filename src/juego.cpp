@@ -9,14 +9,14 @@ Juego::Juego() {
     estadoActual = MENU;
 
     miMenu = new Menu();
-    //miTablero = new Tablero();
+    miTablero = new Tablero();
     //miArena = new Arena();
     motorGrafico = new Renderizador();
 }
 
 Juego::~Juego() {
     delete miMenu;
-    //delete miTablero;
+    delete miTablero;
     //delete miArena;
     delete motorGrafico;
 }
@@ -54,7 +54,7 @@ void Juego::renderizarGraficos() {
         break;
 
     case TABLERO:
-        
+        miTablero->dibujarTablero();
         break;
 
     case BATALLA:
@@ -70,12 +70,12 @@ void Juego::procesarTeclaPresionada(unsigned char key) // JUGADOR 1 (WASD)
 
     switch (estadoActual) {
     case TABLERO: // movimiento discreto en el tablero
-        if (key == 'w' || key == 'W') miTablero->MoverCursorJ1(0, 1);
-        if (key == 's' || key == 'S') miTablero->MoverCursorJ1(0, -1);
-        if (key == 'a' || key == 'A') miTablero->MoverCursorJ1(-1, 0);
-        if (key == 'd' || key == 'D') miTablero->MoverCursorJ1(1, 0);
+        if (key == 'w' || key == 'W') miTablero->moverCursorJ1(0, 1);
+        if (key == 's' || key == 'S') miTablero->moverCursorJ1(0, -1);
+        if (key == 'a' || key == 'A') miTablero->moverCursorJ1(-1, 0);
+        if (key == 'd' || key == 'D') miTablero->moverCursorJ1(1, 0);
         
-        if (key == '.') miTablero->SeleccionarCasillaJ1(); // Botón del J1
+        if (key == '.') miTablero->seleccionarCasillaJ1(); // Botón del J1
         break;
 
     case BATALLA: 
@@ -104,13 +104,12 @@ void Juego::procesarTeclaEspecialPresionada(int key) // JUGADOR 2 (FLECHAS)
 {
     switch (estadoActual) {
     case TABLERO:
-        if (key == GLUT_KEY_UP)    miTablero->MoverCursorJ2(0, 1);
-        if (key == GLUT_KEY_DOWN)  miTablero->MoverCursorJ2(0, -1);
-        if (key == GLUT_KEY_LEFT)  miTablero->MoverCursorJ2(-1, 0);
-        if (key == GLUT_KEY_RIGHT) miTablero->MoverCursorJ2(1, 0);
+        if (key == GLUT_KEY_UP)    miTablero->moverCursorJ2(0, 1);
+        if (key == GLUT_KEY_DOWN)  miTablero->moverCursorJ2(0, -1);
+        if (key == GLUT_KEY_LEFT)  miTablero->moverCursorJ2(-1, 0);
+        if (key == GLUT_KEY_RIGHT) miTablero->moverCursorJ2(1, 0);
 
-        if (key == 13) miTablero->SeleccionarCasillaJ2(); // Botón del J2
-        //cambie la tecla de seleccionar casilla J2 a Enter, porque GLUT_KEY_SHIFT_L no la reconoce FREEGLUT.
+        if (key == '.') miTablero->seleccionarCasillaJ2(); // Botón del J2
         break;
 
     case BATALLA:

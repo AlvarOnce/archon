@@ -1,8 +1,8 @@
-#include "Tablero.h"
+#include "tablero.h"
 
 Tablero::Tablero()
 {
-    InicializarTablero();
+    inicializarTablero();
 }
 
 Tablero::~Tablero()
@@ -10,263 +10,262 @@ Tablero::~Tablero()
 
 }
 
-void Tablero::InicializarTablero()//Importante, iniclizaiamos el Tablero vacio, es decir, creamos la matriz pero no le decimos todavia si hay figuras o no en las casillas
+void Tablero::inicializarTablero()//Importante, iniclizaiamos el Tablero vacio, es decir, creamos la matriz pero no le decimos todavia si hay figuras o no en las casillas
 {
-    for (int i = 0; i < Filas; i++)
+    for (int i = 0; i < FILAS; i++)
     {
-        for (int j = 0; j < Columnas; j++)
+        for (int j = 0; j < COLUMNAS; j++)
         {
-            Casillas[i][j] = nullptr;
+            casillas[i][j] = nullptr;
 
             if ((i + j) % 2 == 0)
             {
-                ColorCasilla[i][j] = CasillaLuz;//como ya estan creadas las celdas de la matriz, ahora le decimos a cada celda que es, si es luz o oscuradad
+                color_casilla[i][j] = CASILLA_LUZ;//como ya estan creadas las celdas de la matriz, ahora le decimos a cada celda que es, si es luz o oscuradad
             }
             else
             {
-                ColorCasilla[i][j] = CasillaOscura;
+                color_casilla[i][j] = CASILLA_OSCURA;
             }
         }
     }
 
-    TurnoActual = BandoLuz;//incia el turno el bando de luz
+    turno_actual = BANDO_LUZ;//incia el turno el bando de luz
 
-    PosicionFilaCursorActualJ1 = 0; PosicionColumnaCursorActualJ1 = 0;
-    PosicionFilaCursorActualJ2 = 8; PosicionColumnaCursorActualJ2 = 8;
-    HayPiezaSeleccionadaJ1 = false; //están en false porqeu, si hemos iniciado el juego, pero como en el archon, no inicias el juego con una pieza ya seleccionada, dejas qeu el juegador escoga qeu figura quiere escoger
-    HayPiezaSeleccionadaJ2 = false;
+    posicion_fila_cursor_actual_j1 = 0; posicion_columna_cursor_actual_j1 = 0;
+    posicion_fila_cursor_actual_j2 = 8; posicion_columna_cursor_actual_j2 = 8;
+    hay_pieza_seleccionada_j1 = false; //están en false porqeu, si hemos iniciado el juego, pero como en el archon, no inicias el juego con una pieza ya seleccionada, dejas qeu el juegador escoga qeu figura quiere escoger
+    hay_pieza_seleccionada_j2 = false;
 
 }
 
-void Tablero::DibujarTablero()
+void Tablero::dibujarTablero()
 {
-    for (int i = 0; i < Filas; i++)
+    for (int i = 0; i < FILAS; i++)
     {
-        for (int j = 0; j < Columnas; j++)
+        for (int j = 0; j < COLUMNAS; j++)
         {
-            int X = XInicio + j * TamanoCasilla;
-            int Y = YInicio + i * TamanoCasilla;
+            int x = X_INICIO + j * TAMANO_CASILLA;
+            int y = Y_INICIO + i * TAMANO_CASILLA;
 
-            if (EsPuntoDePoder(i, j))
+            if (esPuntoDePoder(i, j))
             {
                 //Dibujar con la libreria freglut supongo, un simbolo qeu indique que es una casilla de poder
             }
 
-            if (Casillas[i][j] != nullptr)
+            if (casillas[i][j] != nullptr)
             {
-                Casillas[i][j]->Dibujar(X, Y);//la funcion dibujar debe estar dentro de animal.h, porque aqui le decimos que nos dibuje en la casilla el animal
+                //Casillas[i][j]->Dibujar(X, Y);//la funcion dibujar debe estar dentro de animal.h, porque aqui le decimos que nos dibuje en la casilla el animal
             }
         }
     }
 }
 
-bool Tablero::ObtenerCasillaEnLaPinchamos(int XPantalla, int YPantalla, int& Fila, int& Columna)
+bool Tablero::obtenerCasillaEnLaPinchamos(int x_pantalla, int y_pantalla, int& fila, int& columna)
 {
     // Comprobamos si el clic se ha ehcho dentro ddel tablero de juego
-    if (XPantalla < XInicio || XPantalla >= XInicio + Columnas * TamanoCasilla)
+    if (x_pantalla < X_INICIO || x_pantalla >= X_INICIO + COLUMNAS * TAMANO_CASILLA)
     {
         return false;
     }
-    if (YPantalla < YInicio || YPantalla >= YInicio + Filas * TamanoCasilla)
+    if (y_pantalla < Y_INICIO || y_pantalla >= Y_INICIO + FILAS * TAMANO_CASILLA)
     {
         return false;
     }
 
-    Columna = (XPantalla - XInicio) / TamanoCasilla;//con esto sacas qeu columna de la matriz has clickeado
-    Fila = (YPantalla - YInicio) / TamanoCasilla;//lo mismo qeu la linea anterior pero esta vez con las filas
+    columna = (x_pantalla - X_INICIO) / TAMANO_CASILLA;//con esto sacas qeu columna de la matriz has clickeado
+    fila = (y_pantalla - Y_INICIO) / TAMANO_CASILLA;//lo mismo qeu la linea anterior pero esta vez con las filas
 
     return true;
 }
 
-void Tablero::ColocarPieza(int Fila, int Columna, Animal* Pieza)
+void Tablero::colocarPieza(int fila, int columna, Animal* pieza)
 {
-    Casillas[Fila][Columna] = Pieza;
+    casillas[fila][columna] = pieza;
 }
 
-void Tablero::EliminarPieza(int Fila, int Columna)
+void Tablero::eliminarPieza(int fila, int columna)
 {
-    Casillas[Fila][Columna] = nullptr;
+    casillas[fila][columna] = nullptr;
 }
 
-Animal* Tablero::IdentificarPieza(int Fila, int Columna) //decir que pieza hay en cada casilla
+Animal* Tablero::identificarPieza(int fila, int Columna) //decir que pieza hay en cada casilla
 {
-    return Casillas[Fila][Columna];
+    return casillas[fila][Columna];
 }
 
-void Tablero::MoverPieza(int FilaInicial, int ColumnaInicial, int FilaFinal, int ColumnaFinal)
+void Tablero::moverPieza(int fila_inicial, int columna_inicial, int fila_final, int columna_final)
 {
-    Casillas[FilaFinal][ColumnaFinal] = Casillas[FilaInicial][ColumnaInicial];
-    Casillas[FilaInicial][ColumnaInicial] = nullptr;
+    casillas[fila_final][columna_final] = casillas[fila_inicial][columna_inicial];
+    casillas[fila_inicial][columna_inicial] = nullptr;
 }
 
-bool Tablero::ComprobarCasillaVacia(int Fila, int Columna) //servira para saber si una casilla está vacía o no
+bool Tablero::comprobarCasillaVacia(int fila, int Columna) //servira para saber si una casilla está vacía o no
 {
-    return Casillas[Fila][Columna] == nullptr;
+    return casillas[fila][Columna] == nullptr;
 }
 
-int Tablero::ObtenerTurnoActual()
+int Tablero::obtenerTurnoActual()
 {
-    return TurnoActual;
+    return turno_actual;
 }
 
-void Tablero::AvanzarTurno()
+void Tablero::avanzarTurno()
 {
-    ContadorTurno++;
-    if (ContadorTurno == 8)//rotaba a los ocho turnos los colores de las casillas no?
+    contador_turno++;
+    if (contador_turno == 8)//rotaba a los ocho turnos los colores de las casillas no?
     {
-        ContadorTurno = 0;
-        for (int i = 0; i < Filas; i++)
+        contador_turno = 0;
+        for (int i = 0; i < FILAS; i++)
         {
-            for (int j = 0; j < Columnas; j++)
+            for (int j = 0; j < COLUMNAS; j++)
             {
-                if (ColorCasilla[i][j] == CasillaLuz)
+                if (color_casilla[i][j] == CASILLA_LUZ)
                 {
-                    ColorCasilla[i][j] = CasillaOscura;
+                    color_casilla[i][j] = CASILLA_OSCURA;
                 }
 
                 else
                 {
-                    ColorCasilla[i][j] = CasillaLuz;
+                    color_casilla[i][j] = CASILLA_LUZ;
                 }
             }
         }
     }
 }
 
-bool Tablero::EsCasillaLuz(int Fila, int Columna)
+bool Tablero::esCasillaLuz(int fila, int columna)
 {
-    return ColorCasilla[Fila][Columna] == CasillaLuz;
+    return color_casilla[fila][columna] == CASILLA_LUZ;
 }
 
-bool Tablero::EsCasillaOscuridad(int Fila, int Columna)
+bool Tablero::esCasillaOscuridad(int fila, int columna)
 {
-    return ColorCasilla[Fila][Columna] == CasillaOscura;
+    return color_casilla[fila][columna] == CASILLA_OSCURA;
 }
 
 //estas dos dunciones serviran para saber en la funcion, TieneVentaja, comprobar que la figura y casilla son del mismo bando por asi decirlo
 
-bool Tablero::EsPuntoDePoder(int Fila, int Columna)
+bool Tablero::esPuntoDePoder(int fila, int columna)
 {
-    if (Fila == 4 && Columna == 4) return true;
-    if (Fila == 0 && Columna == 4) return true;
-    if (Fila == 8 && Columna == 4) return true;
-    if (Fila == 4 && Columna == 0) return true;
-    if (Fila == 4 && Columna == 8) return true;
+    if (fila == 4 && columna == 4) return true;
+    if (fila == 0 && columna == 4) return true;
+    if (fila == 8 && columna == 4) return true;
+    if (fila == 4 && columna == 0) return true;
+    if (fila == 4 && columna == 8) return true;
 
     return false;
 }
 
-int Tablero::PuntosDePoderControlados(int Bando)
+int Tablero::puntosDePoderControlados(int bando)
 {
-    int PuntosDePoderTomados = 0;
-    if (!ComprobarCasillaVacia(4, 4) && Casillas[4][4]->SaberBando() == Bando) PuntosDePoderTomados++;//la funcion obtener bando prefiero que este dentro de Animal.h y .cpp
-    if (!ComprobarCasillaVacia(0, 4) && Casillas[0][4]->SaberBando() == Bando) PuntosDePoderTomados++;
-    if (!ComprobarCasillaVacia(8, 4) && Casillas[8][4]->SaberBando() == Bando) PuntosDePoderTomados++;
-    if (!ComprobarCasillaVacia(4, 0) && Casillas[4][0]->SaberBando() == Bando) PuntosDePoderTomados++;
-    if (!ComprobarCasillaVacia(4, 8) && Casillas[4][8]->SaberBando() == Bando) PuntosDePoderTomados++;
+    int puntos_de_poder_tomados = 0;
+    
+    //if (!comprobarCasillaVacia(4, 4) && casillas[4][4]->SaberBando() == bando) puntos_de_poder_tomados++;//la funcion obtener bando prefiero que este dentro de Animal.h y .cpp
+    //if (!comprobarCasillaVacia(0, 4) && casillas[0][4]->SaberBando() == bando) puntos_de_poder_tomados++;
+    //if (!comprobarCasillaVacia(8, 4) && casillas[8][4]->SaberBando() == bando) puntos_de_poder_tomados++;
+    //if (!comprobarCasillaVacia(4, 0) && casillas[4][0]->SaberBando() == bando) puntos_de_poder_tomados++;
+    //if (!comprobarCasillaVacia(4, 8) && casillas[4][8]->SaberBando() == bando) puntos_de_poder_tomados++;
 
-    return PuntosDePoderTomados;
+    return puntos_de_poder_tomados;
 }
 
-bool Tablero::VerificarVictoria(int Bando)
-{
-    if (PuntosDePoderControlados(Bando) == 5) return true;
+bool Tablero::verificarVictoria(int bando){
+    if (puntosDePoderControlados(bando) == 5) return true;
 
-    int Rival = (Bando == BandoLuz) ? BandoOscuridad : BandoLuz;
-    for (int i = 0; i < Filas; i++)
+    int rival = (bando == BANDO_LUZ) ? BANDO_OSCURIDAD : BANDO_LUZ;
+    for (int i = 0; i < FILAS; i++)
     {
-        for (int j = 0; j < Columnas; j++)
+        for (int j = 0; j < COLUMNAS; j++)
         {
-            if (Casillas[i][j] != nullptr && Casillas[i][j]->SaberBando() == Rival)
+            //if (Casillas[i][j] != nullptr && Casillas[i][j]->SaberBando() == Rival)
             {
-                return false;
+                //return false;
             }
         }
     }
     return true;
 }
 
-bool Tablero::TengoVentaja(int Fila, int Columna, int Bando)
-{
-    if (Bando == BandoLuz && ColorCasilla[Fila][Columna] == CasillaLuz)
+bool Tablero::tengoVentaja(int fila, int columna, int bando){
+    if (bando == BANDO_LUZ && color_casilla[fila][columna] == CASILLA_LUZ)
     {
         return true;
     }
-    if (Bando == BandoOscuridad && ColorCasilla[Fila][Columna] == CasillaOscura)
+    if (bando == BANDO_OSCURIDAD && color_casilla[fila][columna] == CASILLA_OSCURA)
     {
         return false;
     }
 } 
 
-void Tablero::MoverCursorJ1(int FilaAumentada, int ColunmaAumentada)
+void Tablero::moverCursorJ1(int fila_aumentada, int columna_aumentada)
 {
     // sumamos el delta a la posicion actual y comprobamos que no salga del tablero
-    int NuevaFilaCursorSeleccionada = PosicionFilaCursorActualJ1 + FilaAumentada;
-    int NuevaColumnaCursorSeleccionada = PosicionColumnaCursorActualJ1 + ColunmaAumentada;
+    int nueva_fila_cursor_seleccionada = posicion_fila_cursor_actual_j1 + fila_aumentada;
+    int nueva_columna_cursor_seleccionada = posicion_columna_cursor_actual_j1 + columna_aumentada;
 
-    if (NuevaFilaCursorSeleccionada >= 0 && NuevaFilaCursorSeleccionada < Filas && NuevaColumnaCursorSeleccionada >= 0 && NuevaColumnaCursorSeleccionada < Columnas)
+    if (nueva_fila_cursor_seleccionada >= 0 && nueva_fila_cursor_seleccionada < FILAS && nueva_columna_cursor_seleccionada >= 0 && nueva_columna_cursor_seleccionada < COLUMNAS)
     {
-        PosicionFilaCursorActualJ1 = NuevaFilaCursorSeleccionada;
-        PosicionColumnaCursorActualJ1 = NuevaColumnaCursorSeleccionada;
+        posicion_fila_cursor_actual_j1 = nueva_fila_cursor_seleccionada;
+        posicion_columna_cursor_actual_j1 = nueva_columna_cursor_seleccionada;
     }
 }
 
-void Tablero::MoverCursorJ2(int FilaAumentada, int ColunmaAumentada)
+void Tablero::moverCursorJ2(int fila_aumentada, int columna_aumentada)
 {
     // sumamos el delta a la posicion actual y comprobamos que no salga del tablero
-    int NuevaFilaCursorSeleccionada = PosicionFilaCursorActualJ2 + FilaAumentada;
-    int NuevaColumnaCursorSeleccionada = PosicionColumnaCursorActualJ2 + ColunmaAumentada;
+    int nueva_fila_cursor_seleccionada = posicion_fila_cursor_actual_j2 + fila_aumentada;
+    int nueva_columna_cursor_seleccionada = posicion_columna_cursor_actual_j2 + columna_aumentada;
 
-    if (NuevaFilaCursorSeleccionada >= 0 && NuevaFilaCursorSeleccionada < Filas && NuevaColumnaCursorSeleccionada >= 0 && NuevaColumnaCursorSeleccionada < Columnas)
+    if (nueva_fila_cursor_seleccionada >= 0 && nueva_fila_cursor_seleccionada < FILAS && nueva_columna_cursor_seleccionada >= 0 && nueva_columna_cursor_seleccionada < COLUMNAS)
     {
-        PosicionFilaCursorActualJ2 = NuevaFilaCursorSeleccionada;
-        PosicionColumnaCursorActualJ2 = NuevaColumnaCursorSeleccionada;
+        posicion_fila_cursor_actual_j2 = nueva_fila_cursor_seleccionada;
+        posicion_columna_cursor_actual_j2 = nueva_columna_cursor_seleccionada;
     }
 }
 
-void Tablero::SeleccionarCasillaJ1()
+void Tablero::seleccionarCasillaJ1()
 {
-    if (TurnoActual != BandoLuz) return; //para evitar que el juegador del bando de luz pueda emplear un turno que no le corresponde
+    if (turno_actual != BANDO_LUZ) return; //para evitar que el juegador del bando de luz pueda emplear un turno que no le corresponde
 
-    if (!HayPiezaSeleccionadaJ1)
+    if (!hay_pieza_seleccionada_j1)
     {
         // si no hay pieza seleccionada, intentamos seleccionar la del cursor
-        if (!ComprobarCasillaVacia(PosicionFilaCursorActualJ1, PosicionColumnaCursorActualJ1))
+        if (!comprobarCasillaVacia(posicion_fila_cursor_actual_j1, posicion_columna_cursor_actual_j1))
         {
-            FilaSeleccionadaJ1 = PosicionFilaCursorActualJ1;
-            ColumnaSeleccionadaJ1 = PosicionColumnaCursorActualJ1;
-            HayPiezaSeleccionadaJ1 = true;
+            fila_seleccionada_j1 = posicion_fila_cursor_actual_j1;
+            columna_seleccionada_j1 = posicion_columna_cursor_actual_j1;
+            hay_pieza_seleccionada_j1 = true;
         }
     }
     else
     {
         // ya hay una pieza seleccionada, la movemos a donde esta el cursor
-        MoverPieza(FilaSeleccionadaJ1, ColumnaSeleccionadaJ1, PosicionFilaCursorActualJ1, PosicionColumnaCursorActualJ1);
-        HayPiezaSeleccionadaJ1 = false;
-        TurnoActual = BandoOscuridad;
+        moverPieza(fila_seleccionada_j1, columna_seleccionada_j1, posicion_fila_cursor_actual_j1, posicion_columna_cursor_actual_j1);
+        hay_pieza_seleccionada_j1 = false;
+        turno_actual = BANDO_OSCURIDAD;
     }
 }
 
-void Tablero::SeleccionarCasillaJ2()
+void Tablero::seleccionarCasillaJ2()
 {
-    if (TurnoActual != BandoOscuridad) return; //lo mismo que en SeleccionarCasillaJ1
-    if (!HayPiezaSeleccionadaJ2)
+    if (turno_actual != BANDO_OSCURIDAD) return; //lo mismo que en SeleccionarCasillaJ1
+    if (!hay_pieza_seleccionada_j2)
     {
         // si no hay pieza seleccionada, intentamos seleccionar la del cursor
-        if (!ComprobarCasillaVacia(PosicionFilaCursorActualJ2, PosicionColumnaCursorActualJ2))
+        if (!comprobarCasillaVacia(posicion_fila_cursor_actual_j2, posicion_columna_cursor_actual_j2))
         {
-            FilaSeleccionadaJ2 = PosicionFilaCursorActualJ2;
-            ColumnaSeleccionadaJ2 = PosicionColumnaCursorActualJ2;
-            HayPiezaSeleccionadaJ2 = true;
+            fila_seleccionada_j2 = posicion_fila_cursor_actual_j2;
+            columna_seleccionada_j2 = posicion_columna_cursor_actual_j2;
+            hay_pieza_seleccionada_j2 = true;
         }
     }
     else
     {
         // ya hay una pieza seleccionada, la movemos a donde esta el cursor
-        MoverPieza(FilaSeleccionadaJ2, ColumnaSeleccionadaJ2, PosicionFilaCursorActualJ2, PosicionColumnaCursorActualJ2);
-        HayPiezaSeleccionadaJ2 = false;
+        moverPieza(fila_seleccionada_j2, columna_seleccionada_j2, posicion_fila_cursor_actual_j2, posicion_columna_cursor_actual_j2);
+        hay_pieza_seleccionada_j2 = false;
 
-        TurnoActual = BandoLuz; //le pasamos el turno al bandoLuz despues
-        AvanzarTurno();
+        turno_actual = BANDO_LUZ; //le pasamos el turno al bandoLuz despues
+        avanzarTurno();
     }
 }

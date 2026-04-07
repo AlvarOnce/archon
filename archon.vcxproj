@@ -154,7 +154,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\menu.cpp" />
     <ClCompile Include="src\renderizador.cpp" />
-    <ClCompile Include="src\Tablero.cpp" />
+    <ClCompile Include="src\tablero.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />
