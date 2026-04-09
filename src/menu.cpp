@@ -21,7 +21,7 @@ void Menu::actualizar(float dt)
 	if (tractor.timer > tractor.msStep)
 	{
 		if (tractor.frameActualX < 1) tractor.frameActualX++;
-		else                   tractor.frameActualX = 0;
+		else tractor.frameActualX = 0;
 		tractor.timer = tractor.timer - tractor.msStep;
 	}
 
@@ -48,7 +48,7 @@ void Menu::actualizar(float dt)
 		paloma.posy = 0.14444 * alto + titulo[0].altura; 
 	}
 
-	selector.posy = 140 - (selector.opcionActual * 20.0f); // SELECTOR	
+	selector.posy = 139 - (selector.opcionActual * 25.0f); // SELECTOR	
 }
 
 void Menu::dibujar(Renderizador* motor)
