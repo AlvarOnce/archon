@@ -38,8 +38,12 @@ void Tablero::inicializarTablero()//Importante, iniclizaiamos el Tablero vacio, 
 
 }
 
-void Tablero::dibujarTablero()
-{
+void Tablero::dibujarTablero(Renderizador* motor){
+
+    // imagen de fondo del tablero
+    motor->dibujarSprite("../assets/Sprites/tablero y escenario/tableroOficial.png", 198, 198, X_INICIO + (9 * 11), Y_INICIO + (9 * 11), 0);
+
+    // recorrer la matriz para dibujar casillas de poder y animales
     for (int i = 0; i < FILAS; i++)
     {
         for (int j = 0; j < COLUMNAS; j++)
@@ -49,15 +53,26 @@ void Tablero::dibujarTablero()
 
             if (esPuntoDePoder(i, j))
             {
-                //Dibujar con la libreria freglut supongo, un simbolo qeu indique que es una casilla de poder
+                // motor->dibujarSprite("../assets/Sprites/puntopoder.png", [...] )
             }
 
             if (casillas[i][j] != nullptr)
             {
-                //Casillas[i][j]->Dibujar(X, Y);//la funcion dibujar debe estar dentro de animal.h, porque aqui le decimos que nos dibuje en la casilla el animal
+                // casillas[i][j]->dibujar(motor); 
+                // la funcion dibujar debe estar dentro de animal.h, porque aqui le decimos que nos dibuje en la casilla el animal
             }
         }
     }
+
+    // dibujar los cursores
+    //float cursor1X = X_INICIO + (posicion_columna_cursor_actual_j1 * TAMANO_CASILLA) + 11.0f;
+    //float cursor1Y = Y_INICIO + (posicion_fila_cursor_actual_j1 * TAMANO_CASILLA) + 11.0f;
+    //motor->dibujarSprite("../assets/Sprites/cursorJ1.png", 22, 22, cursor1X, cursor1Y, -1.0f);
+
+    //float cursor2X = X_INICIO + (posicion_columna_cursor_actual_j2 * TAMANO_CASILLA) + 11.0f;
+    //float cursor2Y = Y_INICIO + (posicion_fila_cursor_actual_j2 * TAMANO_CASILLA) + 11.0f;
+    //motor->dibujarSprite("../assets/Sprites/cursorJ2.png", 22, 22, cursor2X, cursor2Y, -1.0f);
+
 }
 
 bool Tablero::obtenerCasillaEnLaPinchamos(int x_pantalla, int y_pantalla, int& fila, int& columna)
