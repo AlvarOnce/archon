@@ -31,13 +31,10 @@ struct Selector {
     float posx = 178;
     float posy = 140;
 
-    enum Opcion {
-    JUGAR,
-    OPCIONES,
-    CONTROLES,
-    CREDITOS
-    };
+    float tamano_base = 16.0f;
+    float tamano_actual = 16.0f;
 
+    enum Opcion { JUGAR, OPCIONES, CONTROLES, CREDITOS };
     Opcion opcionActual = JUGAR;
 };
 
@@ -50,7 +47,7 @@ public:
     Nube nube[2] = {{0,210,-1}, {240,210,-1.1} };
 
     float dt;
-    float anguloLetras{};
+    float angulo{};
     double ancho = 480;
     double alto = 270;
     Selector selector;

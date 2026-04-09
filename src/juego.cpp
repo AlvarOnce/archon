@@ -89,16 +89,19 @@ void Juego::procesarTeclaPresionada(unsigned char key) // JUGADOR 1 (WASD)
 
             case Selector::JUGAR: // de momento al elegir JUGAR pasa directamente al TABLERO, falta una pantalla para elegir bando etc.
                 estadoActual = TABLERO;
-
-            case Selector::OPCIONES: // en opciones puede estar el volumen o quizá algo del juego
-                //estadoActual = OPCIONES;
-
-            case Selector::CONTROLES: // en principio muestra nuestros controles, quizá se puedan elegir los tuyos propios
-                //estadoActual = CONTROLES;
-
-            case Selector::CREDITOS:
-                //estadoActual = CREDITOS;
                 break;
+
+            //case Selector::OPCIONES: // en opciones puede estar el volumen o quizá algo del juego
+            //    estadoActual = OPCIONES; // no sé si los submenús del ménu son un estado 
+            //    break;
+
+            //case Selector::CONTROLES: // en principio muestra nuestros controles, quizá se puedan elegir los tuyos propios
+            //    estadoActual = CONTROLES;
+            //    break;
+
+            //case Selector::CREDITOS:
+            //    estadoActual = CREDITOS;
+            //    break;
             }
         }
 
