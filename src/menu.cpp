@@ -47,6 +47,8 @@ void Menu::actualizar(float dt)
 		paloma.posx = 0.15 * ancho + titulo[0].horiz;
 		paloma.posy = 0.14444 * alto + titulo[0].altura; 
 	}
+
+	selector.posy = 140 - (selector.opcionActual * 20.0f); // SELECTOR	
 }
 
 void Menu::dibujar(Renderizador* motor)
@@ -66,10 +68,7 @@ void Menu::dibujar(Renderizador* motor)
 	}
 
 	motor->dibujarSprite("../assets/Sprites/menu/opciones.png", 128, 128, 245, 103, -2.8); // OPCIONES
-
-	selector.posy = 140 - (selector.opcionActual * 20.0f);
 	motor->dibujarSprite("../assets/Sprites/menu/selector.png", 16, 16, selector.posx, selector.posy, -3.2); // SELECTOR
-
 	motor->dibujarSprite("../assets/Sprites/menu/palomaSpritesheet.png", 128, 64, paloma.posx, paloma.posy, -3, 2, 4, paloma.frameActualX, paloma.frameActualY); // PALOMA
 	motor->dibujarSprite("../assets/Sprites/menu/tractorSpritesheet.png", 512, 128, tractor.posx, tractor.posy, -5, 1, 2, tractor.frameActualX, tractor.frameActualY); // TRACTOR
 
