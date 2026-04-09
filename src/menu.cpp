@@ -66,12 +66,22 @@ void Menu::dibujar(Renderizador* motor)
 	}
 
 	motor->dibujarSprite("../assets/Sprites/menu/opciones.png", 128, 128, 245, 103, -2.8); // OPCIONES
-	motor->dibujarSprite("../assets/Sprites/menu/selector.png", 16, 16, 178, 140, -3.2); // SELECTOR
+
+	selector.posy = 140 - (selector.opcionActual * 20.0f);
+	motor->dibujarSprite("../assets/Sprites/menu/selector.png", 16, 16, selector.posx, selector.posy, -3.2); // SELECTOR
 
 	motor->dibujarSprite("../assets/Sprites/menu/palomaSpritesheet.png", 128, 64, paloma.posx, paloma.posy, -3, 2, 4, paloma.frameActualX, paloma.frameActualY); // PALOMA
 	motor->dibujarSprite("../assets/Sprites/menu/tractorSpritesheet.png", 512, 128, tractor.posx, tractor.posy, -5, 1, 2, tractor.frameActualX, tractor.frameActualY); // TRACTOR
-	
 
+	
+}
+
+void Menu::moverSelector(int direccion) {
+	int nueva_opcion = selector.opcionActual + direccion;
+	
+	if (nueva_opcion >= 0 && nueva_opcion <= 3) {
+		selector.opcionActual = static_cast<Selector::Opcion>(nueva_opcion);
+	}
 }
 
 
