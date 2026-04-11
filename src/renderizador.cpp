@@ -29,7 +29,7 @@ void Renderizador::dibujarSprite(const char* rutaImagen, float ancho, float alto
     glDisable(GL_LIGHTING);
     glColor3f(1, 1, 1);
 
-    glPushMatrix();  // El renderizador se encarga de mover el origen antes de dibujar en el (0,0)
+    glPushMatrix();  // el renderizador se encarga de mover el origen antes de dibujar en el (0,0)
     glTranslatef(posx, posy, capa); // ahora posicion (x,y) en su capa (capa) corresponden a centro de imagen
     glBegin(GL_POLYGON);
     glTexCoord2d(inicioFrameX/ancho               , (inicioFrameY + altoFrame)/alto);    glVertex3f( -anchoFrame/2, -altoFrame/2, 0); // abajo izquierda (0,1)

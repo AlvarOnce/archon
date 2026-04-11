@@ -52,6 +52,9 @@ public:
     double alto = 270;
     Selector selector;
 
+    //enum Estado { BANDO, OPCIONES, CONTROLES, CREDITOS };
+    //Estado estado_menu;
+
     void actualizar(float dt);
     void dibujar(Renderizador* motor);
     void moverSelector(int direccion);
