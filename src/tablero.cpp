@@ -31,10 +31,10 @@ void Tablero::inicializarTablero()//Importante, iniclizaiamos el Tablero vacio, 
 
     turno_actual = BANDO_LUZ;//incia el turno el bando de luz
 
-    posicion_fila_cursor_actual_j1 = 0; posicion_columna_cursor_actual_j1 = 0;
-    posicion_fila_cursor_actual_j2 = 8; posicion_columna_cursor_actual_j2 = 8;
-    hay_pieza_seleccionada_j1 = false; //están en false porqeu, si hemos iniciado el juego, pero como en el archon, no inicias el juego con una pieza ya seleccionada, dejas qeu el juegador escoga qeu figura quiere escoger
-    hay_pieza_seleccionada_j2 = false;
+    posicion_fila_cursor_actual[0] = 0; posicion_columna_cursor_actual[0] = 0;
+    posicion_fila_cursor_actual[1] = 8; posicion_columna_cursor_actual[1] = 8;
+    hay_pieza_seleccionada[0] = false; //están en false porqeu, si hemos iniciado el juego, pero como en el archon, no inicias el juego con una pieza ya seleccionada, dejas qeu el juegador escoga qeu figura quiere escoger
+    hay_pieza_seleccionada[1] = false;
 
 }
 
@@ -197,75 +197,39 @@ bool Tablero::tengoVentaja(int fila, int columna, int bando){
     }
 } 
 
-void Tablero::moverCursorJ1(int fila_aumentada, int columna_aumentada)
+void Tablero::moverCursor(int IdJugador, int fila_aumentada, int columna_aumentada)
 {
     // sumamos el delta a la posicion actual y comprobamos que no salga del tablero
-    int nueva_fila_cursor_seleccionada = posicion_fila_cursor_actual_j1 + fila_aumentada;
-    int nueva_columna_cursor_seleccionada = posicion_columna_cursor_actual_j1 + columna_aumentada;
+    int nueva_fila_cursor_seleccionada = posicion_fila_cursor_actual[IdJugador] + fila_aumentada;
+    int nueva_columna_cursor_seleccionada = posicion_columna_cursor_actual[IdJugador] + columna_aumentada;
 
     if (nueva_fila_cursor_seleccionada >= 0 && nueva_fila_cursor_seleccionada < FILAS && nueva_columna_cursor_seleccionada >= 0 && nueva_columna_cursor_seleccionada < COLUMNAS)
     {
-        posicion_fila_cursor_actual_j1 = nueva_fila_cursor_seleccionada;
-        posicion_columna_cursor_actual_j1 = nueva_columna_cursor_seleccionada;
+        posicion_fila_cursor_actual[IdJugador] = nueva_fila_cursor_seleccionada;
+        posicion_columna_cursor_actual[IdJugador] = nueva_columna_cursor_seleccionada;
     }
 }
 
-void Tablero::moverCursorJ2(int fila_aumentada, int columna_aumentada)
+void Tablero::seleccionarCasilla()
 {
-    // sumamos el delta a la posicion actual y comprobamos que no salga del tablero
-    int nueva_fila_cursor_seleccionada = posicion_fila_cursor_actual_j2 + fila_aumentada;
-    int nueva_columna_cursor_seleccionada = posicion_columna_cursor_actual_j2 + columna_aumentada;
+    int IdJugador=0;
+    if (turno_actual != BANDO_LUZ) { IdJugador = 1; } //para evitar que el juegador del bando de luz pueda emplear un turno que no le corresponde
 
-    if (nueva_fila_cursor_seleccionada >= 0 && nueva_fila_cursor_seleccionada < FILAS && nueva_columna_cursor_seleccionada >= 0 && nueva_columna_cursor_seleccionada < COLUMNAS)
-    {
-        posicion_fila_cursor_actual_j2 = nueva_fila_cursor_seleccionada;
-        posicion_columna_cursor_actual_j2 = nueva_columna_cursor_seleccionada;
-    }
-}
-
-void Tablero::seleccionarCasillaJ1()
-{
-    if (turno_actual != BANDO_LUZ) return; //para evitar que el juegador del bando de luz pueda emplear un turno que no le corresponde
-
-    if (!hay_pieza_seleccionada_j1)
+    if (!hay_pieza_seleccionada[IdJugador])
     {
         // si no hay pieza seleccionada, intentamos seleccionar la del cursor
-        if (!comprobarCasillaVacia(posicion_fila_cursor_actual_j1, posicion_columna_cursor_actual_j1))
+        if (!comprobarCasillaVacia(posicion_fila_cursor_actual[IdJugador], posicion_columna_cursor_actual[IdJugador]))
         {
-            fila_seleccionada_j1 = posicion_fila_cursor_actual_j1;
-            columna_seleccionada_j1 = posicion_columna_cursor_actual_j1;
-            hay_pieza_seleccionada_j1 = true;
+            fila_seleccionada[IdJugador] = posicion_fila_cursor_actual[IdJugador];
+            columna_seleccionada[IdJugador] = posicion_columna_cursor_actual[IdJugador];
+            hay_pieza_seleccionada[IdJugador] = true;
         }
     }
     else
     {
         // ya hay una pieza seleccionada, la movemos a donde esta el cursor
-        moverPieza(fila_seleccionada_j1, columna_seleccionada_j1, posicion_fila_cursor_actual_j1, posicion_columna_cursor_actual_j1);
-        hay_pieza_seleccionada_j1 = false;
+        moverPieza(fila_seleccionada[IdJugador], columna_seleccionada[IdJugador], posicion_fila_cursor_actual[IdJugador], posicion_columna_cursor_actual[IdJugador]);
+        hay_pieza_seleccionada[IdJugador] = false;
         turno_actual = BANDO_OSCURIDAD;
-    }
-}
-
-void Tablero::seleccionarCasillaJ2()
-{
-    if (turno_actual != BANDO_OSCURIDAD) return; //lo mismo que en SeleccionarCasillaJ1
-    if (!hay_pieza_seleccionada_j2)
-    {
-        // si no hay pieza seleccionada, intentamos seleccionar la del cursor
-        if (!comprobarCasillaVacia(posicion_fila_cursor_actual_j2, posicion_columna_cursor_actual_j2))
-        {
-            fila_seleccionada_j2 = posicion_fila_cursor_actual_j2;
-            columna_seleccionada_j2 = posicion_columna_cursor_actual_j2;
-            hay_pieza_seleccionada_j2 = true;
-        }
-    }
-    else
-    {
-        // ya hay una pieza seleccionada, la movemos a donde esta el cursor
-        moverPieza(fila_seleccionada_j2, columna_seleccionada_j2, posicion_fila_cursor_actual_j2, posicion_columna_cursor_actual_j2);
-        hay_pieza_seleccionada_j2 = false;
-
-        turno_actual = BANDO_LUZ; //le pasamos el turno al bandoLuz despues
-        avanzarTurno();
     }
 }
