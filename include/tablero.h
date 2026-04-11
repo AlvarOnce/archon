@@ -22,7 +22,7 @@ public:
     void seleccionarCasillaJ2();
 
     void inicializarTablero();
-    void dibujarTablero();
+    void dibujarTablero(Renderizador* motor);
     bool obtenerCasillaEnLaPinchamos(int XPantalla, int YPantalla, int& Fila, int& Columna);
 
     void colocarPieza(int Fila, int Columna, Animal* Pieza);

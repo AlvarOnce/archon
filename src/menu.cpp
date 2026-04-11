@@ -6,12 +6,12 @@
 
 void Menu::actualizar(float dt) 
 {
-	anguloLetras += 0.05; 
-	if (anguloLetras > 360) anguloLetras = 0; // LETRAS
+	angulo += 0.05; 
+	if (angulo > 360) angulo = 0; // LETRAS
 
 	for (int i = 0; i < 6; i++) // LETRAS 
 	{
-		titulo[i].altura = 0.73333 * alto + 0.05555 * alto * sin(anguloLetras + i / 2.0); // Desplazamientos relativos a ancho y alto
+		titulo[i].altura = 0.73333 * alto + 0.04 * alto * sin(angulo + i / 2.0); // Desplazamientos relativos a ancho y alto
 		titulo[i].horiz = 0.05625 * ancho + 0.1125 * ancho * i;
 		if (i == 0)  titulo[i].horiz -= 0.00625 * ancho; // Ajuste a la izquierda por ser la 'R' más grande
 	}
@@ -21,7 +21,7 @@ void Menu::actualizar(float dt)
 	if (tractor.timer > tractor.msStep)
 	{
 		if (tractor.frameActualX < 1) tractor.frameActualX++;
-		else                   tractor.frameActualX = 0;
+		else tractor.frameActualX = 0;
 		tractor.timer = tractor.timer - tractor.msStep;
 	}
 
@@ -47,6 +47,9 @@ void Menu::actualizar(float dt)
 		paloma.posx = 0.15 * ancho + titulo[0].horiz;
 		paloma.posy = 0.14444 * alto + titulo[0].altura; 
 	}
+
+	selector.posy = 139 - (selector.opcionActual * 25.0f); // SELECTOR	
+	selector.tamano_actual = selector.tamano_base + 1.0f * sin(angulo * 3.0f); // latido del selector
 }
 
 void Menu::dibujar(Renderizador* motor)
@@ -66,12 +69,18 @@ void Menu::dibujar(Renderizador* motor)
 	}
 
 	motor->dibujarSprite("../assets/Sprites/menu/opciones.png", 128, 128, 245, 103, -2.8); // OPCIONES
-	motor->dibujarSprite("../assets/Sprites/menu/selector.png", 16, 16, 178, 140, -3.2); // SELECTOR
-
+	motor->dibujarSprite("../assets/Sprites/menu/selector.png", selector.tamano_actual, selector.tamano_actual, selector.posx, selector.posy, -3.2); // SELECTOR
 	motor->dibujarSprite("../assets/Sprites/menu/palomaSpritesheet.png", 128, 64, paloma.posx, paloma.posy, -3, 2, 4, paloma.frameActualX, paloma.frameActualY); // PALOMA
 	motor->dibujarSprite("../assets/Sprites/menu/tractorSpritesheet.png", 512, 128, tractor.posx, tractor.posy, -5, 1, 2, tractor.frameActualX, tractor.frameActualY); // TRACTOR
-	
+		
+}
 
+void Menu::moverSelector(int direccion) {
+	int nueva_opcion = selector.opcionActual + direccion;
+	
+	if (nueva_opcion >= 0 && nueva_opcion <= 3) {
+		selector.opcionActual = static_cast<Selector::Opcion>(nueva_opcion);
+	}
 }
 
 

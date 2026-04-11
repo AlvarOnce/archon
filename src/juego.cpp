@@ -66,9 +66,10 @@ void Juego::renderizarGraficos() {
         break;
 
     case TABLERO:  
+        miTablero->dibujarTablero(motorGrafico);
 
         for (int i = 0; i < 10; i++) // LO MISMO QUE ARRIBA DENTRO DE DIBUJAR TABLERO
-        misAnimales[i]->dibujar(motorGrafico);
+        misAnimales[i]->dibujar(motorGrafico); // palomas de prueba
         break;
 
     case BATALLA:
@@ -79,10 +80,32 @@ void Juego::renderizarGraficos() {
 
 void Juego::procesarTeclaPresionada(unsigned char key) // JUGADOR 1 (WASD)
 {
-    // Esc siempre cierra el juego, aunque en un futuro molaría poner un menú de pausa
-    if (key == 27) exit(0); 
+    if (key == 27) exit(0); // Esc siempre cierra el juego, aunque en un futuro molaría poner un menú de pausa
 
     switch (estadoActual) {
+
+    case MENU:
+        if (key == 13) { // Intro para elegir una opción
+            switch (miMenu->getOpcionActual()) {
+
+            case Selector::JUGAR: // de momento al elegir JUGAR pasa directamente al TABLERO, falta una pantalla para elegir bando etc.
+                estadoActual = TABLERO;
+                break;
+
+            //case Selector::OPCIONES: // en opciones puede estar el volumen o quizá algo del juego
+            //    estadoActual = OPCIONES; // no sé si los submenús del ménu son un estado 
+            //    break;
+
+            //case Selector::CONTROLES: // en principio muestra nuestros controles, quizá se puedan elegir los tuyos propios
+            //    estadoActual = CONTROLES;
+            //    break;
+
+            //case Selector::CREDITOS:
+            //    estadoActual = CREDITOS;
+            //    break;
+            }
+        }
+
     case TABLERO: // movimiento discreto en el tablero
         if (key == 'w' || key == 'W') miTablero->moverCursorJ1(0, 1);
         if (key == 's' || key == 'S') miTablero->moverCursorJ1(0, -1);
@@ -117,6 +140,11 @@ void Juego::procesarTeclaLevantada(unsigned char key)
 void Juego::procesarTeclaEspecialPresionada(int key) // JUGADOR 2 (FLECHAS)
 {
     switch (estadoActual) {
+    case MENU:
+        if (key == GLUT_KEY_UP) miMenu->moverSelector(-1); // arriba resta 1 (se acerca a 0 que es JUGAR)
+        if (key == GLUT_KEY_DOWN) miMenu->moverSelector(1); // abajo suma 1 (bajándo hacia el 3 que es CREDITOS)
+        break;
+
     case TABLERO:
         if (key == GLUT_KEY_UP)    miTablero->moverCursorJ2(0, 1);
         if (key == GLUT_KEY_DOWN)  miTablero->moverCursorJ2(0, -1);
