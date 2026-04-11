@@ -7,14 +7,16 @@
 #include "renderizador.h" 
 #include "animal.h"
 #include "cabra.h"
+#include "transicion.h" 
 
 class Juego 
 {
+    Transicion transicion;
     Menu* miMenu;
     Tablero* miTablero;
     //Arena* miArena;
     Renderizador* motorGrafico;
-    Animal* misAnimales[32];
+    Animal* misAnimales[18];
 
     double anchoVentana = 480;
     double altoVentana = 270;
@@ -26,6 +28,7 @@ public:
 
     enum Estado { MENU, TABLERO, BATALLA };
     Estado estadoActual;
+    Estado proximoEstado;
 
     Juego(); 
     ~Juego();

@@ -38,31 +38,33 @@ void Tablero::inicializarTablero()//Importante, iniclizaiamos el Tablero vacio, 
 
 }
 
-void Tablero::dibujarTablero(Renderizador* motor){
+void Tablero::dibujar(Renderizador* motor){
 
     // imagen de fondo del tablero
-    motor->dibujarSprite("../assets/Sprites/tablero y escenario/tableroOficial.png", 198, 198, X_INICIO + (9 * 11), Y_INICIO + (9 * 11), 0);
+    motor->dibujarSprite("../assets/Sprites/tablero/tableroFondo.png", 512, 512, 480/2, 270/2, -1);
+    motor->dibujarSprite("../assets/Sprites/tablero/tablero.png", 256, 256, 480 / 2, 270 / 2, -2);
 
-    // recorrer la matriz para dibujar casillas de poder y animales
-    for (int i = 0; i < FILAS; i++)
-    {
-        for (int j = 0; j < COLUMNAS; j++)
-        {
-            int x = X_INICIO + j * TAMANO_CASILLA;
-            int y = Y_INICIO + i * TAMANO_CASILLA;
 
-            if (esPuntoDePoder(i, j))
-            {
-                // motor->dibujarSprite("../assets/Sprites/puntopoder.png", [...] )
-            }
+    //// recorrer la matriz para dibujar casillas de poder y animales
+    //for (int i = 0; i < FILAS; i++)
+    //{
+    //    for (int j = 0; j < COLUMNAS; j++)
+    //    {
+    //        int x = X_INICIO + j * TAMANO_CASILLA;
+    //        int y = Y_INICIO + i * TAMANO_CASILLA;
 
-            if (casillas[i][j] != nullptr)
-            {
-                // casillas[i][j]->dibujar(motor); 
-                // la funcion dibujar debe estar dentro de animal.h, porque aqui le decimos que nos dibuje en la casilla el animal
-            }
-        }
-    }
+    //        if (esPuntoDePoder(i, j))
+    //        {
+    //            // motor->dibujarSprite("../assets/Sprites/puntopoder.png", [...] )
+    //        }
+
+    //        if (casillas[i][j] != nullptr)
+    //        {
+    //            // casillas[i][j]->dibujar(motor); 
+    //            // la funcion dibujar debe estar dentro de animal.h, porque aqui le decimos que nos dibuje en la casilla el animal
+    //        }
+    //    }
+    //}
 
     // dibujar los cursores
     //float cursor1X = X_INICIO + (posicion_columna_cursor_actual_j1 * TAMANO_CASILLA) + 11.0f;

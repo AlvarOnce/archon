@@ -68,7 +68,7 @@ void Menu::dibujar(Renderizador* motor)
 		motor->dibujarSprite(ruta.c_str(), 64, 64, 0.1625 * ancho + titulo[i].horiz, titulo[i].altura, titulo[i].capa);
 	}
 
-	motor->dibujarSprite("../assets/Sprites/menu/opciones.png", 128, 128, 245, 103, -2.8); // OPCIONES
+	motor->dibujarSprite("../assets/Sprites/menu/opciones.png", 512, 128, 245, 103, -2.8,1,4,selector.opcionActual,0); // OPCIONES
 	motor->dibujarSprite("../assets/Sprites/menu/selector.png", selector.tamano_actual, selector.tamano_actual, selector.posx, selector.posy, -3.2); // SELECTOR
 	motor->dibujarSprite("../assets/Sprites/menu/palomaSpritesheet.png", 128, 64, paloma.posx, paloma.posy, -3, 2, 4, paloma.frameActualX, paloma.frameActualY); // PALOMA
 	motor->dibujarSprite("../assets/Sprites/menu/tractorSpritesheet.png", 512, 128, tractor.posx, tractor.posy, -5, 1, 2, tractor.frameActualX, tractor.frameActualY); // TRACTOR

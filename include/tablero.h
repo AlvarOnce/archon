@@ -1,5 +1,7 @@
 #pragma once
 #include "animal.h"  
+#include "cursor.h" 
+#include "tarjetaID.h" 
 
 const int BANDO_LUZ = 1;
 const int BANDO_OSCURIDAD = 2;
@@ -7,7 +9,9 @@ const int CASILLA_LUZ = 1;
 const int CASILLA_OSCURA = 2;
 
 class Tablero {
+
 public:
+
     Tablero();//Le indicamos, o como que avisamos al programa de que vamos a comenzar a ocupar memoria
     ~Tablero();//Digamos que es como nuestro destructor, si la ejecutamos liberamos toda la memoria ocupada por nuestro tablero
 
@@ -22,7 +26,6 @@ public:
     void seleccionarCasillaJ2();
 
     void inicializarTablero();
-    void dibujarTablero(Renderizador* motor);
     bool obtenerCasillaEnLaPinchamos(int XPantalla, int YPantalla, int& Fila, int& Columna);
 
     void colocarPieza(int Fila, int Columna, Animal* Pieza);
@@ -41,6 +44,11 @@ public:
 
     bool verificarVictoria(int Bando);
     bool tengoVentaja(int Fila, int Columna, int Bando);
+
+    void dibujar(Renderizador* motor);
+
+    Cursor cursor;
+    Tarjeta tarjeta;
 
 private:
     Animal* casillas[9][9];
