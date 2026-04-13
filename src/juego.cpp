@@ -42,6 +42,8 @@ void Juego::actualizarLogica(float dt) {
 
     case TABLERO:
 
+        //miTablero->actualizar(25);
+
         // Aqui por ejemplo irira tablero->actualiza() y DENTRO DE TABLERO: for(todoslosanimales) Animal[i].mover o Animal[i].actualizar
         for (int i = 0; i < 10; i++) // ESTO DENTRO DE ACTUALIZAR TABLERO
         misAnimales[i]->actualizar(25);
