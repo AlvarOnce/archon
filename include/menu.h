@@ -27,34 +27,37 @@ struct Nube {
     float capa;
 };
 
-struct selector {
-    float posx;
-    float posy;
+struct Selector {
+    float posx = 178;
+    float posy = 140;
 
-    enum opcion{
-    JUGAR,
-    OPCIONES,
-    CONTROLES,
-    CREDITOS
-    };
+    float tamano_base = 16.0f;
+    float tamano_actual = 16.0f;
+
+    enum Opcion { JUGAR, OPCIONES, CONTROLES, CREDITOS };
+    Opcion opcionActual = JUGAR;
 };
 
 class Menu {
-
 public:
 
     Letra titulo[6] = {{0,0,-2.0},{0,0,-2.1},{0,0,-2.2},{0,0,-2.3},{0,0,-2.4},{0,0,-2.5}};
     Tractor tractor;
     Paloma paloma;
     Nube nube[2] = {{0,210,-1}, {240,210,-1.1} };
-
+    Selector selector;
 
     float dt;
-    float anguloLetras{};
+    float angulo{};
     double ancho = 480;
     double alto = 270;
 
+    //enum Estado { BANDO, OPCIONES, CONTROLES, CREDITOS };
+    //Estado estado_menu;
+
     void actualizar(float dt);
     void dibujar(Renderizador* motor);
+    void moverSelector(int direccion);
+    Selector::Opcion getOpcionActual() { return selector.opcionActual; }
 };
 

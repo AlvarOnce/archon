@@ -1,5 +1,12 @@
 #include "animal.h"
 
+Animal::Animal(float posx, float posy, float capa, int vida) {
+
+    posx_ = posx;
+    posy_ = posy;
+    vida_ = vida;
+    capaz_ = capa;
+}
 void Animal::actualizar(float dt) {
 
     // movimiento
