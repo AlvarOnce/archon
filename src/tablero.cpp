@@ -33,36 +33,38 @@ void Tablero::inicializarTablero() // iniclizaiamos el Tablero vacio, es decir, 
 
     posicion_fila_cursor_actual_j1 = 0; posicion_columna_cursor_actual_j1 = 0;
     posicion_fila_cursor_actual_j2 = 8; posicion_columna_cursor_actual_j2 = 8;
-    hay_pieza_seleccionada_j1 = false; // est·n en false porque, si hemos iniciado el juego, pero como en el archon, no inicias el juego con una pieza ya seleccionada, dejas qeu el juegador escoga qeu figura quiere escoger
+    hay_pieza_seleccionada_j1 = false; // est√°n en false porque, si hemos iniciado el juego, pero como en el archon, no inicias el juego con una pieza ya seleccionada, dejas qeu el juegador escoga qeu figura quiere escoger
     hay_pieza_seleccionada_j2 = false;
 
 }
 
-void Tablero::dibujarTablero(Renderizador* motor){
+void Tablero::dibujar(Renderizador* motor){
 
     // imagen de fondo del tablero
-    motor->dibujarSprite("../assets/Sprites/tablero y escenario/tableroOficial.png", 480, 270, 480/2, 270/2, 0);
+    motor->dibujarSprite("../assets/Sprites/tablero/tableroFondo.png", 512, 512, 480/2, 270/2, -1);
+    motor->dibujarSprite("../assets/Sprites/tablero/tablero.png", 256, 256, 480 / 2, 270 / 2, -2);
 
-    // recorrer la matriz para dibujar casillas de poder y animales
-    for (int i = 0; i < FILAS; i++)
-    {
-        for (int j = 0; j < COLUMNAS; j++)
-        {
-            int x = X_INICIO + j * TAMANO_CASILLA;
-            int y = Y_INICIO + i * TAMANO_CASILLA;
 
-            if (esPuntoDePoder(i, j))
-            {
-                // motor->dibujarSprite("../assets/Sprites/puntopoder.png", [...] )
-            }
+    //// recorrer la matriz para dibujar casillas de poder y animales
+    //for (int i = 0; i < FILAS; i++)
+    //{
+    //    for (int j = 0; j < COLUMNAS; j++)
+    //    {
+    //        int x = X_INICIO + j * TAMANO_CASILLA;
+    //        int y = Y_INICIO + i * TAMANO_CASILLA;
 
-            if (casillas[i][j] != nullptr)
-            {
-                // casillas[i][j]->dibujar(motor); 
-                // la funcion dibujar debe estar dentro de animal.h, porque aqui le decimos que nos dibuje en la casilla el animal
-            }
-        }
-    }
+    //        if (esPuntoDePoder(i, j))
+    //        {
+    //            // motor->dibujarSprite("../assets/Sprites/puntopoder.png", [...] )
+    //        }
+
+    //        if (casillas[i][j] != nullptr)
+    //        {
+    //            // casillas[i][j]->dibujar(motor); 
+    //            // la funcion dibujar debe estar dentro de animal.h, porque aqui le decimos que nos dibuje en la casilla el animal
+    //        }
+    //    }
+    //}
 
     // dibujar los cursores
     //float cursor1X = X_INICIO + (posicion_columna_cursor_actual_j1 * TAMANO_CASILLA) + 11.0f;
@@ -114,7 +116,7 @@ void Tablero::moverPieza(int fila_inicial, int columna_inicial, int fila_final, 
     casillas[fila_inicial][columna_inicial] = nullptr;
 }
 
-bool Tablero::comprobarCasillaVacia(int fila, int Columna) //servira para saber si una casilla est· vacÌa o no
+bool Tablero::comprobarCasillaVacia(int fila, int Columna) //servira para saber si una casilla est√° vac√≠a o no
 {
     return casillas[fila][Columna] == nullptr;
 }

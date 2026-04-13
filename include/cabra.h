@@ -5,18 +5,14 @@ class Cabra: public Animal {
 
 public:
 
-	// Dibujo y animación
 
-	Cabra() {
+	Cabra(float posx,float posy, float capa, int vida ) : Animal(posx,posy,capa,vida) {
 
-		posx_ = 100;
-		posy_ = 100;
 		frameActualX = 0;
-		frameActualY = 1;
-		timer = 0;
-		msStep = 100;
+	    frameActualY = 0;
 
 	}	
 
+	void actualizar(float dt) override;
 	void dibujar(Renderizador* motor) override;
 };

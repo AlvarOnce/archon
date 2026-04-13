@@ -45,12 +45,12 @@ public:
     Tractor tractor;
     Paloma paloma;
     Nube nube[2] = {{0,210,-1}, {240,210,-1.1} };
+    Selector selector;
 
     float dt;
     float angulo{};
     double ancho = 480;
     double alto = 270;
-    Selector selector;
 
     //enum Estado { BANDO, OPCIONES, CONTROLES, CREDITOS };
     //Estado estado_menu;
