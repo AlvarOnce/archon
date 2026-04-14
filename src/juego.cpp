@@ -4,7 +4,7 @@
 #include "juego.h"
 #include "tablero.h"
 
-#define numeroAnimales 9 // Por ahora crea 9 entidades (todas cabras)
+#define numeroAnimales 9 // Por ahora crea 9 entidades
 
 Tablero miTablero;
 
@@ -18,9 +18,16 @@ Juego::Juego() {
     //miArena = new Arena();
     motorGrafico = new Renderizador();
 
-    for (int i = 0; i < numeroAnimales; i++) // ejemplo de creacion de 32 animales (cabras, dibujadas como palomas)
+    
+    for (int i = 0; i < numeroAnimales; i++) 
     {
+        if (i%3 == 0)
         misAnimales[i] = new Cabra(-15*(numeroAnimales-i) + 11,  36+(22*i) + 11, -3 - 0.01*i, 20);
+        if (i%3 == 1)
+        misAnimales[i] = new Cerdo(-15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i, 20);
+        if (i%3 == 2)
+        misAnimales[i] = new Gallina(-15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i, 20);
+
     }
 }
 

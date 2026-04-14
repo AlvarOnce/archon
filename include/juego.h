@@ -7,6 +7,8 @@
 #include "renderizador.h" 
 #include "animal.h"
 #include "cabra.h"
+#include "cerdo.h"
+#include "gallina.h"
 #include "transicion.h" 
 
 class Juego 
