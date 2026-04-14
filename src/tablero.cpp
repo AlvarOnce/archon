@@ -10,7 +10,7 @@ Tablero::~Tablero()
 
 }
 
-void Tablero::inicializarTablero()//Importante, iniclizaiamos el Tablero vacio, es decir, creamos la matriz pero no le decimos todavia si hay figuras o no en las casillas
+void Tablero::inicializarTablero() // iniclizaiamos el Tablero vacio, es decir, creamos la matriz pero no le decimos todavia si hay figuras o no en las casillas
 {
     for (int i = 0; i < FILAS; i++)
     {
@@ -20,7 +20,7 @@ void Tablero::inicializarTablero()//Importante, iniclizaiamos el Tablero vacio, 
 
             if ((i + j) % 2 == 0)
             {
-                color_casilla[i][j] = CASILLA_LUZ;//como ya estan creadas las celdas de la matriz, ahora le decimos a cada celda que es, si es luz o oscuradad
+                color_casilla[i][j] = CASILLA_LUZ; // como ya estan creadas las celdas de la matriz, ahora le decimos a cada celda que es, si es luz o oscuradad
             }
             else
             {
@@ -29,35 +29,52 @@ void Tablero::inicializarTablero()//Importante, iniclizaiamos el Tablero vacio, 
         }
     }
 
-    turno_actual = BANDO_LUZ;//incia el turno el bando de luz
+    turno_actual = BANDO_LUZ; // incia el turno el bando de luz
 
     posicion_fila_cursor_actual[0] = 0; posicion_columna_cursor_actual[0] = 0;
     posicion_fila_cursor_actual[1] = 8; posicion_columna_cursor_actual[1] = 8;
-    hay_pieza_seleccionada[0] = false; //est·n en false porqeu, si hemos iniciado el juego, pero como en el archon, no inicias el juego con una pieza ya seleccionada, dejas qeu el juegador escoga qeu figura quiere escoger
+    hay_pieza_seleccionada[0] = false; //estÔøΩn en false porqeu, si hemos iniciado el juego, pero como en el archon, no inicias el juego con una pieza ya seleccionada, dejas qeu el juegador escoga qeu figura quiere escoger
     hay_pieza_seleccionada[1] = false;
 
 }
 
-void Tablero::dibujarTablero()
-{
-    for (int i = 0; i < FILAS; i++)
-    {
-        for (int j = 0; j < COLUMNAS; j++)
-        {
-            int x = X_INICIO + j * TAMANO_CASILLA;
-            int y = Y_INICIO + i * TAMANO_CASILLA;
+void Tablero::dibujar(Renderizador* motor){
 
-            if (esPuntoDePoder(i, j))
-            {
-                //Dibujar con la libreria freglut supongo, un simbolo qeu indique que es una casilla de poder
-            }
+    // imagen de fondo del tablero
+    motor->dibujarSprite("../assets/Sprites/tablero/tableroFondo.png", 512, 512, 480/2, 270/2, -1);
+    motor->dibujarSprite("../assets/Sprites/tablero/tablero.png", 256, 256, 480 / 2, 270 / 2, -2);
 
-            if (casillas[i][j] != nullptr)
-            {
-                //Casillas[i][j]->Dibujar(X, Y);//la funcion dibujar debe estar dentro de animal.h, porque aqui le decimos que nos dibuje en la casilla el animal
-            }
-        }
-    }
+
+    //// recorrer la matriz para dibujar casillas de poder y animales
+    //for (int i = 0; i < FILAS; i++)
+    //{
+    //    for (int j = 0; j < COLUMNAS; j++)
+    //    {
+    //        int x = X_INICIO + j * TAMANO_CASILLA;
+    //        int y = Y_INICIO + i * TAMANO_CASILLA;
+
+    //        if (esPuntoDePoder(i, j))
+    //        {
+    //            // motor->dibujarSprite("../assets/Sprites/puntopoder.png", [...] )
+    //        }
+
+    //        if (casillas[i][j] != nullptr)
+    //        {
+    //            // casillas[i][j]->dibujar(motor); 
+    //            // la funcion dibujar debe estar dentro de animal.h, porque aqui le decimos que nos dibuje en la casilla el animal
+    //        }
+    //    }
+    //}
+
+    // dibujar los cursores
+    //float cursor1X = X_INICIO + (posicion_columna_cursor_actual_j1 * TAMANO_CASILLA) + 11.0f;
+    //float cursor1Y = Y_INICIO + (posicion_fila_cursor_actual_j1 * TAMANO_CASILLA) + 11.0f;
+    //motor->dibujarSprite("../assets/Sprites/cursorJ1.png", 22, 22, cursor1X, cursor1Y, -1.0f);
+
+    //float cursor2X = X_INICIO + (posicion_columna_cursor_actual_j2 * TAMANO_CASILLA) + 11.0f;
+    //float cursor2Y = Y_INICIO + (posicion_fila_cursor_actual_j2 * TAMANO_CASILLA) + 11.0f;
+    //motor->dibujarSprite("../assets/Sprites/cursorJ2.png", 22, 22, cursor2X, cursor2Y, -1.0f);
+
 }
 
 bool Tablero::obtenerCasillaEnLaPinchamos(int x_pantalla, int y_pantalla, int& fila, int& columna)
@@ -72,8 +89,8 @@ bool Tablero::obtenerCasillaEnLaPinchamos(int x_pantalla, int y_pantalla, int& f
         return false;
     }
 
-    columna = (x_pantalla - X_INICIO) / TAMANO_CASILLA;//con esto sacas qeu columna de la matriz has clickeado
-    fila = (y_pantalla - Y_INICIO) / TAMANO_CASILLA;//lo mismo qeu la linea anterior pero esta vez con las filas
+    columna = (x_pantalla - X_INICIO) / TAMANO_CASILLA; // con esto sacas qeu columna de la matriz has clickeado
+    fila = (y_pantalla - Y_INICIO) / TAMANO_CASILLA; // lo mismo qeu la linea anterior pero esta vez con las filas
 
     return true;
 }
@@ -99,7 +116,7 @@ void Tablero::moverPieza(int fila_inicial, int columna_inicial, int fila_final, 
     casillas[fila_inicial][columna_inicial] = nullptr;
 }
 
-bool Tablero::comprobarCasillaVacia(int fila, int Columna) //servira para saber si una casilla est· vacÌa o no
+bool Tablero::comprobarCasillaVacia(int fila, int Columna) //servira para saber si una casilla est√° vac√≠a o no
 {
     return casillas[fila][Columna] == nullptr;
 }

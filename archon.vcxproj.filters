@@ -38,6 +38,10 @@
     <ClInclude Include="include\juego.h" />
     <ClInclude Include="include\renderizador.h" />
     <ClInclude Include="include\tablero.h" />
+    <ClInclude Include="include\cabra.h" />
+    <ClInclude Include="include\transicion.h" />
+    <ClInclude Include="include\cursor.h" />
+    <ClInclude Include="include\tarjetaID.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\memoria.md">
@@ -69,6 +73,10 @@
     <ClCompile Include="src\juego.cpp" />
     <ClCompile Include="src\renderizador.cpp" />
     <ClCompile Include="src\tablero.cpp" />
+    <ClCompile Include="src\cabra.cpp" />
+    <ClCompile Include="src\transicion.cpp" />
+    <ClCompile Include="src\cursor.cpp" />
+    <ClCompile Include="src\tarjetaID.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib">
