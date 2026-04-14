@@ -15,16 +15,11 @@ public:
     Tablero();//Le indicamos, o como que avisamos al programa de que vamos a comenzar a ocupar memoria
     ~Tablero();//Digamos que es como nuestro destructor, si la ejecutamos liberamos toda la memoria ocupada por nuestro tablero
 
-    int posicion_fila_cursor_actual_j1;
-    int posicion_columna_cursor_actual_j1;
-    int posicion_fila_cursor_actual_j2;
-    int posicion_columna_cursor_actual_j2;
+    int posicion_fila_cursor_actual[2];
+    int posicion_columna_cursor_actual[2];
 
-    void moverCursorJ1(int FilaAumentada, int ColumnaAumentada);
-    void moverCursorJ2(int FilaAumentada, int ColumnaAumentada);
-    void seleccionarCasillaJ1();
-    void seleccionarCasillaJ2();
-
+    void moverCursor(int IdJugador, int FilaAumentada, int ColumnaAumentada);
+    void seleccionarCasilla();
     void inicializarTablero();
     bool obtenerCasillaEnLaPinchamos(int XPantalla, int YPantalla, int& Fila, int& Columna);
 
@@ -62,10 +57,8 @@ private:
         Casilla Oscuridad = 2
     */
 
-    int fila_seleccionada_j1, columna_seleccionada_j1;
-    int fila_seleccionada_j2, columna_seleccionada_j2;
-    bool hay_pieza_seleccionada_j1;
-    bool hay_pieza_seleccionada_j2;
+    int fila_seleccionada[2], columna_seleccionada[2];
+    bool hay_pieza_seleccionada[2];
 
     static const int TAMANO_CASILLA = 22;
 

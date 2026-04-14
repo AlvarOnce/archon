@@ -134,12 +134,12 @@ void Juego::procesarTeclaPresionada(unsigned char key) // Hacer que tecla solo s
         break;
 
         case TABLERO: // movimiento discreto en el tablero
-        if (key == 'w' || key == 'W') miTablero->moverCursorJ1(0, 1);
-        if (key == 's' || key == 'S') miTablero->moverCursorJ1(0, -1);
-        if (key == 'a' || key == 'A') miTablero->moverCursorJ1(-1, 0);
-        if (key == 'd' || key == 'D') miTablero->moverCursorJ1(1, 0);
+        if (key == 'w' || key == 'W') miTablero->moverCursor(0,0, 1);
+        if (key == 's' || key == 'S') miTablero->moverCursor(0,0, -1);
+        if (key == 'a' || key == 'A') miTablero->moverCursor(0,-1, 0);
+        if (key == 'd' || key == 'D') miTablero->moverCursor(0,1, 0);
         
-        if (key == '.') miTablero->seleccionarCasillaJ1(); // Botón del J1
+        if (key == '.') miTablero->seleccionarCasilla(); // Botón del J1
         break;
 
      case BATALLA: 
@@ -174,12 +174,11 @@ void Juego::procesarTeclaEspecialPresionada(int key) // JUGADOR 2 (FLECHAS)
         break;
 
     case TABLERO:
-        if (key == GLUT_KEY_UP) { miTablero->moverCursorJ2(0, 1); miTablero->cursor.mover(0, 1); } // esto es PROVISIONAL y hay que modificarlo ( es para observar movimiento en pantalla por ahora)
-        if (key == GLUT_KEY_DOWN) { miTablero->moverCursorJ2(0, -1); miTablero->cursor.mover(0, -1); } // hasta solucionar moverCursorJ1 y J2.
-        if (key == GLUT_KEY_LEFT) { miTablero->moverCursorJ2(-1, 0); miTablero->cursor.mover(-1, 0); }
-        if (key == GLUT_KEY_RIGHT) { miTablero->moverCursorJ2(1, 0); miTablero->cursor.mover(1, 0); }
-
-        if (key == '.') miTablero->seleccionarCasillaJ2(); // Botón del J2
+        if (key == GLUT_KEY_UP)    { miTablero->moverCursor(1,0, 1); miTablero->cursor.mover(0, 1); } // esto es PROVISIONAL y hay que modificarlo ( es para observar movimiento en pantalla por ahora)
+        if (key == GLUT_KEY_DOWN)  { miTablero->moverCursor(1,0, -1); miTablero->cursor.mover(0, -1); } // hasta solucionar moverCursorJ1 y J2.
+        if (key == GLUT_KEY_LEFT)  { miTablero->moverCursor(1,-1, 0); miTablero->cursor.mover(-1, 0); }
+        if (key == GLUT_KEY_RIGHT) { miTablero->moverCursor(1,1, 0); miTablero->cursor.mover(1, 0); }
+        if (key == '.') miTablero->seleccionarCasilla(); // Botón del J2
         break;
 
     case BATALLA:
