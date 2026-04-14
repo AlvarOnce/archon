@@ -9,6 +9,8 @@
 #include "cabra.h"
 #include "cerdo.h"
 #include "gallina.h"
+#include "oveja.h"
+#include "granjero.h"
 #include "transicion.h" 
 
 class Juego 

@@ -21,12 +21,14 @@ Juego::Juego() {
     for (int j = 0; j < 2; j++) // Creación de 18 instancias de animal, guardadas en la colección de animales
         for (int i = 0; i < numeroAnimales; i++)
         {
-            if (i % 3 == 0)
+            if (i % 4 == 0)
                 misAnimales[i + j*numeroAnimales] = new Cabra(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i-0.08*j, 20);
-            if (i % 3 == 1)
+            if (i % 4 == 1)
                 misAnimales[i + j*numeroAnimales] = new Cerdo(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20);
-            if (i % 3 == 2)
+            if (i % 4 == 2)
                 misAnimales[i + j*numeroAnimales] = new Gallina(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20);
+            if (i % 4 == 3)
+                misAnimales[i + j * numeroAnimales] = new Oveja(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20);
         }
 }
 

@@ -2,7 +2,7 @@
 
 void Cabra::dibujar(Renderizador* motor) 
 {
-	motor->dibujarSprite("../assets/Sprites/cabra/cabraSpritesheet.png", 256, 32, posx_, posy_, capaz_, 1, 8, frameActualX_, frameActualY_);
+	motor->dibujarSprite("../assets/Sprites/cabra/cabraSpritesheet.png", 256, 64, posx_, posy_, capaz_, 2, 8, frameActualX_, frameActualY_);
 }
 
 void Cabra::actualizar(float dt)
