@@ -18,17 +18,16 @@ Juego::Juego() {
     //miArena = new Arena();
     motorGrafico = new Renderizador();
 
-    
-    for (int i = 0; i < numeroAnimales; i++) 
-    {
-        if (i%3 == 0)
-        misAnimales[i] = new Cabra(-15*(numeroAnimales-i) + 11,  36+(22*i) + 11, -3 - 0.01*i, 20);
-        if (i%3 == 1)
-        misAnimales[i] = new Cerdo(-15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i, 20);
-        if (i%3 == 2)
-        misAnimales[i] = new Gallina(-15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i, 20);
-
-    }
+    for (int j = 0; j < 2; j++) // Creación de 18 instancias de animal, guardadas en la colección de animales
+        for (int i = 0; i < numeroAnimales; i++)
+        {
+            if (i % 3 == 0)
+                misAnimales[i + j*numeroAnimales] = new Cabra(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i-0.08*j, 20);
+            if (i % 3 == 1)
+                misAnimales[i + j*numeroAnimales] = new Cerdo(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20);
+            if (i % 3 == 2)
+                misAnimales[i + j*numeroAnimales] = new Gallina(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20);
+        }
 }
 
 Juego::~Juego() {
@@ -51,8 +50,12 @@ void Juego::actualizarLogica(float dt) {
 
     case TABLERO:
 
-        for (int i = 0; i < numeroAnimales; i++) 
-        misAnimales[i]->actualizar(25);
+        for (int j = 0; j < 2; j++)
+            for (int i = 0; i < numeroAnimales; i++)
+            {
+                misAnimales[i + j * numeroAnimales]->actualizar(25);
+            }
+
         break;
 
         //if(el cursor esta sobre un animal, funcion propia de tablero y cursor detectar la casilla)
@@ -89,8 +92,10 @@ void Juego::renderizarGraficos() {
     case TABLERO:  
         miTablero->dibujar(motorGrafico);
 
-        for (int i = 0; i < numeroAnimales; i++) // LO MISMO QUE ARRIBA DENTRO DE DIBUJAR TABLERO
-        misAnimales[i]->dibujar(motorGrafico); // 9 cabras
+        for (int j = 0; j < 2; j++)
+            for (int i = 0; i < numeroAnimales; i++)
+                misAnimales[i + j * numeroAnimales]->dibujar(motorGrafico);
+         
 
         miTablero->cursor.dibujar(motorGrafico);
 

@@ -34,6 +34,9 @@ public:
 	float vely_{0};
 	int equipo_;
 	int vida_;
+	int ataque_;
+
+	int casillaInicial_[2];
 
 	void mover(modoJuego modo, direccion dir);
 	virtual void atacar()
