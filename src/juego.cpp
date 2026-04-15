@@ -15,6 +15,7 @@ Juego::Juego() {
 
     miMenu = new Menu();
     miTablero = new Tablero();
+    creditos = new Creditos();
     //miArena = new Arena();
     motorGrafico = new Renderizador();
 
@@ -46,7 +47,7 @@ void Juego::actualizarLogica(float dt) {
 
     case MENU:
        
-        miMenu->actualizar(25);
+        miMenu->actualizar(dt);
 
         break;
 
@@ -55,7 +56,7 @@ void Juego::actualizarLogica(float dt) {
         for (int j = 0; j < 2; j++)
             for (int i = 0; i < numeroAnimales; i++)
             {
-                misAnimales[i + j * numeroAnimales]->actualizar(25);
+                misAnimales[i + j * numeroAnimales]->actualizar(dt);
             }
 
         break;
@@ -68,12 +69,14 @@ void Juego::actualizarLogica(float dt) {
         // Aqui por ejemplo irira batalla->actualiza()
         break;
 
-  
+    case CREDITOS:
+
+        if (!transicion.activo)
+        creditos->actualizar(25);
+        break;
     }
 
-
-    if (transicion.activo) transicion.actualizar(25);
-
+    if (transicion.activo) transicion.actualizar(dt);
     if (transicion.getEstado() == Transicion::CERRADO)
     {
         estadoActual = proximoEstado;
@@ -86,6 +89,7 @@ void Juego::renderizarGraficos() {
     motorGrafico->limpiarPantalla();
 
     switch (estadoActual) {
+
     case MENU:
         miMenu->dibujar(motorGrafico);
 
@@ -110,6 +114,11 @@ void Juego::renderizarGraficos() {
 
     case BATALLA:
         
+        break;
+
+    case CREDITOS:
+
+        creditos->dibujar(motorGrafico);
         break;
     }
 
@@ -139,9 +148,10 @@ void Juego::procesarTeclaPresionada(unsigned char key) // Hacer que tecla solo s
             //    estadoActual = CONTROLES;
             //    break;
 
-            //case Selector::CREDITOS:
-            //    estadoActual = CREDITOS;
-            //    break;
+            case Selector::CREDITOS:
+                transicion.empieza();
+                proximoEstado = CREDITOS;
+                break;
             }
 
         }
