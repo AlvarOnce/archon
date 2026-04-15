@@ -7,10 +7,6 @@
 #include "renderizador.h" 
 #include "transicion.h" 
 
-enum  Comando { ARRIBA, ABAJO, IZQUIERDA, DERECHA, SELECCIONAR, CANCELAR, NINGUNO };
-
-enum Jugador { J1, J2 };
-
 class Juego {
 
     Transicion transicion;
@@ -19,22 +15,19 @@ class Juego {
     //Arena* arena;
     Renderizador* motor;
 
-    double anchoVentana = 480;
-    double altoVentana = 270;
-
-	Comando traducirTeclaJ1(unsigned char key);
-	Comando traducirTeclaJ2(int key);
+    double anchoVentana_ = 480;
+    double altoVentana_ = 270;
 
 public:
     Juego();
     ~Juego();
 
-    double getAnchoVentana() {return anchoVentana;} // Para decirle al main cuánto mide la ventana que debe crear
-    double getAltoVentana() {return altoVentana;}
+    double anchoVentana() const {return anchoVentana_;} // Para decirle al main cuánto mide la ventana que debe crear
+    double altoVentana() const {return altoVentana_;}
 
     enum Estado { MENU, TABLERO, ARENA };
-    Estado estadoActual;
-    Estado proximoEstado;
+    Estado estadoActual {MENU};
+    Estado proximoEstado {MENU};
 
     // game loop dividido en dos fases desacopladas
     void actualizarLogica(float dt); // se llama desde OnTimer
@@ -45,4 +38,5 @@ public:
     void procesarTeclaLevantada(unsigned char key);
     void procesarTeclaEspecialPresionada(int key);
     void procesarTeclaEspecialLevantada(int key);
+
 };

@@ -135,8 +135,10 @@
     <ClInclude Include="include\ETSIDI.h" />
     <ClInclude Include="include\freeglut.h" />
     <ClInclude Include="include\juego.h" />
+    <ClInclude Include="include\jugador.h" />
     <ClInclude Include="include\menu.h" />
     <ClInclude Include="include\renderizador.h" />
+    <ClInclude Include="include\tablero.h" />
     <ClInclude Include="include\tablero.h" />
     <ClInclude Include="include\tarjetaID.h" />
     <ClInclude Include="include\transicion.h" />
@@ -157,9 +159,11 @@
     <ClCompile Include="src\cabra.cpp" />
     <ClCompile Include="src\cursor.cpp" />
     <ClCompile Include="src\juego.cpp" />
+    <ClCompile Include="src\jugador.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\menu.cpp" />
     <ClCompile Include="src\renderizador.cpp" />
+    <ClCompile Include="src\tablero.cpp" />
     <ClCompile Include="src\tablero.cpp" />
     <ClCompile Include="src\tarjetaID.cpp" />
     <ClCompile Include="src\transicion.cpp" />

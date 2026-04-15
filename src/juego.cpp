@@ -7,10 +7,6 @@
 Tablero miTablero;
 
 Juego::Juego() {
-
-    estadoActual = MENU;
-    proximoEstado;
-
     menu = new Menu();
     tablero = new Tablero();
     //arena = new Arena();
@@ -75,6 +71,7 @@ void Juego::renderizarGraficos() {
 
     if(transicion.activo) transicion.dibujar(motor);
 }
+
 
 void Juego::procesarTeclaPresionada(unsigned char key) // Hacer que tecla solo se procese si transicion.activo = false
 {
@@ -147,11 +144,11 @@ void Juego::procesarTeclaEspecialPresionada(int key) // JUGADOR 2 (FLECHAS)
         if (key == GLUT_KEY_DOWN) menu->moverSelector(1); // abajo suma 1 (bajándo hacia el 3 que es CREDITOS)
         break;
 
-    case TABLERO:
-        if (key == GLUT_KEY_UP)    { tablero->moverCursor(1,0, 1); tablero->cursor.mover(0, 1); } // esto es PROVISIONAL y hay que modificarlo ( es para observar movimiento en pantalla por ahora)
-        if (key == GLUT_KEY_DOWN)  { tablero->moverCursor(1,0, -1); tablero->cursor.mover(0, -1); } // hasta solucionar moverCursorJ1 y J2.
-        if (key == GLUT_KEY_LEFT)  { tablero->moverCursor(1,-1, 0); tablero->cursor.mover(-1, 0); }
-        if (key == GLUT_KEY_RIGHT) { tablero->moverCursor(1,1, 0); tablero->cursor.mover(1, 0); }
+    case TABLERO: 
+        if (key == GLUT_KEY_UP)    { tablero->jugador[1].cursor.mover(0, 1); }
+        if (key == GLUT_KEY_DOWN)  { tablero->jugador[1].cursor.mover(0, -1); }
+        if (key == GLUT_KEY_LEFT)  { tablero->jugador[1].cursor.mover(-1, 0); }
+        if (key == GLUT_KEY_RIGHT) { tablero->jugador[1].cursor.mover(1, 0); }
         if (key == '.') tablero->seleccionarCasilla(); // Botón del J2
         break;
 

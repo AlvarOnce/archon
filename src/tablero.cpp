@@ -5,10 +5,24 @@
 Tablero::Tablero()
 {
     inicializarTablero();
-    for (int i = 0; i < numeroAnimales; i++) // ejemplo de creacion de 32 animales (cabras, dibujadas como palomas)
-    {
-        misAnimales[i] = new Cabra(-15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i, 20);
+    
+    // Inicializar jugadores
+    jugador[0].inicializar(numeroAnimales);
+    jugador[1].inicializar(numeroAnimales);
+    
+    // Crear animales para el jugador 0 (bando de luz)
+    for (int i = 0; i < numeroAnimales; i++) {
+        Cabra* cabra = new Cabra(-15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i, 20);
+        jugador[0].agregarAnimal(i, cabra);
+        misAnimales[i] = cabra;
     }
+    
+    // Crear animales para el jugador 1 (bando de oscuridad)
+    //for (int i = 0; i < numeroAnimales; i++) {
+    //    Cabra* cabra = new Cabra(480 + 15 * (numeroAnimales - i) - 11, 36 + (22 * i) + 11, -3 - 0.01 * i, 20);
+    //    jugador[1].agregarAnimal(i, cabra);
+    //    misAnimales[numeroAnimales + i] = cabra;
+    //}
 }
 
 Tablero::~Tablero()
@@ -39,7 +53,7 @@ void Tablero::inicializarTablero() // iniclizaiamos el Tablero vacio, es decir, 
 
     posicion_fila_cursor_actual[0] = 0; posicion_columna_cursor_actual[0] = 0;
     posicion_fila_cursor_actual[1] = 8; posicion_columna_cursor_actual[1] = 8;
-    hay_pieza_seleccionada[0] = false; //estÔøΩn en false porqeu, si hemos iniciado el juego, pero como en el archon, no inicias el juego con una pieza ya seleccionada, dejas qeu el juegador escoga qeu figura quiere escoger
+    hay_pieza_seleccionada[0] = false; //est·n en false porqeu, si hemos iniciado el juego, pero como en el archon, no inicias el juego con una pieza ya seleccionada, dejas qeu el juegador escoga qeu figura quiere escoger
     hay_pieza_seleccionada[1] = false;
 
 }
@@ -50,15 +64,25 @@ void Tablero::dibujar(Renderizador* motor){
     motor->dibujarSprite("../assets/Sprites/tablero/tableroFondo.png", 512, 512, 480/2, 270/2, -1);
     motor->dibujarSprite("../assets/Sprites/tablero/tablero.png", 256, 256, 480 / 2, 270 / 2, -2);
 
-    cursor.dibujar(motor);
+    // Dibujar animales de ambos jugadores
+    jugador[0].dibujar(motor);
+    jugador[1].dibujar(motor);
+
+    // Dibujar cursores en las posiciones correctas del tablero para ambos jugadores
+    // Cursor del jugador 0
+    float cursor0X = X_INICIO + (posicion_columna_cursor_actual[0] * TAMANO_CASILLA) + 11.0f;
+    float cursor0Y = Y_INICIO + (posicion_fila_cursor_actual[0] * TAMANO_CASILLA) + 11.0f;
+    motor->dibujarSprite("../assets/Sprites/tablero/cursor.png", 22, 22, cursor0X, cursor0Y, -4.0f);
+
+    // Cursor del jugador 1
+    float cursor1X = X_INICIO + (posicion_columna_cursor_actual[1] * TAMANO_CASILLA) + 11.0f;
+    float cursor1Y = Y_INICIO + (posicion_fila_cursor_actual[1] * TAMANO_CASILLA) + 11.0f;
+    motor->dibujarSprite("../assets/Sprites/tablero/cursor.png", 22, 22, cursor1X, cursor1Y, -4.0f);
 
     //if(el cursor esta sobre un animal, funcion propia de tablero y cursor detectar la casilla)
     // en actualizar se determina que tarjeta se va a dibujar interiormente
-    if (cursor.posx > 150 && cursor.posx < 170) // ELIMINAR ESTA CONDICION
+    if (cursor0X > 150 && cursor0X < 170) // ELIMINAR ESTA CONDICION
         tarjeta.dibujar(motor);
-
-    for (int i = 0; i < numeroAnimales; i++) // LO MISMO QUE ARRIBA DENTRO DE DIBUJAR TABLERO
-        misAnimales[i]->dibujar(motor); // 9 cabras
 
     //// recorrer la matriz para dibujar casillas de poder y animales
     //for (int i = 0; i < FILAS; i++)
@@ -94,8 +118,8 @@ void Tablero::dibujar(Renderizador* motor){
 
 void Tablero::actualizar(float dt)
 {
-    for (int i = 0; i < numeroAnimales; i++)
-        misAnimales[i]->actualizar(25);
+    jugador[0].actualizar(dt);
+    jugador[1].actualizar(dt);
 }
 
 bool Tablero::obtenerCasillaEnLaPinchamos(int x_pantalla, int y_pantalla, int& fila, int& columna)
@@ -137,7 +161,7 @@ void Tablero::moverPieza(int fila_inicial, int columna_inicial, int fila_final, 
     casillas[fila_inicial][columna_inicial] = nullptr;
 }
 
-bool Tablero::comprobarCasillaVacia(int fila, int Columna) //servira para saber si una casilla est√° vac√≠a o no
+bool Tablero::comprobarCasillaVacia(int fila, int Columna) //servira para saber si una casilla est· vacÌa o no
 {
     return casillas[fila][Columna] == nullptr;
 }

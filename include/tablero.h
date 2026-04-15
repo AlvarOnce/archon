@@ -2,7 +2,8 @@
 #include "animal.h"  
 #include "cabra.h"
 #include "cursor.h" 
-#include "tarjetaID.h" 
+#include "tarjetaID.h"
+#include "jugador.h"
 
 const int BANDO_LUZ = 1;
 const int BANDO_OSCURIDAD = 2;
@@ -44,7 +45,7 @@ public:
     void dibujar(Renderizador* motor);
 	void actualizar(float dt);
 
-    Cursor cursor;
+    Jugador jugador[2];
     Tarjeta tarjeta;
 
 private:
