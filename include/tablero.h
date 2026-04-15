@@ -1,5 +1,6 @@
 #pragma once
 #include "animal.h"  
+#include "cabra.h"
 #include "cursor.h" 
 #include "tarjetaID.h" 
 
@@ -41,11 +42,14 @@ public:
     bool tengoVentaja(int Fila, int Columna, int Bando);
 
     void dibujar(Renderizador* motor);
+	void actualizar(float dt);
 
     Cursor cursor;
     Tarjeta tarjeta;
 
 private:
+    Animal* misAnimales[18];
+
     Animal* casillas[9][9];
     int color_casilla[9][9];
     

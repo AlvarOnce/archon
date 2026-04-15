@@ -169,7 +169,6 @@
     <Library Include="lib\freeglut.lib" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="src\CopiaDibujoAnterior" />
     <Text Include="src\zzz.txt" />
   </ItemGroup>
   <ItemGroup>

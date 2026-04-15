@@ -5,33 +5,36 @@
 #include "tablero.h"
 //#include "arena.h"
 #include "renderizador.h" 
-#include "animal.h"
-#include "cabra.h"
 #include "transicion.h" 
 
-class Juego 
-{
+enum  Comando { ARRIBA, ABAJO, IZQUIERDA, DERECHA, SELECCIONAR, CANCELAR, NINGUNO };
+
+enum Jugador { J1, J2 };
+
+class Juego {
+
     Transicion transicion;
-    Menu* miMenu;
-    Tablero* miTablero;
-    //Arena* miArena;
-    Renderizador* motorGrafico;
-    Animal* misAnimales[18];
+    Menu* menu;
+    Tablero* tablero;
+    //Arena* arena;
+    Renderizador* motor;
 
     double anchoVentana = 480;
     double altoVentana = 270;
 
+	Comando traducirTeclaJ1(unsigned char key);
+	Comando traducirTeclaJ2(int key);
+
 public:
+    Juego();
+    ~Juego();
 
     double getAnchoVentana() {return anchoVentana;} // Para decirle al main cuánto mide la ventana que debe crear
     double getAltoVentana() {return altoVentana;}
 
-    enum Estado { MENU, TABLERO, BATALLA };
+    enum Estado { MENU, TABLERO, ARENA };
     Estado estadoActual;
     Estado proximoEstado;
-
-    Juego(); 
-    ~Juego();
 
     // game loop dividido en dos fases desacopladas
     void actualizarLogica(float dt); // se llama desde OnTimer

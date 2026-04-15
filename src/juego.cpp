@@ -4,8 +4,6 @@
 #include "juego.h"
 #include "tablero.h"
 
-#define numeroAnimales 9 // Por ahora crea 9 entidades (todas cabras)
-
 Tablero miTablero;
 
 Juego::Juego() {
@@ -13,22 +11,17 @@ Juego::Juego() {
     estadoActual = MENU;
     proximoEstado;
 
-    miMenu = new Menu();
-    miTablero = new Tablero();
-    //miArena = new Arena();
-    motorGrafico = new Renderizador();
-
-    for (int i = 0; i < numeroAnimales; i++) // ejemplo de creacion de 32 animales (cabras, dibujadas como palomas)
-    {
-        misAnimales[i] = new Cabra(-15*(numeroAnimales-i) + 11,  36+(22*i) + 11, -3 - 0.01*i, 20);
-    }
+    menu = new Menu();
+    tablero = new Tablero();
+    //arena = new Arena();
+    motor = new Renderizador();
 }
 
 Juego::~Juego() {
-    delete miMenu;
-    delete miTablero;
-    //delete miArena;
-    delete motorGrafico;
+    delete menu;
+    delete tablero;
+    //delete arena;
+    delete motor;
 }
 
 void Juego::actualizarLogica(float dt) {
@@ -38,30 +31,23 @@ void Juego::actualizarLogica(float dt) {
 
     case MENU:
        
-        miMenu->actualizar(25);
+        menu->actualizar(25);
 
         break;
 
     case TABLERO:
 
-        for (int i = 0; i < numeroAnimales; i++) 
-        misAnimales[i]->actualizar(25);
+		tablero->actualizar(25);
         break;
 
-        //if(el cursor esta sobre un animal, funcion propia de tablero y cursor detectar la casilla)
-        // miTablero->tarjeta.animalSeleccionado = ___
+    case ARENA:
 
-    case BATALLA:
-
-        // Aqui por ejemplo irira batalla->actualiza()
-        break;
-
-  
+        //arena->actualizar(25);
+        break;        
     }
 
-
+    // transición entre estados 
     if (transicion.activo) transicion.actualizar(25);
-
     if (transicion.getEstado() == Transicion::CERRADO)
     {
         estadoActual = proximoEstado;
@@ -69,37 +55,25 @@ void Juego::actualizarLogica(float dt) {
 }
 
 void Juego::renderizarGraficos() {
-    // FASE 2: pintar en pantalla.
+    // FASE 2: pintar en pantalla
 
-    motorGrafico->limpiarPantalla();
+    motor->limpiarPantalla();
 
     switch (estadoActual) {
     case MENU:
-        miMenu->dibujar(motorGrafico);
-
+        menu->dibujar(motor);
         break;
 
     case TABLERO:  
-        miTablero->dibujar(motorGrafico);
-
-        for (int i = 0; i < numeroAnimales; i++) // LO MISMO QUE ARRIBA DENTRO DE DIBUJAR TABLERO
-        misAnimales[i]->dibujar(motorGrafico); // 9 cabras
-
-        miTablero->cursor.dibujar(motorGrafico);
-
-        //if(el cursor esta sobre un animal, funcion propia de tablero y cursor detectar la casilla)
-        // en actualizar se determina que tarjeta se va a dibujar interiormente
-        if(miTablero->cursor.posx > 150 && miTablero->cursor.posx <170) // ELIMINAR ESTA CONDICION
-        miTablero->tarjeta.dibujar(motorGrafico);
-
+        tablero->dibujar(motor);       
         break;
 
-    case BATALLA:
-        
+    case ARENA:
+		//arena->dibujar(motor);
         break;
     }
 
-    if(transicion.activo) { transicion.dibujar(motorGrafico); }
+    if(transicion.activo) transicion.dibujar(motor);
 }
 
 void Juego::procesarTeclaPresionada(unsigned char key) // Hacer que tecla solo se procese si transicion.activo = false
@@ -110,7 +84,7 @@ void Juego::procesarTeclaPresionada(unsigned char key) // Hacer que tecla solo s
 
         case MENU:
         if (key == 13) { // Intro para elegir una opción
-            switch (miMenu->getOpcionActual()) {
+            switch (menu->getOpcionActual()) {
 
             case Selector::JUGAR: 
                 transicion.empieza();
@@ -134,17 +108,17 @@ void Juego::procesarTeclaPresionada(unsigned char key) // Hacer que tecla solo s
         break;
 
         case TABLERO: // movimiento discreto en el tablero
-        if (key == 'w' || key == 'W') miTablero->moverCursor(0,0, 1);
-        if (key == 's' || key == 'S') miTablero->moverCursor(0,0, -1);
-        if (key == 'a' || key == 'A') miTablero->moverCursor(0,-1, 0);
-        if (key == 'd' || key == 'D') miTablero->moverCursor(0,1, 0);
+        if (key == 'w' || key == 'W') tablero->moverCursor(0,0, 1);
+        if (key == 's' || key == 'S') tablero->moverCursor(0,0, -1);
+        if (key == 'a' || key == 'A') tablero->moverCursor(0,-1, 0);
+        if (key == 'd' || key == 'D') tablero->moverCursor(0,1, 0);
         
-        if (key == '.') miTablero->seleccionarCasilla(); // Botón del J1
+        if (key == '.') tablero->seleccionarCasilla(); // Botón del J1
         break;
 
-     case BATALLA: 
+     case ARENA: 
         // movimiento continuo, se activa el bool "interruptor"
-        // miArena->recibirInputJugador1(key, true); 
+        // arena->recibirInputJugador1(key, true); 
         break;
 
     }
@@ -158,7 +132,7 @@ void Juego::procesarTeclaLevantada(unsigned char key)
         // cuando se levanta la tecla, ya se ha hecho todo al pulsarla.
         break;
 
-    case BATALLA:
+    case ARENA:
         // se apaga el bool al levantar la tecla
         // miArena->recibirInputJugador1(key, false);
         break;
@@ -169,20 +143,20 @@ void Juego::procesarTeclaEspecialPresionada(int key) // JUGADOR 2 (FLECHAS)
 {
     switch (estadoActual) {
     case MENU:
-        if (key == GLUT_KEY_UP) miMenu->moverSelector(-1); // arriba resta 1 (se acerca a 0 que es JUGAR)
-        if (key == GLUT_KEY_DOWN) miMenu->moverSelector(1); // abajo suma 1 (bajándo hacia el 3 que es CREDITOS)
+        if (key == GLUT_KEY_UP) menu->moverSelector(-1); // arriba resta 1 (se acerca a 0 que es JUGAR)
+        if (key == GLUT_KEY_DOWN) menu->moverSelector(1); // abajo suma 1 (bajándo hacia el 3 que es CREDITOS)
         break;
 
     case TABLERO:
-        if (key == GLUT_KEY_UP)    { miTablero->moverCursor(1,0, 1); miTablero->cursor.mover(0, 1); } // esto es PROVISIONAL y hay que modificarlo ( es para observar movimiento en pantalla por ahora)
-        if (key == GLUT_KEY_DOWN)  { miTablero->moverCursor(1,0, -1); miTablero->cursor.mover(0, -1); } // hasta solucionar moverCursorJ1 y J2.
-        if (key == GLUT_KEY_LEFT)  { miTablero->moverCursor(1,-1, 0); miTablero->cursor.mover(-1, 0); }
-        if (key == GLUT_KEY_RIGHT) { miTablero->moverCursor(1,1, 0); miTablero->cursor.mover(1, 0); }
-        if (key == '.') miTablero->seleccionarCasilla(); // Botón del J2
+        if (key == GLUT_KEY_UP)    { tablero->moverCursor(1,0, 1); tablero->cursor.mover(0, 1); } // esto es PROVISIONAL y hay que modificarlo ( es para observar movimiento en pantalla por ahora)
+        if (key == GLUT_KEY_DOWN)  { tablero->moverCursor(1,0, -1); tablero->cursor.mover(0, -1); } // hasta solucionar moverCursorJ1 y J2.
+        if (key == GLUT_KEY_LEFT)  { tablero->moverCursor(1,-1, 0); tablero->cursor.mover(-1, 0); }
+        if (key == GLUT_KEY_RIGHT) { tablero->moverCursor(1,1, 0); tablero->cursor.mover(1, 0); }
+        if (key == '.') tablero->seleccionarCasilla(); // Botón del J2
         break;
 
-    case BATALLA:
-        // miArena->recibirInputJugador2(key, true);
+    case ARENA:
+        // arena->recibirInputJugador2(key, true);
         break;
     }
 }
@@ -194,8 +168,8 @@ void Juego::procesarTeclaEspecialLevantada(int key)
         // igual que antes, aquí no hay que poner nada
         break;
 
-    case BATALLA:
-        // miArena->recibirInputJugador2(key, false);
+    case ARENA:
+        // arena->recibirInputJugador2(key, false);
         break;
     }
 }

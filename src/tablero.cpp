@@ -1,8 +1,14 @@
 #include "tablero.h"
 
+#define numeroAnimales 9 // Por ahora crea 9 entidades (todas cabras)
+
 Tablero::Tablero()
 {
     inicializarTablero();
+    for (int i = 0; i < numeroAnimales; i++) // ejemplo de creacion de 32 animales (cabras, dibujadas como palomas)
+    {
+        misAnimales[i] = new Cabra(-15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i, 20);
+    }
 }
 
 Tablero::~Tablero()
@@ -44,6 +50,15 @@ void Tablero::dibujar(Renderizador* motor){
     motor->dibujarSprite("../assets/Sprites/tablero/tableroFondo.png", 512, 512, 480/2, 270/2, -1);
     motor->dibujarSprite("../assets/Sprites/tablero/tablero.png", 256, 256, 480 / 2, 270 / 2, -2);
 
+    cursor.dibujar(motor);
+
+    //if(el cursor esta sobre un animal, funcion propia de tablero y cursor detectar la casilla)
+    // en actualizar se determina que tarjeta se va a dibujar interiormente
+    if (cursor.posx > 150 && cursor.posx < 170) // ELIMINAR ESTA CONDICION
+        tarjeta.dibujar(motor);
+
+    for (int i = 0; i < numeroAnimales; i++) // LO MISMO QUE ARRIBA DENTRO DE DIBUJAR TABLERO
+        misAnimales[i]->dibujar(motor); // 9 cabras
 
     //// recorrer la matriz para dibujar casillas de poder y animales
     //for (int i = 0; i < FILAS; i++)
@@ -75,6 +90,12 @@ void Tablero::dibujar(Renderizador* motor){
     //float cursor2Y = Y_INICIO + (posicion_fila_cursor_actual_j2 * TAMANO_CASILLA) + 11.0f;
     //motor->dibujarSprite("../assets/Sprites/cursorJ2.png", 22, 22, cursor2X, cursor2Y, -1.0f);
 
+}
+
+void Tablero::actualizar(float dt)
+{
+    for (int i = 0; i < numeroAnimales; i++)
+        misAnimales[i]->actualizar(25);
 }
 
 bool Tablero::obtenerCasillaEnLaPinchamos(int x_pantalla, int y_pantalla, int& fila, int& columna)
