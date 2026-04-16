@@ -170,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\CopiaDibujoAnterior" />
+    <Text Include="src\Funciones tablero david.txt" />
     <Text Include="src\zzz.txt" />
   </ItemGroup>
   <ItemGroup>
