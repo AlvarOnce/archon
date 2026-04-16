@@ -2,6 +2,7 @@
 
 Tablero::Tablero()
 {
+    fase_actual = NAVEGANDO;
     inicializarTablero();
 }
 
@@ -10,7 +11,7 @@ Tablero::~Tablero()
 
 }
 
-void Tablero::inicializarTablero() // iniclizaiamos el Tablero vacio, es decir, creamos la matriz pero no le decimos todavia si hay figuras o no en las casillas
+void Tablero::inicializarTablero() // inicializamos el Tablero vacio
 {
     for (int i = 0; i < FILAS; i++)
     {
@@ -20,7 +21,7 @@ void Tablero::inicializarTablero() // iniclizaiamos el Tablero vacio, es decir, 
 
             if ((i + j) % 2 == 0)
             {
-                color_casilla[i][j] = CASILLA_LUZ; // como ya estan creadas las celdas de la matriz, ahora le decimos a cada celda que es, si es luz o oscuradad
+                color_casilla[i][j] = CASILLA_LUZ;
             }
             else
             {
@@ -29,71 +30,140 @@ void Tablero::inicializarTablero() // iniclizaiamos el Tablero vacio, es decir, 
         }
     }
 
-    turno_actual = BANDO_LUZ; // incia el turno el bando de luz
+    turno_actual = BANDO_LUZ; // inicia el turno el bando de luz
 
-    posicion_fila_cursor_actual[0] = 0; posicion_columna_cursor_actual[0] = 0;
-    posicion_fila_cursor_actual[1] = 8; posicion_columna_cursor_actual[1] = 8;
-    hay_pieza_seleccionada[0] = false; //est�n en false porqeu, si hemos iniciado el juego, pero como en el archon, no inicias el juego con una pieza ya seleccionada, dejas qeu el juegador escoga qeu figura quiere escoger
-    hay_pieza_seleccionada[1] = false;
-
+    // NOTA: Las posiciones iniciales del cursor ya no se declaran aquí.
+    // Nacen directamente en Juego.cpp cuando se hace 'new Jugador(...)'.
+    // Ahí le indicaremos las coordenadas del "Mago/Granjero".
 }
 
-void Tablero::dibujar(Renderizador* motor){
+void Tablero::recibirInputDireccion(int idJugador, int deltaFila, int deltaCol)
+{
+    Jugador* j = jugadores[idJugador];
+    if (turno_actual != j->getBando()) return; // No es su turno
 
-    // imagen de fondo del tablero
-    motor->dibujarSprite("../assets/Sprites/tablero/tableroFondo.png", 512, 512, 480/2, 270/2, -1);
+    if (fase_actual == NAVEGANDO) {
+        // 1. Fase normal: Movemos el cursor buscando pieza
+        j->moverCursorVacio(deltaFila, deltaCol);
+    }
+    else if (fase_actual == MOVIENDO_PIEZA) {
+        // 2. Fase de agarre: El cursor azul/rojo se queda fijo, controlas a la pieza
+        j->moverPiezaVirtual(deltaFila, deltaCol);
+    }
+}
+
+void Tablero::botonAccion(int idJugador)
+{
+    Jugador* j = jugadores[idJugador];
+    if (turno_actual != j->getBando()) return;
+
+    if (fase_actual == NAVEGANDO)
+    {
+        // INTENTAR AGARRAR
+        int f = j->getFilaCursor();
+        int c = j->getColCursor();
+
+        if (!comprobarCasillaVacia(f, c)) {
+            Animal* piezaEnCasilla = casillas[f][c];
+
+            // ¿Es mía la pieza? (Usamos obtenerBando que añadimos en Animal.h)
+            if (piezaEnCasilla->obtenerBando() == j->getBando()) {
+                j->agarrarPieza(piezaEnCasilla);
+
+                // BORRAMOS TEMPORALMENTE la pieza de la matriz (así "vuela" y no se pinta doble)
+                casillas[f][c] = nullptr;
+
+                // CAMBIAMOS DE FASE
+                fase_actual = MOVIENDO_PIEZA;
+            }
+        }
+    }
+    else if (fase_actual == MOVIENDO_PIEZA)
+    {
+        // INTENTAR SOLTAR EN LA CASILLA DESTINO
+        int origenF = j->getFilaCursor(); // Dónde empezó (el cursor fijo)
+        int origenC = j->getColCursor();
+        int destF = j->getFilaPiezaVirtual(); // Dónde está la pieza voladora
+        int destC = j->getColPiezaVirtual();
+
+        Animal* piezaQueLlevo = j->getPieza();
+
+        // 1. ¿He soltado la pieza en la misma casilla de la que la cogí? (Cancelar)
+        if (destF == origenF && destC == origenC) {
+            casillas[origenF][origenC] = piezaQueLlevo; // La devolvemos a la matriz
+            j->soltarPieza();
+            fase_actual = NAVEGANDO;
+            return; // No pasamos turno, fue un error del jugador
+        }
+
+        // 2. ¿La casilla de destino está vacía?
+        if (comprobarCasillaVacia(destF, destC)) {
+            casillas[destF][destC] = piezaQueLlevo; // Aterriza
+            j->soltarPieza();
+            fase_actual = NAVEGANDO;
+
+            // ¡MOVIMIENTO COMPLETADO! PASAMOS TURNO.
+            turno_actual = (turno_actual == BANDO_LUZ) ? BANDO_OSCURIDAD : BANDO_LUZ;
+            avanzarTurno();
+
+            // Teletransportamos el cursor del jugador a donde aterrizó la pieza
+            j->moverCursorVacio(destF - origenF, destC - origenC);
+        }
+        else {
+            Animal* enemigo = casillas[destF][destC];
+            if (enemigo->obtenerBando() != j->getBando()) {
+
+                // ¡¡COMBATE!! 
+                // Aquí en el futuro le diremos al Juego.cpp que cambie a estado BATALLA
+                // dejaremos a los animales listos para pelear.
+
+            }
+        }
+    }
+}
+
+void Tablero::dibujar(Renderizador* motor) {
+
+    // 1. Imagen de fondo del tablero
+    motor->dibujarSprite("../assets/Sprites/tablero/tableroFondo.png", 512, 512, 480 / 2, 270 / 2, -1);
     motor->dibujarSprite("../assets/Sprites/tablero/tablero.png", 256, 256, 480 / 2, 270 / 2, -2);
 
-
-    //// recorrer la matriz para dibujar casillas de poder y animales
-    //for (int i = 0; i < FILAS; i++)
-    //{
-    //    for (int j = 0; j < COLUMNAS; j++)
-    //    {
-    //        int x = X_INICIO + j * TAMANO_CASILLA;
-    //        int y = Y_INICIO + i * TAMANO_CASILLA;
-
-    //        if (esPuntoDePoder(i, j))
-    //        {
-    //            // motor->dibujarSprite("../assets/Sprites/puntopoder.png", [...] )
-    //        }
-
-    //        if (casillas[i][j] != nullptr)
-    //        {
-    //            // casillas[i][j]->dibujar(motor); 
-    //            // la funcion dibujar debe estar dentro de animal.h, porque aqui le decimos que nos dibuje en la casilla el animal
-    //        }
-    //    }
-    //}
-
-    // dibujar los cursores
-    //float cursor1X = X_INICIO + (posicion_columna_cursor_actual_j1 * TAMANO_CASILLA) + 11.0f;
-    //float cursor1Y = Y_INICIO + (posicion_fila_cursor_actual_j1 * TAMANO_CASILLA) + 11.0f;
-    //motor->dibujarSprite("../assets/Sprites/cursorJ1.png", 22, 22, cursor1X, cursor1Y, -1.0f);
-
-    //float cursor2X = X_INICIO + (posicion_columna_cursor_actual_j2 * TAMANO_CASILLA) + 11.0f;
-    //float cursor2Y = Y_INICIO + (posicion_fila_cursor_actual_j2 * TAMANO_CASILLA) + 11.0f;
-    //motor->dibujarSprite("../assets/Sprites/cursorJ2.png", 22, 22, cursor2X, cursor2Y, -1.0f);
-
-}
-
-bool Tablero::obtenerCasillaEnLaPinchamos(int x_pantalla, int y_pantalla, int& fila, int& columna)
-{
-    // Comprobamos si el clic se ha ehcho dentro ddel tablero de juego
-    if (x_pantalla < X_INICIO || x_pantalla >= X_INICIO + COLUMNAS * TAMANO_CASILLA)
+    // 2. Recorrer la matriz para dibujar casillas de poder y animales en reposo
+    for (int i = 0; i < FILAS; i++)
     {
-        return false;
-    }
-    if (y_pantalla < Y_INICIO || y_pantalla >= Y_INICIO + FILAS * TAMANO_CASILLA)
-    {
-        return false;
+        for (int j = 0; j < COLUMNAS; j++)
+        {
+            // Calculamos el centro exacto de la casilla en píxeles (+11 para centrar en recuadro de 22)
+            float xPixel = X_INICIO + j * TAMANO_CASILLA + 11.0f;
+            float yPixel = Y_INICIO + i * TAMANO_CASILLA + 11.0f;
+
+            if (esPuntoDePoder(i, j))
+            {
+                // motor->dibujarSprite("../assets/Sprites/puntopoder.png", [...] )
+            }
+
+            if (casillas[i][j] != nullptr)
+            {
+                // Invocamos el polimorfismo para que el animal se pinte centrado en su casilla
+                casillas[i][j]->dibujarEnCoordenadas(motor, xPixel, yPixel);
+            }
+        }
     }
 
-    columna = (x_pantalla - X_INICIO) / TAMANO_CASILLA; // con esto sacas qeu columna de la matriz has clickeado
-    fila = (y_pantalla - Y_INICIO) / TAMANO_CASILLA; // lo mismo qeu la linea anterior pero esta vez con las filas
+    // 3. Pintar los Cursores de los jugadores (El azul y el rojo)
+    jugadores[0]->dibujarCursorVacio(motor);
+    jugadores[1]->dibujarCursorVacio(motor);
 
-    return true;
+    // 4. Si alguien tiene una pieza agarrada, pintarla la última (por encima de todo para que parezca que vuela)
+    if (fase_actual == MOVIENDO_PIEZA) {
+        if (turno_actual == BANDO_LUZ) jugadores[0]->dibujarPiezaFlotando(motor);
+        else                           jugadores[1]->dibujarPiezaFlotando(motor);
+    }
 }
+
+// -------------------------------------------------------------
+// LÓGICA DE REGLAS Y MEMORIA (Se mantiene intacta la de David)
+// -------------------------------------------------------------
 
 void Tablero::colocarPieza(int fila, int columna, Animal* pieza)
 {
@@ -105,7 +175,7 @@ void Tablero::eliminarPieza(int fila, int columna)
     casillas[fila][columna] = nullptr;
 }
 
-Animal* Tablero::identificarPieza(int fila, int Columna) //decir que pieza hay en cada casilla
+Animal* Tablero::identificarPieza(int fila, int Columna)
 {
     return casillas[fila][Columna];
 }
@@ -116,7 +186,7 @@ void Tablero::moverPieza(int fila_inicial, int columna_inicial, int fila_final, 
     casillas[fila_inicial][columna_inicial] = nullptr;
 }
 
-bool Tablero::comprobarCasillaVacia(int fila, int Columna) //servira para saber si una casilla está vacía o no
+bool Tablero::comprobarCasillaVacia(int fila, int Columna)
 {
     return casillas[fila][Columna] == nullptr;
 }
@@ -129,7 +199,7 @@ int Tablero::obtenerTurnoActual()
 void Tablero::avanzarTurno()
 {
     contador_turno++;
-    if (contador_turno == 8)//rotaba a los ocho turnos los colores de las casillas no?
+    if (contador_turno == 8)
     {
         contador_turno = 0;
         for (int i = 0; i < FILAS; i++)
@@ -140,7 +210,6 @@ void Tablero::avanzarTurno()
                 {
                     color_casilla[i][j] = CASILLA_OSCURA;
                 }
-
                 else
                 {
                     color_casilla[i][j] = CASILLA_LUZ;
@@ -160,8 +229,6 @@ bool Tablero::esCasillaOscuridad(int fila, int columna)
     return color_casilla[fila][columna] == CASILLA_OSCURA;
 }
 
-//estas dos dunciones serviran para saber en la funcion, TieneVentaja, comprobar que la figura y casilla son del mismo bando por asi decirlo
-
 bool Tablero::esPuntoDePoder(int fila, int columna)
 {
     if (fila == 4 && columna == 4) return true;
@@ -176,17 +243,18 @@ bool Tablero::esPuntoDePoder(int fila, int columna)
 int Tablero::puntosDePoderControlados(int bando)
 {
     int puntos_de_poder_tomados = 0;
-    
-    //if (!comprobarCasillaVacia(4, 4) && casillas[4][4]->SaberBando() == bando) puntos_de_poder_tomados++;//la funcion obtener bando prefiero que este dentro de Animal.h y .cpp
-    //if (!comprobarCasillaVacia(0, 4) && casillas[0][4]->SaberBando() == bando) puntos_de_poder_tomados++;
-    //if (!comprobarCasillaVacia(8, 4) && casillas[8][4]->SaberBando() == bando) puntos_de_poder_tomados++;
-    //if (!comprobarCasillaVacia(4, 0) && casillas[4][0]->SaberBando() == bando) puntos_de_poder_tomados++;
-    //if (!comprobarCasillaVacia(4, 8) && casillas[4][8]->SaberBando() == bando) puntos_de_poder_tomados++;
+
+    // Descomentado y arreglado usando la función obtenerBando() de Animal.h
+    if (!comprobarCasillaVacia(4, 4) && casillas[4][4]->obtenerBando() == bando) puntos_de_poder_tomados++;
+    if (!comprobarCasillaVacia(0, 4) && casillas[0][4]->obtenerBando() == bando) puntos_de_poder_tomados++;
+    if (!comprobarCasillaVacia(8, 4) && casillas[8][4]->obtenerBando() == bando) puntos_de_poder_tomados++;
+    if (!comprobarCasillaVacia(4, 0) && casillas[4][0]->obtenerBando() == bando) puntos_de_poder_tomados++;
+    if (!comprobarCasillaVacia(4, 8) && casillas[4][8]->obtenerBando() == bando) puntos_de_poder_tomados++;
 
     return puntos_de_poder_tomados;
 }
 
-bool Tablero::verificarVictoria(int bando){
+bool Tablero::verificarVictoria(int bando) {
     if (puntosDePoderControlados(bando) == 5) return true;
 
     int rival = (bando == BANDO_LUZ) ? BANDO_OSCURIDAD : BANDO_LUZ;
@@ -194,16 +262,16 @@ bool Tablero::verificarVictoria(int bando){
     {
         for (int j = 0; j < COLUMNAS; j++)
         {
-            //if (Casillas[i][j] != nullptr && Casillas[i][j]->SaberBando() == Rival)
+            if (casillas[i][j] != nullptr && casillas[i][j]->obtenerBando() == rival)
             {
-                //return false;
+                return false;
             }
         }
     }
     return true;
 }
 
-bool Tablero::tengoVentaja(int fila, int columna, int bando){
+bool Tablero::tengoVentaja(int fila, int columna, int bando) {
     if (bando == BANDO_LUZ && color_casilla[fila][columna] == CASILLA_LUZ)
     {
         return true;
@@ -212,41 +280,5 @@ bool Tablero::tengoVentaja(int fila, int columna, int bando){
     {
         return false;
     }
-} 
-
-void Tablero::moverCursor(int IdJugador, int fila_aumentada, int columna_aumentada)
-{
-    // sumamos el delta a la posicion actual y comprobamos que no salga del tablero
-    int nueva_fila_cursor_seleccionada = posicion_fila_cursor_actual[IdJugador] + fila_aumentada;
-    int nueva_columna_cursor_seleccionada = posicion_columna_cursor_actual[IdJugador] + columna_aumentada;
-
-    if (nueva_fila_cursor_seleccionada >= 0 && nueva_fila_cursor_seleccionada < FILAS && nueva_columna_cursor_seleccionada >= 0 && nueva_columna_cursor_seleccionada < COLUMNAS)
-    {
-        posicion_fila_cursor_actual[IdJugador] = nueva_fila_cursor_seleccionada;
-        posicion_columna_cursor_actual[IdJugador] = nueva_columna_cursor_seleccionada;
-    }
-}
-
-void Tablero::seleccionarCasilla()
-{
-    int IdJugador=0;
-    if (turno_actual != BANDO_LUZ) { IdJugador = 1; } //para evitar que el juegador del bando de luz pueda emplear un turno que no le corresponde
-
-    if (!hay_pieza_seleccionada[IdJugador])
-    {
-        // si no hay pieza seleccionada, intentamos seleccionar la del cursor
-        if (!comprobarCasillaVacia(posicion_fila_cursor_actual[IdJugador], posicion_columna_cursor_actual[IdJugador]))
-        {
-            fila_seleccionada[IdJugador] = posicion_fila_cursor_actual[IdJugador];
-            columna_seleccionada[IdJugador] = posicion_columna_cursor_actual[IdJugador];
-            hay_pieza_seleccionada[IdJugador] = true;
-        }
-    }
-    else
-    {
-        // ya hay una pieza seleccionada, la movemos a donde esta el cursor
-        moverPieza(fila_seleccionada[IdJugador], columna_seleccionada[IdJugador], posicion_fila_cursor_actual[IdJugador], posicion_columna_cursor_actual[IdJugador]);
-        hay_pieza_seleccionada[IdJugador] = false;
-        turno_actual = BANDO_OSCURIDAD;
-    }
+    return false; // Añadido return de seguridad
 }

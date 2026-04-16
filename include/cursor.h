@@ -1,14 +1,16 @@
 #pragma once
 #include "renderizador.h"
 
-class Cursor {
+class Cursor 
+{
+    float posx;
+    float posy;
+    int idJugador; 
 
 public:
+    Cursor() {} 
+    Cursor(float x_inicial, float y_inicial, int id); 
 
-	float posx = 240;
-	float posy = 135;
-
-	void mover(int x, int y);
-	void dibujar(Renderizador* motor);
-
+    void mover(int x, int y);
+    void dibujar(Renderizador* motor);
 };

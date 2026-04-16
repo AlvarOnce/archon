@@ -1,11 +1,12 @@
 #include "animal.h"
 
-Animal::Animal(float posx, float posy, float capa, int vida) {
+Animal::Animal(float posx, float posy, float capa, int vida, int equipo) {
 
     posx_ = posx;
     posy_ = posy;
     vida_ = vida;
-    capaz_ = capa;
+    capa_ = capa;
+    equipo_ = equipo;
 }
 void Animal::actualizar(float dt) {
 
@@ -18,7 +19,7 @@ void Animal::actualizar(float dt) {
     if (timer > msStep)
     {
         if (frameActualX < 3) frameActualX++;
-        else                   frameActualX = 0;
+        else frameActualX = 0;
         timer = timer - msStep;
     }
 }
@@ -36,14 +37,24 @@ void Animal::mover(modoJuego modo, direccion dir)  // Para que el animal sepa qu
         if (dir == U) vely_ = 1;
         if (dir == D) vely_ = -1;
 
-        if (dir == UR) velx_ = 0.71; vely_ = 0.71;
-        if (dir == UL) velx_ = -0.71; vely_ = 0.71;
-        if (dir == DR) velx_ = 0.71; vely_ = -0.71;
-        if (dir == DL) velx_ = -0.71; vely_ = -0.71;
+        if (dir == UR) { velx_ = 0.71; vely_ = 0.71; }
+        if (dir == UL) { velx_ = -0.71; vely_ = 0.71; }
+        if (dir == DR) { velx_ = 0.71; vely_ = -0.71; }
+        if (dir == DL) { velx_ = -0.71; vely_ = -0.71; }
 
         break;
 
     case BATALLA: // Se llama desde batalla con animal.mover(BATALLA, direccion)
+
+        if (dir == R) velx_ = 1;
+        if (dir == L) velx_ = -1;
+        if (dir == U) vely_ = 1;
+        if (dir == D) vely_ = -1;
+
+        if (dir == UR) { velx_ = 0.71; vely_ = 0.71; }
+        if (dir == UL) { velx_ = -0.71; vely_ = 0.71; }
+        if (dir == DR) { velx_ = 0.71; vely_ = -0.71; }
+        if (dir == DL) { velx_ = -0.71; vely_ = -0.71; }
 
         break;
     }
@@ -53,4 +64,9 @@ void Animal::mover(modoJuego modo, direccion dir)  // Para que el animal sepa qu
 void Animal::dibujar(Renderizador* motor)
 {
     
+}
+
+void Animal::dibujarEnCoordenadas(Renderizador* motor, float xPixel, float yPixel)
+{
+
 }

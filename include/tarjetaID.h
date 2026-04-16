@@ -1,11 +1,12 @@
 #pragma once
 #include "renderizador.h"
+#include "animal.h"
 
 class Tarjeta {
 
 public:
 
-	int animalSeleccionado = 1;
+	Animal* animalSeleccionado = nullptr;
 	enum lado {IZQ = 69, DER = 480 - 69};
 	float posy = 32;
 
