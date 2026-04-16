@@ -73,6 +73,11 @@ void Juego::actualizarLogica(float dt) {
 
         if (!transicion.activo)
         creditos->actualizar(25);
+        if (creditos->getFinalizado())
+        {
+            transicion.empieza();
+            proximoEstado = MENU;
+        }
         break;
     }
 
@@ -149,6 +154,7 @@ void Juego::procesarTeclaPresionada(unsigned char key) // Hacer que tecla solo s
             //    break;
 
             case Selector::CREDITOS:
+                creditos->reset();
                 transicion.empieza();
                 proximoEstado = CREDITOS;
                 break;
