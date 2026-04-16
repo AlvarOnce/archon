@@ -2,26 +2,24 @@
 #include <stdlib.h>
 
 #include "juego.h"
-#include "tablero.h"
 
 #define numeroAnimales 9 // Por ahora crea 9 entidades (todas cabras)
-
-Tablero miTablero;
 
 Juego::Juego() {
 
     estadoActual = MENU;
-    proximoEstado;
+    proximoEstado = MENU;
 
     miMenu = new Menu();
-    miTablero = new Tablero();
+    
     //miArena = new Arena();
     motorGrafico = new Renderizador();
 
-    for (int i = 0; i < numeroAnimales; i++) // ejemplo de creacion de 32 animales (cabras, dibujadas como palomas)
+    for (int i = 0; i < numeroAnimales; i++) 
     {
         misAnimales[i] = new Cabra(-15*(numeroAnimales-i) + 11,  36+(22*i) + 11, -3 - 0.01*i, 20);
     }
+    miTablero = new Tablero(misAnimales);   //he movido el constructor de tablero debajo de animales para que pueda recibir los animales creados
 }
 
 Juego::~Juego() {
@@ -58,7 +56,7 @@ void Juego::actualizarLogica(float dt) {
 
   
     }
-
+    
 
     if (transicion.activo) transicion.actualizar(25);
 
@@ -133,13 +131,9 @@ void Juego::procesarTeclaPresionada(unsigned char key) // Hacer que tecla solo s
         }
         break;
 
-        case TABLERO: // movimiento discreto en el tablero
-        if (key == 'w' || key == 'W') miTablero->moverCursorJ1(0, 1);
-        if (key == 's' || key == 'S') miTablero->moverCursorJ1(0, -1);
-        if (key == 'a' || key == 'A') miTablero->moverCursorJ1(-1, 0);
-        if (key == 'd' || key == 'D') miTablero->moverCursorJ1(1, 0);
-        
-        if (key == '.') miTablero->seleccionarCasillaJ1(); // Botón del J1
+        case TABLERO: // movimiento discreto en el tabler
+
+        miTablero->moverCursor(key);
         break;
 
      case BATALLA: 
@@ -174,12 +168,8 @@ void Juego::procesarTeclaEspecialPresionada(int key) // JUGADOR 2 (FLECHAS)
         break;
 
     case TABLERO:
-        if (key == GLUT_KEY_UP) { miTablero->moverCursorJ2(0, 1); miTablero->cursor.mover(0, 1); } // esto es PROVISIONAL y hay que modificarlo ( es para observar movimiento en pantalla por ahora)
-        if (key == GLUT_KEY_DOWN) { miTablero->moverCursorJ2(0, -1); miTablero->cursor.mover(0, -1); } // hasta solucionar moverCursorJ1 y J2.
-        if (key == GLUT_KEY_LEFT) { miTablero->moverCursorJ2(-1, 0); miTablero->cursor.mover(-1, 0); }
-        if (key == GLUT_KEY_RIGHT) { miTablero->moverCursorJ2(1, 0); miTablero->cursor.mover(1, 0); }
 
-        if (key == '.') miTablero->seleccionarCasillaJ2(); // Botón del J2
+        miTablero->moverCursor(key);  
         break;
 
     case BATALLA:
