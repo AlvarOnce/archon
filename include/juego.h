@@ -2,7 +2,6 @@
 
 #include "tablero.h"
 #include "menu.h"
-#include "tablero.h"
 //#include "arena.h"
 #include "renderizador.h" 
 #include "animal.h"

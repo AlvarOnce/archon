@@ -2,19 +2,15 @@
 #include <stdlib.h>
 
 #include "juego.h"
-#include "tablero.h"
 
 #define numeroAnimales 9 // Por ahora crea 9 entidades
-
-Tablero miTablero;
 
 Juego::Juego() {
 
     estadoActual = MENU;
-    proximoEstado;
+    proximoEstado = MENU;
 
     miMenu = new Menu();
-    miTablero = new Tablero();
     creditos = new Creditos();
     //miArena = new Arena();
     motorGrafico = new Renderizador();
@@ -31,6 +27,8 @@ Juego::Juego() {
             if (i % 4 == 3)
                 misAnimales[i + j * numeroAnimales] = new Oveja(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20);
         }
+    miTablero = new Tablero(misAnimales);
+
 }
 
 Juego::~Juego() {
@@ -163,13 +161,9 @@ void Juego::procesarTeclaPresionada(unsigned char key) // Hacer que tecla solo s
         }
         break;
 
-        case TABLERO: // movimiento discreto en el tablero
-        if (key == 'w' || key == 'W') miTablero->moverCursor(0,0, 1);
-        if (key == 's' || key == 'S') miTablero->moverCursor(0,0, -1);
-        if (key == 'a' || key == 'A') miTablero->moverCursor(0,-1, 0);
-        if (key == 'd' || key == 'D') miTablero->moverCursor(0,1, 0);
-        
-        if (key == '.') miTablero->seleccionarCasilla(); // Botón del J1
+        case TABLERO: // movimiento discreto en el tabler
+
+        miTablero->moverCursor(key);
         break;
 
      case BATALLA: 
@@ -204,11 +198,8 @@ void Juego::procesarTeclaEspecialPresionada(int key) // JUGADOR 2 (FLECHAS)
         break;
 
     case TABLERO:
-        if (key == GLUT_KEY_UP)    { miTablero->moverCursor(1,0, 1); miTablero->cursor.mover(0, 1); } // esto es PROVISIONAL y hay que modificarlo ( es para observar movimiento en pantalla por ahora)
-        if (key == GLUT_KEY_DOWN)  { miTablero->moverCursor(1,0, -1); miTablero->cursor.mover(0, -1); } // hasta solucionar moverCursorJ1 y J2.
-        if (key == GLUT_KEY_LEFT)  { miTablero->moverCursor(1,-1, 0); miTablero->cursor.mover(-1, 0); }
-        if (key == GLUT_KEY_RIGHT) { miTablero->moverCursor(1,1, 0); miTablero->cursor.mover(1, 0); }
-        if (key == '.') miTablero->seleccionarCasilla(); // Botón del J2
+
+        miTablero->moverCursor(key);  
         break;
 
     case BATALLA:
