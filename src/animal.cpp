@@ -13,14 +13,7 @@ void Animal::actualizar(float dt) {
     posx_ = posx_ + velx_ * dt;
     posy_ = posy_ + vely_ * dt;
 
-    // timer y ciclado de animación
-    timer = timer + dt;
-    if (timer > msStep)
-    {
-        if (frameActualX < 3) frameActualX++;
-        else                   frameActualX = 0;
-        timer = timer - msStep;
-    }
+    animar(dt);
 }
 
 void Animal::mover(modoJuego modo, direccion dir)  // Para que el animal sepa que tipo de movimiento debe realizar, se le debe indicar en que modo estamos
@@ -49,6 +42,29 @@ void Animal::mover(modoJuego modo, direccion dir)  // Para que el animal sepa qu
     }
 
 }
+
+void Animal::animar(float dt) {
+
+        timer = timer + dt;
+        if (timer > msStep)
+        {
+            if (frameActualX_ < nFrames-1) frameActualX_++;
+            else frameActualX_ = 0;
+            timer = timer - msStep;
+        }
+
+}
+
+
+
+void Animal::setState(int frameX, int frameY) {
+
+    frameActualX_ = frameX;
+    frameActualY_ = frameY;
+    pausa = true;
+
+}
+
 
 void Animal::dibujar(Renderizador* motor)
 {

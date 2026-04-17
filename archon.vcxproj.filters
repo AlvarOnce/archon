@@ -42,6 +42,12 @@
     <ClInclude Include="include\transicion.h" />
     <ClInclude Include="include\cursor.h" />
     <ClInclude Include="include\tarjetaID.h" />
+    <ClInclude Include="include\cerdo.h" />
+    <ClInclude Include="include\gallina.h" />
+    <ClInclude Include="include\granjero.h" />
+    <ClInclude Include="include\llama.h" />
+    <ClInclude Include="include\oveja.h" />
+    <ClInclude Include="include\creditos.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\memoria.md">
@@ -77,6 +83,12 @@
     <ClCompile Include="src\transicion.cpp" />
     <ClCompile Include="src\cursor.cpp" />
     <ClCompile Include="src\tarjetaID.cpp" />
+    <ClCompile Include="src\cerdo.cpp" />
+    <ClCompile Include="src\gallina.cpp" />
+    <ClCompile Include="src\granjero.cpp" />
+    <ClCompile Include="src\llama.cpp" />
+    <ClCompile Include="src\oveja.cpp" />
+    <ClCompile Include="src\creditos.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib">
