@@ -11,7 +11,6 @@ Juego::Juego() {
     proximoEstado = MENU;
 
     miMenu = new Menu();
-    miTablero = new Tablero();
     creditos = new Creditos();
     //miArena = new Arena();
     motorGrafico = new Renderizador();
@@ -28,6 +27,8 @@ Juego::Juego() {
             if (i % 4 == 3)
                 misAnimales[i + j * numeroAnimales] = new Oveja(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20);
         }
+    miTablero = new Tablero(misAnimales);
+
 }
 
 Juego::~Juego() {
