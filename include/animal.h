@@ -5,27 +5,17 @@
 
 enum modoJuego
 {
-	TABLERO,
-	BATALLA
+	TABLERO, BATALLA
 };
 
 enum animacionTipo
 {
-	QUIETO,
-	CAMINAR,
-	ATACAR,
+	QUIETO, CAMINAR, ATACAR,
 };
 
 enum direccion
 {
-	R,
-	L,
-	U,
-	D,
-	UR,
-	UL,
-	DR,
-	DL
+	R, L, U, D, UR, UL, DR, DL
 };
 
 class Animal {
@@ -37,8 +27,6 @@ public:
 	virtual ~Animal() {}
 	
 	// Lógica
-
-
 	float posx_{ 100 };
 	float posy_{ 100 };
 	float capaz_;
@@ -46,6 +34,9 @@ public:
 	float vely_{0};
 	int equipo_;
 	int vida_;
+	int ataque_;
+
+	int casillaInicial_[2];
 
 	void mover(modoJuego modo, direccion dir);
 	virtual void atacar()
@@ -62,16 +53,20 @@ public:
 
 	void setPosX(float posx) { posx_ = posx;}
 	void setPosy(float posy) { posy_ = posy; }
-	void setVelX(float velx) { velx_ = velx; } // Es probable que las velocidades sean fijas, en cuyo caso, se eliminarían los setvel();
+	void setVelX(float velx) { velx_ = velx; } 
 	void setVelY(float vely) { vely_ = vely; }
 
 	// Dibujo y animación
-	int frameActualX = 0;
-	int frameActualY = 1;
+	int frameActualX_ = 0;
+	int frameActualY_ = 1;
+	int nFrames;
 	float timer = 0;
 	float msStep = 100;
+	bool pausa = true;
 	int ancho;
 	int alto;
+	void setState(int frameX, int frameY);
+	void animar(float dt);
 
 	virtual void actualizar(float dt);
 	virtual void dibujar(Renderizador* motor);

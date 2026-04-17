@@ -20,8 +20,7 @@ class Tablero {
         Casilla luz = 1
         Casilla Oscuridad = 2
     */
-
-
+  
     static const int TAMANO_CASILLA = 22;
 
     static const int FILAS = 9;
@@ -33,9 +32,9 @@ class Tablero {
     static const int Y_INICIO = 36;
 
     /*
-        Colocación de neustro tablero en nuestra panatalla
+        ColocaciÃ³n de neustro tablero en nuestra panatalla
         tomando en cuenta que nuestro tablero es 480x270
-        y viendo que nuestras casillas son de 22x22 píxeles
+        y viendo que nuestras casillas son de 22x22 pÃ­xeles
         X_incio=(480-[22x9])=(480-198)/2=141
         Y_incio=(270-[22x9])=(270-198)/2=36
         pd:dividimos entre dos para que cuando se dibuje el tablero este centrado en la ventana emergente.
@@ -58,8 +57,6 @@ public:
     Cursor cursor;
     Tarjeta tarjeta;
 }; 
-
-
 
 //actualmente el tablero se puede mover con awsd porque es el turno del jugador 1, si fuese del 2 con las flechas, si pulsas . el 
 // programa mira si hay una pieza en la casilla, y si la hay bloquea el cursor. El siguiente paso es que despues de bloquear el

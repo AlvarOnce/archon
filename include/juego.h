@@ -6,13 +6,19 @@
 #include "renderizador.h" 
 #include "animal.h"
 #include "cabra.h"
+#include "cerdo.h"
+#include "gallina.h"
+#include "oveja.h"
+#include "granjero.h"
 #include "transicion.h" 
+#include "creditos.h"
 
 class Juego 
 {
     Transicion transicion;
     Menu* miMenu;
     Tablero* miTablero;
+    Creditos* creditos;
     //Arena* miArena;
     Renderizador* motorGrafico;
     Animal* misAnimales[18];
@@ -25,7 +31,7 @@ public:
     double getAnchoVentana() {return anchoVentana;} // Para decirle al main cuánto mide la ventana que debe crear
     double getAltoVentana() {return altoVentana;}
 
-    enum Estado { MENU, TABLERO, BATALLA };
+    enum Estado { MENU, TABLERO, BATALLA, CREDITOS };
     Estado estadoActual;
     Estado proximoEstado;
 
