@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
-
+#include "arena.h"
 #include "juego.h"
 #include "tablero.h"
 
@@ -15,7 +15,7 @@ Juego::Juego() {
 
     miMenu = new Menu();
     miTablero = new Tablero();
-    //miArena = new Arena();
+    miArena = new Arena();
     motorGrafico = new Renderizador();
 
     for (int i = 0; i < numeroAnimales; i++) // ejemplo de creacion de 32 animales (cabras, dibujadas como palomas)
@@ -27,7 +27,7 @@ Juego::Juego() {
 Juego::~Juego() {
     delete miMenu;
     delete miTablero;
-    //delete miArena;
+    delete miArena;
     delete motorGrafico;
 }
 
@@ -53,7 +53,7 @@ void Juego::actualizarLogica(float dt) {
 
     case BATALLA:
 
-        // Aqui por ejemplo irira batalla->actualiza()
+        miArena->actualizar(dt);
         break;
 
   
@@ -95,7 +95,7 @@ void Juego::renderizarGraficos() {
         break;
 
     case BATALLA:
-        
+        miArena->dibujar();
         break;
     }
 
@@ -143,9 +143,12 @@ void Juego::procesarTeclaPresionada(unsigned char key) // Hacer que tecla solo s
         break;
 
      case BATALLA: 
-        // movimiento continuo, se activa el bool "interruptor"
-        // miArena->recibirInputJugador1(key, true); 
-        break;
+         if (key == 'w' || key == 'W') miArena->recibirMovimiento(0, ARRIBA, true);
+         if (key == 's' || key == 'S') miArena->recibirMovimiento(0, ABAJO, true);
+         if (key == 'a' || key == 'A') miArena->recibirMovimiento(0, IZQUIERDA, true);
+         if (key == 'd' || key == 'D') miArena->recibirMovimiento(0, DERECHA, true);
+         if (key == '.') miArena->recibirAtaque(0); //poner los controles qeu querais
+         break;
 
     }
 }
@@ -159,9 +162,12 @@ void Juego::procesarTeclaLevantada(unsigned char key)
         break;
 
     case BATALLA:
-        // se apaga el bool al levantar la tecla
-        // miArena->recibirInputJugador1(key, false);
+        if (key == 'w' || key == 'W') miArena->recibirMovimiento(0, ARRIBA, false);
+        if (key == 's' || key == 'S') miArena->recibirMovimiento(0, ABAJO, false);
+        if (key == 'a' || key == 'A') miArena->recibirMovimiento(0, IZQUIERDA, false);
+        if (key == 'd' || key == 'D') miArena->recibirMovimiento(0, DERECHA, false);
         break;
+
     }
 }
 
@@ -183,7 +189,11 @@ void Juego::procesarTeclaEspecialPresionada(int key) // JUGADOR 2 (FLECHAS)
         break;
 
     case BATALLA:
-        // miArena->recibirInputJugador2(key, true);
+        if (key == GLUT_KEY_UP)    miArena->recibirMovimiento(1, ARRIBA, true);
+        if (key == GLUT_KEY_DOWN)  miArena->recibirMovimiento(1, ABAJO, true);
+        if (key == GLUT_KEY_LEFT)  miArena->recibirMovimiento(1, IZQUIERDA, true);
+        if (key == GLUT_KEY_RIGHT) miArena->recibirMovimiento(1, DERECHA, true);
+        if (key == '.') miArena->recibirAtaque(1);
         break;
     }
 }
@@ -196,7 +206,10 @@ void Juego::procesarTeclaEspecialLevantada(int key)
         break;
 
     case BATALLA:
-        // miArena->recibirInputJugador2(key, false);
+        if (key == GLUT_KEY_UP)    miArena->recibirMovimiento(1, ARRIBA, false);
+        if (key == GLUT_KEY_DOWN)  miArena->recibirMovimiento(1, ABAJO, false);
+        if (key == GLUT_KEY_LEFT)  miArena->recibirMovimiento(1, IZQUIERDA, false);
+        if (key == GLUT_KEY_RIGHT) miArena->recibirMovimiento(1, DERECHA, false);
         break;
     }
 }

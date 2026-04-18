@@ -3,7 +3,7 @@
 #include "tablero.h"
 #include "menu.h"
 #include "tablero.h"
-//#include "arena.h"
+#include "arena.h"
 #include "renderizador.h" 
 #include "animal.h"
 #include "cabra.h"
@@ -14,7 +14,7 @@ class Juego
     Transicion transicion;
     Menu* miMenu;
     Tablero* miTablero;
-    //Arena* miArena;
+    Arena* miArena;
     Renderizador* motorGrafico;
     Animal* misAnimales[18];
 
