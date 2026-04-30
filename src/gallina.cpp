@@ -7,6 +7,7 @@ void Gallina::dibujar(Renderizador* motor)
 
 void Gallina::actualizar(float dt)
 {
+	Animal::actualizar(dt);
 	// actualizar posicion
 	if (posx_ < (480 - 198) / 2 + 11) posx_++;
 

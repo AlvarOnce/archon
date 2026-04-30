@@ -4,6 +4,13 @@ Tablero::Tablero(Animal** misAnimales)
 {
     inicializarTablero();
 
+    /*for (int i = 0; i < 2; i++)
+    {
+        for (int j = 0; j < FILAS; j++)
+        {
+            casillas[i][j] = misAnimales[j*(i+1)];
+        }
+    }*/
     for (int j = 0; j < FILAS; j++)
     {
         casillas[0][j] = misAnimales[j];
@@ -90,8 +97,8 @@ void Tablero::moverCursor(int key)
             if (key == 's' || key == 'S')   cursor.mover(0, -1);
             if (key == 'a' || key == 'A')   cursor.mover(-1, 0);
             if (key == 'd' || key == 'D')   cursor.mover(1, 0);     //la 'd' y la flecha izquierda las dos glut las lee como 100
-            //para probar//std::cout << "posicion del cursor: " << cursor.columna << ", " << cursor.fila << std::endl;
-			//std::cout << casillas[cursor.columna][cursor.fila] << std::endl; // esto es para ver si el cursor se mueve por la matriz, si el puntero es null o no
+            std::cout << "posicion del cursor: " << cursor.columna << ", " << cursor.fila << std::endl;
+			std::cout << casillas[cursor.columna][cursor.fila] << std::endl; // esto es para ver si el cursor se mueve por la matriz, si el puntero es null o no
         }
         else if (turno_actual == BANDO_OSCURIDAD)
         {
@@ -101,16 +108,25 @@ void Tablero::moverCursor(int key)
             if (key == GLUT_KEY_RIGHT)      cursor.mover(1, 0);
         }
     }
+    else 
+    {
+        if (key == 'w' || key == 'W')   animal_seleccionado_->mover(TABLERO, U), cursor.mover(0, 1);
+        if (key == 's' || key == 'S')   animal_seleccionado_->mover(TABLERO, D), cursor.mover(0, -1);
+        if (key == 'a' || key == 'A')   animal_seleccionado_->mover(TABLERO, L), cursor.mover(-1, 0);
+        if (key == 'd' || key == 'D')   animal_seleccionado_->mover(TABLERO, R), cursor.mover(1, 0);
+    }
     if (key == '.') seleccionarPieza();
     
 }
 
 void Tablero::seleccionarPieza() {
     if (casillas[cursor.columna][cursor.fila] == nullptr) {
-        //selecciona una casilla que no tiene nada
-
+        casillas[cursor.columna][cursor.fila] = animal_seleccionado_;
+        hay_pieza_seleccionada_ = !hay_pieza_seleccionada_;
 	}
     else {
         hay_pieza_seleccionada_ = !hay_pieza_seleccionada_;
+		animal_seleccionado_ = casillas[cursor.columna][cursor.fila];
+        casillas[cursor.columna][cursor.fila] = nullptr;
 	}
 }   

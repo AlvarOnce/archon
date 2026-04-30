@@ -7,6 +7,10 @@ void Cursor::mover(int x, int y)
 	posy += 22*y;
 	columna += x;
 	fila += y;
+	if (columna < 0)	{columna = 0;		posx = 141 + 11;	}
+	if (columna > 8)	{columna = 8;		posx = 141 + 11 + 22 * 8;}
+	if (fila < 0)		{fila = 0;			posy = 36 + 11;}
+	if (fila > 8)		{fila = 8;			posy = 36 + 11 + 22 * 8;}
 
 }
 

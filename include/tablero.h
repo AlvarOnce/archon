@@ -12,7 +12,7 @@ class Tablero {
     Animal* casillas[9][9]; //crea la matriz que es el tablero, cada casilla es un puntero a animal, es decir que tiene los atributos de animal
 	int color_casilla[9][9];  //la casilla de abajo a la izquierda es (0,0) y la de arriba a la derecha es (8,8) la matriz de arriba
     bool hay_pieza_seleccionada_ = FALSE;  //1 hay una pieza seleccionada 0 no hay
-
+	Animal* animal_seleccionado_ = nullptr; //puntero al animal seleccionado, si no hay ninguno seleccionado es nullptr
     int turno_actual;
 
     /*
@@ -61,5 +61,5 @@ public:
 //actualmente el tablero se puede mover con awsd porque es el turno del jugador 1, si fuese del 2 con las flechas, si pulsas . el 
 // programa mira si hay una pieza en la casilla, y si la hay bloquea el cursor. El siguiente paso es que despues de bloquear el
 // cursor, awsd mueva al animal. Otras cosas para hacer son:
-//hay que prohibir al cursor irse fuera del tablero, me gustaria pero es muy complicado, que no se pueda mover nada hasta que no 
+//me gustaria pero es muy complicado, que no se pueda mover nada hasta que no 
 // termine la animacion de los animales moverse a su sitio, arreglar el bug de que la d y la flecha izquierda son iguales

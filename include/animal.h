@@ -35,6 +35,7 @@ public:
 	int equipo_;
 	int vida_;
 	int ataque_;
+	float avance = 0; // para saber cuanto se ha movido el animal, y asi saber cuando parar la animacion de caminar
 
 	int casillaInicial_[2];
 

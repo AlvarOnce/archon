@@ -10,8 +10,14 @@ Animal::Animal(float posx, float posy, float capa, int vida) {
 void Animal::actualizar(float dt) {
 
     // movimiento
-    posx_ = posx_ + velx_ * dt;
-    posy_ = posy_ + vely_ * dt;
+    posx_ = posx_ + velx_ * dt/25;
+    posy_ = posy_ + vely_ * dt/25;
+    avance = avance + abs(velx_ * dt/25) + abs(vely_*dt/25);
+    if (avance >= 22) { // si el animal se ha movido más de una casilla, se para
+        velx_ = 0;
+        vely_ = 0;
+        avance = 0;
+	}
 
     animar(dt);
 }
@@ -29,10 +35,10 @@ void Animal::mover(modoJuego modo, direccion dir)  // Para que el animal sepa qu
         if (dir == U) vely_ = 1;
         if (dir == D) vely_ = -1;
 
-        if (dir == UR) velx_ = 0.71; vely_ = 0.71;
-        if (dir == UL) velx_ = -0.71; vely_ = 0.71;
-        if (dir == DR) velx_ = 0.71; vely_ = -0.71;
-        if (dir == DL) velx_ = -0.71; vely_ = -0.71;
+        if (dir == UR) velx_ = 0.71, vely_ = 0.71; //avance = -sqrt(2) + 1;
+        if (dir == UL) velx_ = -0.71, vely_ = 0.71;
+        if (dir == DR) velx_ = 0.71, vely_ = -0.71;
+        if (dir == DL) velx_ = -0.71, vely_ = -0.71;
 
         break;
 
