@@ -36,7 +36,8 @@ public:
 	int vida_;
 	int ataque_;
 	float avance_ = 0; // para saber cuanto se ha movido el animal, y asi saber cuando parar la animacion de caminar
-	bool en_movimiento_ = false;	
+	bool en_movimiento_ = false;
+	int casillas_movidas_ = 0;
 
 	int casillaInicial_[2];
 

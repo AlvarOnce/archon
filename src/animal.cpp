@@ -18,6 +18,7 @@ void Animal::actualizar(float dt) {
         vely_ = 0;
         avance_ = 0;
 		en_movimiento_ = false;
+		casillas_movidas_++;
 	}
 
     animar(dt);
@@ -37,10 +38,10 @@ void Animal::mover(modoJuego modo, direccion dir)  // Para que el animal sepa qu
         if (dir == U) vely_ = 1;
         if (dir == D) vely_ = -1;
 
-        if (dir == UR) velx_ = 0.71, vely_ = 0.71; //avance = -sqrt(2) + 1;
+        if (dir == UR) velx_ = 0.71, vely_ = 0.71; //avance = -(2*0.71)+ 1;
         if (dir == UL) velx_ = -0.71, vely_ = 0.71;
-        if (dir == DR) velx_ = 0.71, vely_ = -0.71;
-        if (dir == DL) velx_ = -0.71, vely_ = -0.71;
+        if (dir == DR) velx_ = 0.71, vely_ = -0.71;         //como hariamos para que le llegue la señal de que queremos diagonal??
+        if (dir == DL) velx_ = -0.71, vely_ = -0.71;        //se podria hacer con las teclas e y q, z y c, pero no lo veo
 
         break;
 

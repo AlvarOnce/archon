@@ -121,13 +121,21 @@ void Tablero::moverCursor(int key)
 }
 
 void Tablero::seleccionarPieza() {
-    if (casillas[cursor.columna][cursor.fila] == nullptr) {
+    if (casillas[cursor.columna][cursor.fila] == nullptr && animal_seleccionado_ == nullptr) {
+
+    }
+    else if (casillas[cursor.columna][cursor.fila] != nullptr && animal_seleccionado_ == nullptr) {
+        hay_pieza_seleccionada_ = !hay_pieza_seleccionada_;
+        animal_seleccionado_ = casillas[cursor.columna][cursor.fila];
+        casillas[cursor.columna][cursor.fila] = nullptr;
+    }
+    else if (casillas[cursor.columna][cursor.fila] == nullptr && animal_seleccionado_ != nullptr) {
         casillas[cursor.columna][cursor.fila] = animal_seleccionado_;
         hay_pieza_seleccionada_ = !hay_pieza_seleccionada_;
-	}
-    else {
-        hay_pieza_seleccionada_ = !hay_pieza_seleccionada_;
-		animal_seleccionado_ = casillas[cursor.columna][cursor.fila];
-        casillas[cursor.columna][cursor.fila] = nullptr;
-	}
-}   
+		animal_seleccionado_ = nullptr;
+    }
+    else if (casillas[cursor.columna][cursor.fila] != nullptr && animal_seleccionado_ != nullptr)
+    {
+
+    }
+}
