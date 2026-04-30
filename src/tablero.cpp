@@ -110,6 +110,7 @@ void Tablero::moverCursor(int key)
     }
     else 
     {
+        if (animal_seleccionado_->getEnMovimiento()) return;
         if (key == 'w' || key == 'W')   animal_seleccionado_->mover(TABLERO, U), cursor.mover(0, 1);
         if (key == 's' || key == 'S')   animal_seleccionado_->mover(TABLERO, D), cursor.mover(0, -1);
         if (key == 'a' || key == 'A')   animal_seleccionado_->mover(TABLERO, L), cursor.mover(-1, 0);

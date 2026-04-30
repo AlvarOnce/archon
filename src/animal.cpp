@@ -10,13 +10,14 @@ Animal::Animal(float posx, float posy, float capa, int vida) {
 void Animal::actualizar(float dt) {
 
     // movimiento
-    posx_ = posx_ + velx_ * dt/25;
-    posy_ = posy_ + vely_ * dt/25;
-    avance = avance + abs(velx_ * dt/25) + abs(vely_*dt/25);
-    if (avance >= 22) { // si el animal se ha movido más de una casilla, se para
+	posx_ = posx_ + velx_;      //antes esto era velx_ * dt, pero
+    posy_ = posy_ + vely_;      // no le veia el sentido, me da miedo haberlo quitado
+    avance_ = avance_ + abs(velx_ ) + abs(vely_);
+    if (avance_ >= 22) { // si el animal se ha movido más de una casilla, se para
         velx_ = 0;
         vely_ = 0;
-        avance = 0;
+        avance_ = 0;
+		en_movimiento_ = false;
 	}
 
     animar(dt);
@@ -30,6 +31,7 @@ void Animal::mover(modoJuego modo, direccion dir)  // Para que el animal sepa qu
 
     case TABLERO: // Se llama desde tablero con animal.mover(TABLERO, direccion)
 
+		en_movimiento_ = true;
         if (dir == R) velx_ = 1; // optimizable
         if (dir == L) velx_ = -1;
         if (dir == U) vely_ = 1;

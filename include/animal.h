@@ -35,7 +35,8 @@ public:
 	int equipo_;
 	int vida_;
 	int ataque_;
-	float avance = 0; // para saber cuanto se ha movido el animal, y asi saber cuando parar la animacion de caminar
+	float avance_ = 0; // para saber cuanto se ha movido el animal, y asi saber cuando parar la animacion de caminar
+	bool en_movimiento_ = false;	
 
 	int casillaInicial_[2];
 
@@ -49,6 +50,7 @@ public:
 	float getPosY() const { return posy_; }
 	float getVelX() const { return velx_; }
 	float getVelY() const { return vely_; }
+	bool getEnMovimiento() const { return en_movimiento_; }
 
 //protected: // Solo los hijos animales pueden modificar sus posiciones
 
@@ -56,6 +58,7 @@ public:
 	void setPosy(float posy) { posy_ = posy; }
 	void setVelX(float velx) { velx_ = velx; } 
 	void setVelY(float vely) { vely_ = vely; }
+	bool setEnMovimiento(bool en_movimiento) { en_movimiento_ = en_movimiento; }
 
 	// Dibujo y animación
 	int frameActualX_ = 0;
