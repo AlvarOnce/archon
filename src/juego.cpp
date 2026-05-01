@@ -20,13 +20,13 @@ Juego::Juego() {
         {
 			int tipoAnimal = ((j*(i+1)) % 3) + j;
             if (tipoAnimal == 0)
-                misAnimales[i + j*numeroAnimales] = new Gallina(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i-0.08*j, 20);
+                misAnimales[i + j*numeroAnimales] = new Gallina(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i-0.08*j, 20, 174);
             else if (tipoAnimal == 1)
-                misAnimales[i + j*numeroAnimales] = new Cerdo(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20);
+                misAnimales[i + j*numeroAnimales] = new Cerdo(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20, 152);
             else if (tipoAnimal == 2)
-                misAnimales[i + j*numeroAnimales] = new Cabra(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20);
+                misAnimales[i + j*numeroAnimales] = new Cabra(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20, 152);
             else if (tipoAnimal == 3)
-                misAnimales[i + j * numeroAnimales] = new Oveja(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20);
+                misAnimales[i + j * numeroAnimales] = new Oveja(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20, 152);
         }
     miTablero = new Tablero(misAnimales);
 

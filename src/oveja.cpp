@@ -8,14 +8,6 @@ void Oveja::dibujar(Renderizador* motor)
 void Oveja::actualizar(float dt)
 {
 	Animal::actualizar(dt);
-	// actualizar posicion
-	if (posx_ < (480 - 198) / 2 + 11) posx_++;
-
-	//actualizar animacion
-	nFrames = 5;
-	if (posx_ < (480 - 198) / 2 + 11)
-		animar(dt);
-
-	else
-		setState(0, 0);
+	
+	setState(0, 0);
 }
