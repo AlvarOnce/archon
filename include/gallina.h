@@ -8,6 +8,7 @@ public:
 
 	Gallina(float posx, float posy, float capa, int vida) : Animal(posx, posy, capa, vida) {
 
+		max_casillas_movidas_ = 2;
 		setState(0, 0);
 	}
 

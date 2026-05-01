@@ -8,7 +8,7 @@ Tablero::Tablero(Animal** misAnimales)
     {
         for (int j = 0; j < FILAS; j++)
         {
-            casillas[i][j] = misAnimales[j+(i*FILAS)];
+            casillas[1-i][j] = misAnimales[j+(i*FILAS)];
         }
     }
 

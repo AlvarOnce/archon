@@ -35,8 +35,8 @@ public:
 	int equipo_;
 	int vida_;
 	int ataque_;
-	float avanzando_casilla_ = 0; // para saber cuanto se ha movido el animal, y asi saber cuando parar la animacion de caminar
-	bool en_movimiento_ = false;
+	float avanzando_casilla_ = 0;	// para saber cuando ha terminado de moverse
+	bool en_movimiento_ = false;	// para bloquear el teclado si se esta moviendo
 	int casillas_movidas_x_ = 0;
 	int casillas_movidas_y_ = 0;
 	int casillas_movidas_ = 0; 
@@ -44,8 +44,9 @@ public:
 
 	int casillaInicial_[2];
 
-	bool mover(modoJuego modo, direccion dir);
-	virtual void atacar()
+	bool mover(modoJuego modo, direccion dir);	//ahora es un bool, si devuelve true se ha movido bien,
+												// si devuelve false, no se ha movido
+	virtual void atacar()						
 	{
 		std::cout << "Soy un animal genérico, mi ataque no está definido.";
 	}
@@ -55,7 +56,7 @@ public:
 	float getVelX() const { return velx_; }
 	float getVelY() const { return vely_; }
 	bool getEnMovimiento() const { return en_movimiento_; }
-	int getMaxCasillasMovidas() const { return max_casillas_movidas_; }
+	int getMaxCasillasMovidas() const { return max_casillas_movidas_; } //para sacarlo de la clase hija
 
 //protected: // Solo los hijos animales pueden modificar sus posiciones
 

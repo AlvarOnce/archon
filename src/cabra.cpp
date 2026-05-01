@@ -10,7 +10,7 @@ void Cabra::actualizar(float dt)
 	Animal::actualizar(dt);
 
 	// actualizar posicion
-	if (posx_ < (480 - 198) / 2 + 11) posx_++;		//posx_ < 152, no se porque lo han puesto así
+	if (posx_ < (480 - 198) / 2 + 11) posx_++;		//posx_ < 152, 
 
 
 	//actualizar animacion

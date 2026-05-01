@@ -9,13 +9,13 @@ void Gallina::actualizar(float dt)
 {
 	Animal::actualizar(dt);
 	// actualizar posicion
-	if (posx_ < (480 - 198) / 2 + 11) posx_++;
+	if (posx_ < 174) posx_++;
 
 
 	//actualizar animacion
 
 	nFrames = 8;
-	if (posx_ < (480 - 198) / 2 + 11)
+	if (posx_ < 174)
 		animar(dt);
 
 	else

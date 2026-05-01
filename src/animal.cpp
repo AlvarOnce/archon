@@ -6,7 +6,7 @@ Animal::Animal(float posx, float posy, float capa, int vida)
 }
 void Animal::actualizar(float dt) {
 
-    if (!en_movimiento_) {
+    if (!en_movimiento_) {      
         animar(dt);
         return;
     }
