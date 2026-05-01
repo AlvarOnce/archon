@@ -36,6 +36,9 @@ Juego::~Juego() {
     delete miTablero;
     //delete miArena;
     delete motorGrafico;
+	delete creditos;
+    for (int i = 0; i < 2*numeroAnimales; i++)
+		delete misAnimales[i];
 }
 
 void Juego::actualizarLogica(float dt) {
@@ -106,7 +109,7 @@ void Juego::renderizarGraficos() {
                 misAnimales[i + j * numeroAnimales]->dibujar(motorGrafico);
          
 
-        miTablero->cursor.dibujar(motorGrafico);
+        miTablero->cursor.dibujar(motorGrafico);        //esto igual se podria mover de sitio para que el cursor no se mueva con el animal en el tablero
 
         //if(el cursor esta sobre un animal, funcion propia de tablero y cursor detectar la casilla)
         // en actualizar se determina que tarjeta se va a dibujar interiormente

@@ -4,16 +4,12 @@ Tablero::Tablero(Animal** misAnimales)
 {
     inicializarTablero();
 
-    /*for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 2; i++)
     {
         for (int j = 0; j < FILAS; j++)
         {
-            casillas[i][j] = misAnimales[j*(i+1)];
+            casillas[i][j] = misAnimales[j+(i*FILAS)];
         }
-    }*/
-    for (int j = 0; j < FILAS; j++)
-    {
-        casillas[0][j] = misAnimales[j];
     }
 
 }
@@ -97,8 +93,8 @@ void Tablero::moverCursor(int key)
             if (key == 's' || key == 'S')   cursor.mover(0, -1);
             if (key == 'a' || key == 'A')   cursor.mover(-1, 0);
             if (key == 'd' || key == 'D')   cursor.mover(1, 0);     //la 'd' y la flecha izquierda las dos glut las lee como 100
-            std::cout << "posicion del cursor: " << cursor.columna << ", " << cursor.fila << std::endl;
-			std::cout << casillas[cursor.columna][cursor.fila] << std::endl; // esto es para ver si el cursor se mueve por la matriz, si el puntero es null o no
+            //std::cout << "posicion del cursor: " << cursor.columna << ", " << cursor.fila << std::endl;
+			//std::cout << casillas[cursor.columna][cursor.fila] << std::endl; // esto es para ver si el cursor se mueve por la matriz, si el puntero es null o no
         }
         else if (turno_actual == BANDO_OSCURIDAD)
         {
@@ -111,10 +107,19 @@ void Tablero::moverCursor(int key)
     else 
     {
         if (animal_seleccionado_->getEnMovimiento()) return;
-        if (key == 'w' || key == 'W')   animal_seleccionado_->mover(TABLERO, U), cursor.mover(0, 1);
-        if (key == 's' || key == 'S')   animal_seleccionado_->mover(TABLERO, D), cursor.mover(0, -1);
-        if (key == 'a' || key == 'A')   animal_seleccionado_->mover(TABLERO, L), cursor.mover(-1, 0);
-        if (key == 'd' || key == 'D')   animal_seleccionado_->mover(TABLERO, R), cursor.mover(1, 0);
+
+		bool movimiento_valido = false;
+        if (key == 'w' || key == 'W')   movimiento_valido = animal_seleccionado_->mover(TABLERO, U);
+        if (key == 's' || key == 'S')   movimiento_valido = animal_seleccionado_->mover(TABLERO, D);
+        if (key == 'a' || key == 'A')   movimiento_valido = animal_seleccionado_->mover(TABLERO, L);
+        if (key == 'd' || key == 'D')   movimiento_valido = animal_seleccionado_->mover(TABLERO, R);
+
+        if (movimiento_valido) {
+            if (key == 'w' || key == 'W') cursor.mover(0, 1);
+            if (key == 's' || key == 'S') cursor.mover(0, -1);
+            if (key == 'a' || key == 'A') cursor.mover(-1, 0);
+            if (key == 'd' || key == 'D') cursor.mover(1, 0);
+        }
     }
     if (key == '.') seleccionarPieza();
     

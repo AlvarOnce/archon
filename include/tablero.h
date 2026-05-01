@@ -9,6 +9,7 @@ const int CASILLA_LUZ = 1;
 const int CASILLA_OSCURA = 2;
 
 class Tablero {
+
     Animal* casillas[9][9]; //crea la matriz que es el tablero, cada casilla es un puntero a animal, es decir que tiene los atributos de animal
 	int color_casilla[9][9];  //la casilla de abajo a la izquierda es (0,0) y la de arriba a la derecha es (8,8) la matriz de arriba
     bool hay_pieza_seleccionada_ = FALSE;  //1 hay una pieza seleccionada 0 no hay

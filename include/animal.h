@@ -5,7 +5,7 @@
 
 enum modoJuego
 {
-	TABLERO, BATALLA
+	TABLERO, BATALLA, CANCELAR
 };
 
 enum animacionTipo
@@ -35,13 +35,16 @@ public:
 	int equipo_;
 	int vida_;
 	int ataque_;
-	float avance_ = 0; // para saber cuanto se ha movido el animal, y asi saber cuando parar la animacion de caminar
+	float avanzando_casilla_ = 0; // para saber cuanto se ha movido el animal, y asi saber cuando parar la animacion de caminar
 	bool en_movimiento_ = false;
-	int casillas_movidas_ = 0;
+	int casillas_movidas_x_ = 0;
+	int casillas_movidas_y_ = 0;
+	int casillas_movidas_ = 0; 
+	int max_casillas_movidas_ = 100; // esto se puede modificar en cada clase hija, para que cada animal tenga un número de casillas a mover diferente
 
 	int casillaInicial_[2];
 
-	void mover(modoJuego modo, direccion dir);
+	bool mover(modoJuego modo, direccion dir);
 	virtual void atacar()
 	{
 		std::cout << "Soy un animal genérico, mi ataque no está definido.";
@@ -52,6 +55,7 @@ public:
 	float getVelX() const { return velx_; }
 	float getVelY() const { return vely_; }
 	bool getEnMovimiento() const { return en_movimiento_; }
+	int getMaxCasillasMovidas() const { return max_casillas_movidas_; }
 
 //protected: // Solo los hijos animales pueden modificar sus posiciones
 
@@ -59,7 +63,7 @@ public:
 	void setPosy(float posy) { posy_ = posy; }
 	void setVelX(float velx) { velx_ = velx; } 
 	void setVelY(float vely) { vely_ = vely; }
-	bool setEnMovimiento(bool en_movimiento) { en_movimiento_ = en_movimiento; }
+	void setEnMovimiento(bool en_movimiento) { en_movimiento_ = en_movimiento; }
 
 	// Dibujo y animación
 	int frameActualX_ = 0;
