@@ -17,9 +17,9 @@ void Animal::actualizar(float dt) {
             setState(0, 0);     
         }
         return; // Salimos de la función para que no haga el movimiento del Tablero todavía
-    }
-    if (!en_movimiento_) {      
-        animar(dt);
+    } 
+    if (!en_movimiento_) { 
+		setState(0, 0);
         return;
     }
     // movimiento podriamos usar Vector 2D
@@ -34,6 +34,11 @@ void Animal::actualizar(float dt) {
         avanzando_casilla_ = 0;
 		en_movimiento_ = false;
 	}
+
+	if (posx_ <= 130) int trash = mover(TABLERO, R); // Limite izquierdo del tablero
+	if (posx_ >= 130 + 22 * 8) int trash = mover(TABLERO, L); // Limite derecho del tablero
+	if (posy_ <= 25) int trash = mover(TABLERO, U); // Limite inferior del tablero
+	if (posy_ >= 25 + 22 * 8) int trash = mover(TABLERO, D); // Limite superior del tablero
 
     animar(dt);
 }

@@ -13,6 +13,5 @@ public:
 		setState(0, 0);
 	}
 
-	void actualizar(float dt) override;
 	void dibujar(Renderizador* motor) override;
 };

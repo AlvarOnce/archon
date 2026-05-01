@@ -85,6 +85,7 @@ void Tablero::dibujar(Renderizador* motor){
 
 void Tablero::moverCursor(int key)
 {
+    if (casillas[0][0]!= nullptr && casillas[0][0]->getIntroTablero()) return;
     if (hay_pieza_seleccionada_ == FALSE)
     {
         if (turno_actual == BANDO_LUZ)

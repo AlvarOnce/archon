@@ -59,6 +59,7 @@ public:
 	float getVelY() const { return vely_; }
 	bool getEnMovimiento() const { return en_movimiento_; }
 	int getMaxCasillasMovidas() const { return max_casillas_movidas_; } //para sacarlo de la clase hija
+	bool getIntroTablero() const { return intro_tablero_; }
 
 //protected: // Solo los hijos animales pueden modificar sus posiciones
 
