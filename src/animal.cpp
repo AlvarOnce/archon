@@ -35,10 +35,12 @@ void Animal::actualizar(float dt) {
 		en_movimiento_ = false;
 	}
 
+
+    //cuando te vas a una casilla fuera del cuadrado, el juego mueve otra vez automaticamente a la casilla de antes
 	if (posx_ <= 130) int trash = mover(TABLERO, R); // Limite izquierdo del tablero
-	if (posx_ >= 130 + 22 * 8) int trash = mover(TABLERO, L); // Limite derecho del tablero
+	if (posx_ >= 130 + 22 * 10) int trash = mover(TABLERO, L); // Limite derecho del tablero
 	if (posy_ <= 25) int trash = mover(TABLERO, U); // Limite inferior del tablero
-	if (posy_ >= 25 + 22 * 8) int trash = mover(TABLERO, D); // Limite superior del tablero
+	if (posy_ >= 25 + 22 * 10) int trash = mover(TABLERO, D); // Limite superior del tablero
 
     animar(dt);
 }
