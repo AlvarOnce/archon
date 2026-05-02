@@ -16,6 +16,7 @@ Juego::Juego() {
     miMenu = new Menu();
     miTablero = new Tablero();
     creditos = new Creditos();
+    controles = new Controles();
     //miArena = new Arena();
     motorGrafico = new Renderizador();
 
@@ -79,6 +80,19 @@ void Juego::actualizarLogica(float dt) {
             proximoEstado = MENU;
         }
         break;
+
+    case CONTROLES:
+
+        if (!transicion.activo)
+            controles->actualizar(25);
+        if (controles->getFinalizado())
+        {
+            transicion.empieza();
+            proximoEstado = MENU;
+        }
+        break;
+
+
     }
 
     if (transicion.activo) transicion.actualizar(dt);
@@ -125,6 +139,11 @@ void Juego::renderizarGraficos() {
 
         creditos->dibujar(motorGrafico);
         break;
+
+    case CONTROLES:
+
+        controles->dibujar(motorGrafico);
+        break;
     }
 
     if(transicion.activo) { transicion.dibujar(motorGrafico); }
@@ -157,6 +176,12 @@ void Juego::procesarTeclaPresionada(unsigned char key) // Hacer que tecla solo s
                 creditos->reset();
                 transicion.empieza();
                 proximoEstado = CREDITOS;
+                break;
+
+            case Selector::CONTROLES:
+                controles->reset();
+                transicion.empieza();
+                proximoEstado = CONTROLES;
                 break;
             }
 
