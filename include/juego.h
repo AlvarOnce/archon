@@ -1,13 +1,17 @@
 #pragma once
 
-#include "tablero.h"
 #include "menu.h"
 #include "tablero.h"
 #include "arena.h"
 #include "renderizador.h" 
 #include "animal.h"
 #include "cabra.h"
+#include "cerdo.h"
+#include "gallina.h"
+#include "oveja.h"
+#include "granjero.h"
 #include "transicion.h" 
+#include "creditos.h"
 
 class Juego 
 {
@@ -23,10 +27,10 @@ class Juego
 
 public:
 
-    double getAnchoVentana() {return anchoVentana;} // Para decirle al main cu·nto mide la ventana que debe crear
+    double getAnchoVentana() {return anchoVentana;} // Para decirle al main cu√°nto mide la ventana que debe crear
     double getAltoVentana() {return altoVentana;}
 
-    enum Estado { MENU, TABLERO, BATALLA };
+    enum Estado { MENU, TABLERO, BATALLA, CREDITOS };
     Estado estadoActual;
     Estado proximoEstado;
 

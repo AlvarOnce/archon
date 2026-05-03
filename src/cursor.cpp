@@ -3,8 +3,10 @@
 
 void Cursor::mover(int x, int y)
 {
-	posx += 22.0*x;
-	posy += 22.0*y;
+	posx += 22*x;
+	posy += 22*y;
+	columna += x;
+	fila += y;
 
 }
 
