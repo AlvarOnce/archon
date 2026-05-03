@@ -95,19 +95,12 @@ void Juego::renderizarGraficos() {
         break;
 
     case TABLERO:  
-        miTablero->dibujar(motorGrafico);
-
-        miTablero->cursor.dibujar(motorGrafico);        //esto igual se podria mover de sitio para que el cursor no se mueva con el animal en el tablero
-
-        //if(el cursor esta sobre un animal, funcion propia de tablero y cursor detectar la casilla)
-        // en actualizar se determina que tarjeta se va a dibujar interiormente
-        if(miTablero->cursor.posx > 150 && miTablero->cursor.posx <170) // ELIMINAR ESTA CONDICION
-        miTablero->tarjeta.dibujar(motorGrafico);
+        miTablero->dibujar(motorGrafico);             
 
         break;
 
     case BATALLA:
-        miArena->dibujar();
+        miArena->dibujar(); // @Alvaro to @David: falta el motor gráfico de la arena 
         break;
 
     case CREDITOS:

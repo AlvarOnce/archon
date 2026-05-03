@@ -87,7 +87,15 @@ void Tablero::dibujar(Renderizador* motor){
     if (animal_seleccionado_ != nullptr)
     {
         animal_seleccionado_->dibujar(motor);
-    }   
+    }
+
+	// dibuja el cursor
+	cursor.dibujar(motor);
+
+    // if(el cursor esta sobre un animal) funcion propia de tablero y cursor detectar la casilla
+        // en actualizar se determina que tarjeta se va a dibujar interiormente
+    if (cursor.posx > 150 && cursor.posx < 170) // ELIMINAR ESTA CONDICION
+        tarjeta.dibujar(motor);
 }
 
 //la 'd' y la flecha izquierda las dos glut las lee como 100
