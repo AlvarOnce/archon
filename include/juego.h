@@ -21,6 +21,7 @@ class Juego
     Arena* miArena;
     Renderizador* motorGrafico;
     Animal* misAnimales[18];
+    Creditos* creditos;
 
     double anchoVentana = 480;
     double altoVentana = 270;

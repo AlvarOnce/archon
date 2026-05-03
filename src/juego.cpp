@@ -3,6 +3,8 @@
 #include "arena.h"
 #include "juego.h"
 
+
+
 #define numeroAnimales 9 // Por ahora crea 9 entidades
 
 Juego::Juego() {
@@ -11,9 +13,9 @@ Juego::Juego() {
     proximoEstado = MENU;
 
     miMenu = new Menu();
-    miTablero = new Tablero();
     miArena = new Arena();
     motorGrafico = new Renderizador();
+    creditos = new Creditos();
 
     for (int j = 0; j < 2; j++) // Creación de 18 instancias de animal, guardadas en la colección de animales
         for (int i = 0; i < numeroAnimales; i++)
