@@ -3,8 +3,6 @@
 #include "arena.h"
 #include "juego.h"
 
-
-
 #define numeroAnimales 9 // Por ahora crea 9 entidades
 
 Juego::Juego() {
@@ -40,7 +38,7 @@ Juego::~Juego() {
     delete miArena;
     delete motorGrafico;
 	delete creditos;
-    for (int i = 0; i < 2*numeroAnimales; i++)
+    for (int i = 0; i < 2 * numeroAnimales; i++)
 		delete misAnimales[i];
 }
 
@@ -57,17 +55,9 @@ void Juego::actualizarLogica(float dt) {
 
     case TABLERO:
 
-        for (int j = 0; j < 2; j++)
-            for (int i = 0; i < numeroAnimales; i++)
-            {
-                misAnimales[i + j * numeroAnimales]->actualizar(dt);
-            }
-
+		miTablero->actualizar(dt);
         break;
-
-        //if(el cursor esta sobre un animal, funcion propia de tablero y cursor detectar la casilla)
-        // miTablero->tarjeta.animalSeleccionado = ___
-
+    
     case BATALLA:
 
         miArena->actualizar(dt);

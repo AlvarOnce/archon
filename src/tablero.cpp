@@ -46,6 +46,7 @@ void Tablero::inicializarTablero() // iniclizaiamos el Tablero vacio, es decir, 
 
 void Tablero::actualizar(float dt)
 {
+    // actualiza todos los animales posados sobre el tablero
     for (int i = 0; i < FILAS; i++)
     {
         for (int j = 0; j < COLUMNAS; j++)
@@ -55,6 +56,12 @@ void Tablero::actualizar(float dt)
                 casillas[i][j]->actualizar(dt);
             }
         }
+    }
+
+    // actualiza el animal levantado en el cursor
+    if (animal_seleccionado_ != nullptr)
+    {
+        animal_seleccionado_->actualizar(dt);
     }
 }
 
