@@ -4,9 +4,12 @@ Tablero::Tablero(Animal** misAnimales)
 {
     inicializarTablero();
 
-    for (int j = 0; j < FILAS; j++)
+    for (int i = 0; i < 2; i++)
     {
-        casillas[0][j] = misAnimales[j];
+        for (int j = 0; j < FILAS; j++)
+        {
+            casillas[1-i][j] = misAnimales[j+(i*FILAS)];
+        }
     }
 
 }
@@ -82,6 +85,7 @@ void Tablero::dibujar(Renderizador* motor){
 
 void Tablero::moverCursor(int key)
 {
+    if (casillas[0][0]!= nullptr && casillas[0][0]->getIntroTablero()) return;
     if (hay_pieza_seleccionada_ == FALSE)
     {
         if (turno_actual == BANDO_LUZ)
@@ -90,7 +94,7 @@ void Tablero::moverCursor(int key)
             if (key == 's' || key == 'S')   cursor.mover(0, -1);
             if (key == 'a' || key == 'A')   cursor.mover(-1, 0);
             if (key == 'd' || key == 'D')   cursor.mover(1, 0);     //la 'd' y la flecha izquierda las dos glut las lee como 100
-            //para probar//std::cout << "posicion del cursor: " << cursor.columna << ", " << cursor.fila << std::endl;
+            //std::cout << "posicion del cursor: " << cursor.columna << ", " << cursor.fila << std::endl;
 			//std::cout << casillas[cursor.columna][cursor.fila] << std::endl; // esto es para ver si el cursor se mueve por la matriz, si el puntero es null o no
         }
         else if (turno_actual == BANDO_OSCURIDAD)
@@ -101,16 +105,43 @@ void Tablero::moverCursor(int key)
             if (key == GLUT_KEY_RIGHT)      cursor.mover(1, 0);
         }
     }
+    else 
+    {
+        if (animal_seleccionado_->getEnMovimiento()) return;
+
+		bool movimiento_valido = false;
+        if (key == 'w' || key == 'W')   movimiento_valido = animal_seleccionado_->mover(TABLERO, U);
+        if (key == 's' || key == 'S')   movimiento_valido = animal_seleccionado_->mover(TABLERO, D);
+        if (key == 'a' || key == 'A')   movimiento_valido = animal_seleccionado_->mover(TABLERO, L);
+        if (key == 'd' || key == 'D')   movimiento_valido = animal_seleccionado_->mover(TABLERO, R);
+
+        if (movimiento_valido) {
+            if (key == 'w' || key == 'W') cursor.mover(0, 1);
+            if (key == 's' || key == 'S') cursor.mover(0, -1);
+            if (key == 'a' || key == 'A') cursor.mover(-1, 0);
+            if (key == 'd' || key == 'D') cursor.mover(1, 0);
+        }
+    }
     if (key == '.') seleccionarPieza();
     
 }
 
 void Tablero::seleccionarPieza() {
-    if (casillas[cursor.columna][cursor.fila] == nullptr) {
-        //selecciona una casilla que no tiene nada
+    if (casillas[cursor.columna][cursor.fila] == nullptr && animal_seleccionado_ == nullptr) {
 
-	}
-    else {
+    }
+    else if (casillas[cursor.columna][cursor.fila] != nullptr && animal_seleccionado_ == nullptr) {
         hay_pieza_seleccionada_ = !hay_pieza_seleccionada_;
-	}
-}   
+        animal_seleccionado_ = casillas[cursor.columna][cursor.fila];
+        casillas[cursor.columna][cursor.fila] = nullptr;
+    }
+    else if (casillas[cursor.columna][cursor.fila] == nullptr && animal_seleccionado_ != nullptr) {
+        casillas[cursor.columna][cursor.fila] = animal_seleccionado_;
+        hay_pieza_seleccionada_ = !hay_pieza_seleccionada_;
+		animal_seleccionado_ = nullptr;
+    }
+    else if (casillas[cursor.columna][cursor.fila] != nullptr && animal_seleccionado_ != nullptr)
+    {
+
+    }
+}

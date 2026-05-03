@@ -5,8 +5,8 @@ class Cursor {
 
 public:
 
-	int posx = 240;			//esto antes eran floats, los he cambiado
-	int posy = 135;
+	float posx = 240;			
+	float posy = 135;
 	int columna = 4;
 	int fila = 4;
 	void mover(int x, int y);

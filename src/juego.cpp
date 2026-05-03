@@ -20,14 +20,15 @@ Juego::Juego() {
     for (int j = 0; j < 2; j++) // Creación de 18 instancias de animal, guardadas en la colección de animales
         for (int i = 0; i < numeroAnimales; i++)
         {
-            if (i % 4 == 0)
-                misAnimales[i + j*numeroAnimales] = new Cabra(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i-0.08*j, 20);
-            if (i % 4 == 1)
-                misAnimales[i + j*numeroAnimales] = new Cerdo(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20);
-            if (i % 4 == 2)
-                misAnimales[i + j*numeroAnimales] = new Gallina(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20);
-            if (i % 4 == 3)
-                misAnimales[i + j * numeroAnimales] = new Oveja(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20);
+			int tipoAnimal = ((j*(i+1)) % 3) + j;
+            if (tipoAnimal == 0)
+                misAnimales[i + j*numeroAnimales] = new Gallina(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i-0.08*j, 20, 174);
+            else if (tipoAnimal == 1)
+                misAnimales[i + j*numeroAnimales] = new Cerdo(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20, 152);
+            else if (tipoAnimal == 2)
+                misAnimales[i + j*numeroAnimales] = new Cabra(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20, 152);
+            else if (tipoAnimal == 3)
+                misAnimales[i + j * numeroAnimales] = new Oveja(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20, 152);
         }
     miTablero = new Tablero(misAnimales);
 
@@ -38,6 +39,9 @@ Juego::~Juego() {
     delete miTablero;
     delete miArena;
     delete motorGrafico;
+	delete creditos;
+    for (int i = 0; i < 2*numeroAnimales; i++)
+		delete misAnimales[i];
 }
 
 void Juego::actualizarLogica(float dt) {
@@ -108,7 +112,7 @@ void Juego::renderizarGraficos() {
                 misAnimales[i + j * numeroAnimales]->dibujar(motorGrafico);
          
 
-        miTablero->cursor.dibujar(motorGrafico);
+        miTablero->cursor.dibujar(motorGrafico);        //esto igual se podria mover de sitio para que el cursor no se mueva con el animal en el tablero
 
         //if(el cursor esta sobre un animal, funcion propia de tablero y cursor detectar la casilla)
         // en actualizar se determina que tarjeta se va a dibujar interiormente
