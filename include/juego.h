@@ -1,8 +1,8 @@
 #pragma once
 
-#include "tablero.h"
 #include "menu.h"
-//#include "arena.h"
+#include "tablero.h"
+#include "arena.h"
 #include "renderizador.h" 
 #include "animal.h"
 #include "cabra.h"
@@ -18,17 +18,17 @@ class Juego
     Transicion transicion;
     Menu* miMenu;
     Tablero* miTablero;
-    Creditos* creditos;
-    //Arena* miArena;
+    Arena* miArena;
     Renderizador* motorGrafico;
     Animal* misAnimales[18];
+    Creditos* creditos;
 
     double anchoVentana = 480;
     double altoVentana = 270;
 
 public:
 
-    double getAnchoVentana() {return anchoVentana;} // Para decirle al main cu·nto mide la ventana que debe crear
+    double getAnchoVentana() {return anchoVentana;} // Para decirle al main cu√°nto mide la ventana que debe crear
     double getAltoVentana() {return altoVentana;}
 
     enum Estado { MENU, TABLERO, BATALLA, CREDITOS };
