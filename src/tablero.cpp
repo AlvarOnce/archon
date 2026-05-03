@@ -71,37 +71,23 @@ void Tablero::dibujar(Renderizador* motor){
     motor->dibujarSprite("../assets/Sprites/tablero/tableroFondo.png", 512, 512, 480/2, 270/2, -1);
     motor->dibujarSprite("../assets/Sprites/tablero/tablero.png", 256, 256, 480 / 2, 270 / 2, -2);
 
+    // dibuja los animales posados sobre el tablero
+    for (int i = 0; i < FILAS; i++)
+    {
+        for (int j = 0; j < COLUMNAS; j++)
+        {
+            if (casillas[i][j] != nullptr)
+            {
+                casillas[i][j]->dibujar(motor);
+            }
+        }
+    }
 
-    //// recorrer la matriz para dibujar casillas de poder y animales
-    //for (int i = 0; i < FILAS; i++)
-    //{
-    //    for (int j = 0; j < COLUMNAS; j++)
-    //    {
-    //        int x = X_INICIO + j * TAMANO_CASILLA;
-    //        int y = Y_INICIO + i * TAMANO_CASILLA;
-
-    //        if (esPuntoDePoder(i, j))
-    //        {
-    //            // motor->dibujarSprite("../assets/Sprites/puntopoder.png", [...] )
-    //        }
-
-    //        if (casillas[i][j] != nullptr)
-    //        {
-    //            // casillas[i][j]->dibujar(motor); 
-    //            // la funcion dibujar debe estar dentro de animal.h, porque aqui le decimos que nos dibuje en la casilla el animal
-    //        }
-    //    }
-    //}
-
-    // dibujar los cursores
-    //float cursor1X = X_INICIO + (posicion_columna_cursor_actual_j1 * TAMANO_CASILLA) + 11.0f;
-    //float cursor1Y = Y_INICIO + (posicion_fila_cursor_actual_j1 * TAMANO_CASILLA) + 11.0f;
-    //motor->dibujarSprite("../assets/Sprites/cursorJ1.png", 22, 22, cursor1X, cursor1Y, -1.0f);
-
-    //float cursor2X = X_INICIO + (posicion_columna_cursor_actual_j2 * TAMANO_CASILLA) + 11.0f;
-    //float cursor2Y = Y_INICIO + (posicion_fila_cursor_actual_j2 * TAMANO_CASILLA) + 11.0f;
-    //motor->dibujarSprite("../assets/Sprites/cursorJ2.png", 22, 22, cursor2X, cursor2Y, -1.0f);
-
+    // dibuja el animal levantado en el cursor
+    if (animal_seleccionado_ != nullptr)
+    {
+        animal_seleccionado_->dibujar(motor);
+    }   
 }
 
 //la 'd' y la flecha izquierda las dos glut las lee como 100

@@ -97,11 +97,6 @@ void Juego::renderizarGraficos() {
     case TABLERO:  
         miTablero->dibujar(motorGrafico);
 
-        for (int j = 0; j < 2; j++)
-            for (int i = 0; i < numeroAnimales; i++)
-                misAnimales[i + j * numeroAnimales]->dibujar(motorGrafico);
-         
-
         miTablero->cursor.dibujar(motorGrafico);        //esto igual se podria mover de sitio para que el cursor no se mueva con el animal en el tablero
 
         //if(el cursor esta sobre un animal, funcion propia de tablero y cursor detectar la casilla)
