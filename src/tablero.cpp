@@ -44,6 +44,20 @@ void Tablero::inicializarTablero() // iniclizaiamos el Tablero vacio, es decir, 
 
 }
 
+void Tablero::actualizar(float dt)
+{
+    for (int i = 0; i < FILAS; i++)
+    {
+        for (int j = 0; j < COLUMNAS; j++)
+        {
+            if (casillas[i][j] != nullptr)
+            {
+                casillas[i][j]->actualizar(dt);
+            }
+        }
+    }
+}
+
 void Tablero::dibujar(Renderizador* motor){
 
     // imagen de fondo del tablero
