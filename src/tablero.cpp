@@ -129,7 +129,8 @@ void Tablero::recibirMovimiento(int jugador, int dx, int dy)
     }   
 }
 
-void Tablero::seleccionarPieza() {
+void Tablero::seleccionarPieza(int jugador) // falta que tenga en cuenta el turno, que solo se pueda seleccionar una pieza del bando del jugador que le toca
+{                                           // seguramente con la clase Jugador sea más fácil
     if (casillas[cursor.columna][cursor.fila] == nullptr && animal_seleccionado_ == nullptr) {
 
     }

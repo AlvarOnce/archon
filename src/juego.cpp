@@ -141,7 +141,7 @@ void Juego::procesarTeclaPresionada(unsigned char key) // Hacer que tecla solo s
          if (key == 's' || key == 'S') tablero->recibirMovimiento(0, 0, -1);
          if (key == 'a' || key == 'A') tablero->recibirMovimiento(0, -1, 0);
          if (key == 'd' || key == 'D') tablero->recibirMovimiento(0, 1, 0);
-         if (key == '.') tablero->seleccionarPieza();
+         if (key == 'q' || key == 'Q') tablero->seleccionarPieza(0);
         break;
 
 		case BATALLA: // movimiento continuo en la batalla, se procesa al pulsar la tecla y al levantarla, hay movimiento mientras se mantenga pulsada la tecla
@@ -149,7 +149,7 @@ void Juego::procesarTeclaPresionada(unsigned char key) // Hacer que tecla solo s
          if (key == 's' || key == 'S') arena->recibirMovimiento(0, ABAJO, true);
          if (key == 'a' || key == 'A') arena->recibirMovimiento(0, IZQUIERDA, true);
          if (key == 'd' || key == 'D') arena->recibirMovimiento(0, DERECHA, true);
-         if (key == '.') arena->recibirAtaque(0); //poner los controles qeu querais
+         if (key == 'q' || key == 'Q') arena->recibirAtaque(0); //poner los controles qeu querais
          break;
 
     }
@@ -182,12 +182,11 @@ void Juego::procesarTeclaEspecialPresionada(int key) // JUGADOR 2 (FLECHAS)
         break;
 
     case TABLERO:
-
-        if (key == 'w' || key == 'W') tablero->recibirMovimiento(0, 0, 1); // tablero->recibirMovimiento(jugador, dx, dy);
-        if (key == 's' || key == 'S') tablero->recibirMovimiento(0, 0, -1);
-        if (key == 'a' || key == 'A') tablero->recibirMovimiento(0, -1, 0);
-        if (key == 'd' || key == 'D') tablero->recibirMovimiento(0, 1, 0);
-        if (key == '.') tablero->seleccionarPieza();
+        if (key == GLUT_KEY_UP)    tablero->recibirMovimiento(1, 0, 1); // tablero->recibirMovimiento(jugador, dx, dy);
+        if (key == GLUT_KEY_DOWN)  tablero->recibirMovimiento(1, 0, -1);
+        if (key == GLUT_KEY_LEFT)  tablero->recibirMovimiento(1, -1, 0);
+        if (key == GLUT_KEY_RIGHT) tablero->recibirMovimiento(1, 1, 0);
+        if (key == '.') tablero->seleccionarPieza(1);
         break;
 
     case BATALLA:
