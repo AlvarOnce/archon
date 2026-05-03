@@ -50,7 +50,7 @@ public:
 
 
     void inicializarTablero(); //pone el color de las casillas del tablero y pone que no haya animales
-    void moverCursor(int key);  //recibe la tecla pulsada y la procesa
+    void recibirMovimiento(int jugador, int dx, int dy);  //recibe la tecla pulsada y la procesa
     void seleccionarPieza();    //identifica si en la casilla hay un animal, si lo hay, bloquea el cursor y tocaria que se moviese el animal y no el cursor
 
     void dibujar(Renderizador* motor);

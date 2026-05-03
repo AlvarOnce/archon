@@ -20,13 +20,13 @@ Juego::Juego() {
     for (int j = 0; j < 2; j++) // Creación de 18 instancias de animal, guardadas en la colección de animales
         for (int i = 0; i < numeroAnimales; i++)
         {
-			int tipoAnimal = ((j*(i+1)) % 3) + j;
+            int tipoAnimal = ((j * (i + 1)) % 3) + j;
             if (tipoAnimal == 0)
-                misAnimales[i + j*numeroAnimales] = new Gallina(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i-0.08*j, 20, 174);
+                misAnimales[i + j * numeroAnimales] = new Gallina(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20, 174);
             else if (tipoAnimal == 1)
-                misAnimales[i + j*numeroAnimales] = new Cerdo(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20, 152);
+                misAnimales[i + j * numeroAnimales] = new Cerdo(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20, 152);
             else if (tipoAnimal == 2)
-                misAnimales[i + j*numeroAnimales] = new Cabra(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20, 152);
+                misAnimales[i + j * numeroAnimales] = new Cabra(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20, 152);
             else if (tipoAnimal == 3)
                 misAnimales[i + j * numeroAnimales] = new Oveja(-44 * j - 15 * (numeroAnimales - i) + 11, 36 + (22 * i) + 11, -3 - 0.01 * i - 0.08 * j, 20, 152);
         }
@@ -167,12 +167,15 @@ void Juego::procesarTeclaPresionada(unsigned char key) // Hacer que tecla solo s
         }
         break;
 
-        case TABLERO: // movimiento discreto en el tabler
-
-        miTablero->moverCursor(key);
+		case TABLERO: // movimiento discreto en el tablero, no hace falta procesar la tecla al levantarla, el movimiento se hace una vez al pulsar y ya está
+         if (key == 'w' || key == 'W') miTablero->recibirMovimiento(0, 0, 1); // miTablero->recibirMovimiento(jugador, dx, dy);
+         if (key == 's' || key == 'S') miTablero->recibirMovimiento(0, 0, -1);
+         if (key == 'a' || key == 'A') miTablero->recibirMovimiento(0, -1, 0);
+         if (key == 'd' || key == 'D') miTablero->recibirMovimiento(0, 1, 0);
+         if (key == '.') miTablero->seleccionarPieza();
         break;
 
-     case BATALLA: 
+		case BATALLA: // movimiento continuo en la batalla, se procesa al pulsar la tecla y al levantarla, hay movimiento mientras se mantenga pulsada la tecla
          if (key == 'w' || key == 'W') miArena->recibirMovimiento(0, ARRIBA, true);
          if (key == 's' || key == 'S') miArena->recibirMovimiento(0, ABAJO, true);
          if (key == 'a' || key == 'A') miArena->recibirMovimiento(0, IZQUIERDA, true);
@@ -211,7 +214,11 @@ void Juego::procesarTeclaEspecialPresionada(int key) // JUGADOR 2 (FLECHAS)
 
     case TABLERO:
 
-        miTablero->moverCursor(key);  
+        if (key == 'w' || key == 'W') miTablero->recibirMovimiento(0, 0, 1); // miTablero->recibirMovimiento(jugador, dx, dy);
+        if (key == 's' || key == 'S') miTablero->recibirMovimiento(0, 0, -1);
+        if (key == 'a' || key == 'A') miTablero->recibirMovimiento(0, -1, 0);
+        if (key == 'd' || key == 'D') miTablero->recibirMovimiento(0, 1, 0);
+        if (key == '.') miTablero->seleccionarPieza();
         break;
 
     case BATALLA:
